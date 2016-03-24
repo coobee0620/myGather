@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 如果设置了这个id，factory将会以这个id作为key,否则将会用这个文件路径作为key -->
+<!-- copier验证不通过是不可用的 -->
+<copier id="">
+    <converter from="com.taobao.trip.hrc.domain.po.UserreviewPO" to="com.taobao.trip.hrc.domain.dto.Userreview">
+        <customBuilt>
+            <field name="" type="" targetName="" targetType=""/>
+            <field name="" type="" targetName="" targetType=""/>
+        </customBuilt>
+
+        <ignores>
+            <field name=""/>
+        </ignores>
+        <!-- 特殊装饰器，加强转换器 -->
+        <!-- 高级属性 -->
+        <decorator>
+            <!-- 特殊转换方法 -->
+            <methodDecorators>
+                <methodDecorator type="" method=""/>
+            </methodDecorators>
+            <!-- 简单压缩，将source对象的属性压缩到target对象中的一个field中 -->
+            <!-- 默认的style为K-V，key为字段名，value为字段的toString方法 -->
+            <compressors>
+                <!-- 如果不设置field，默认范围为全部字段 -->
+                <!-- className是source上field对象的类名 -->
+                <!-- compressor.name表示converter.from中的字段名 -->
+                <!-- compressor.type表示compressor.name所对应的类型 -->
+                <!-- compressor.targetName必须是String，对应converter.to中的属性 -->
+                <!-- 如果不设置name,type，compressor.field表示converter.from中的字段 -->
+                <!-- 目的是将source上字段压缩到target上一个field上 -->
+                <!-- targetType 必须是String -->
+                <!-- 默认样式为key-value,如果style设置错误或者不设置，会使用默认样式 -->
+                <compressor name="" type="" style="" targetName="">
+                    <!-- 想要压缩source对象上哪些属性。 -->
+                    <field name=""/>
+                </compressor>
+            </compressors>
+        </decorator>
+    </converter>
+</copier>
