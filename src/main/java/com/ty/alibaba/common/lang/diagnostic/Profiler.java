@@ -1,8 +1,8 @@
-package com.ty.common.lang.diagnostic;
+package com.ty.alibaba.common.lang.diagnostic;
 
-import com.ty.common.lang.ObjectUtil;
-import com.ty.common.lang.StringUtil;
-import com.ty.common.lang.enumeration.IntegerEnum;
+import com.ty.alibaba.common.lang.ObjectUtil;
+import com.ty.alibaba.common.lang.StringUtil;
+import com.ty.alibaba.common.lang.enumeration.IntegerEnum;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @project myGather
- * @description �������Բ�ͳ���߳�ִ��ʱ��Ĺ��ߡ�
+ * @description 用来测试并统计线程执行时间的工具。
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -19,35 +19,35 @@ public final class Profiler {
     private static final ThreadLocal<Entry> entryStack = new ThreadLocal<Entry>();
 
     /**
-     * ��ʼ��ʱ��
+     * 开始计时。
      */
     public static void start() {
         start((String) null);
     }
 
     /**
-     * ��ʼ��ʱ��
+     * 开始计时。
      *
-     * @param message ��һ��entry����Ϣ
+     * @param message 第一个entry的信息
      */
     public static void start(String message) {
         entryStack.set(new Entry(message, null, null));
     }
 
     /**
-     * ��ʼ��ʱ��
+     * 开始计时。
      *
-     * @param message ��һ��entry����Ϣ
+     * @param message 第一个entry的信息
      */
     public static void start(Message message) {
         entryStack.set(new Entry(message, null, null));
     }
 
     /**
-     * �����ʱ����
+     * 清除计时器。
      *
      * <p>
-     * ����Ժ�����ٴε���<code>start</code>�������¼�ʱ��
+     * 清除以后必须再次调用<code>start</code>方可重新计时。
      * </p>
      */
     public static void reset() {
@@ -55,9 +55,9 @@ public final class Profiler {
     }
 
     /**
-     * ��ʼһ���µ�entry������ʱ��
+     * 开始一个新的entry，并计时。
      *
-     * @param message ��entry����Ϣ
+     * @param message 新entry的信息
      */
     public static void enter(String message) {
         Entry currentEntry = getCurrentEntry();
@@ -68,9 +68,9 @@ public final class Profiler {
     }
 
     /**
-     * ��ʼһ���µ�entry������ʱ��
+     * 开始一个新的entry，并计时。
      *
-     * @param message ��entry����Ϣ
+     * @param message 新entry的信息
      */
     public static void enter(Message message) {
         Entry currentEntry = getCurrentEntry();
@@ -81,7 +81,7 @@ public final class Profiler {
     }
 
     /**
-     * ���������һ��entry����¼����ʱ�䡣
+     * 结束最近的一个entry，记录结束时间。
      */
     public static void release() {
         Entry currentEntry = getCurrentEntry();
@@ -92,9 +92,9 @@ public final class Profiler {
     }
 
     /**
-     * ȡ�úķѵ���ʱ�䡣
+     * 取得耗费的总时间。
      *
-     * @return �ķѵ���ʱ�䣬���δ��ʼ��ʱ���򷵻�<code>-1</code>
+     * @return 耗费的总时间，如果未开始计时，则返回<code>-1</code>
      */
     public static long getDuration() {
         Entry entry = entryStack.get();
@@ -107,32 +107,32 @@ public final class Profiler {
     }
 
     /**
-     * �г����е�entry��
+     * 列出所有的entry。
      *
-     * @return �г�����entry����ͳ�Ƹ�����ռ�õ�ʱ��
+     * @return 列出所有entry，并统计各自所占用的时间
      */
     public static String dump() {
         return dump("", "");
     }
 
     /**
-     * �г����е�entry��
+     * 列出所有的entry。
      *
-     * @param prefix ǰ׺
+     * @param prefix 前缀
      *
-     * @return �г�����entry����ͳ�Ƹ�����ռ�õ�ʱ��
+     * @return 列出所有entry，并统计各自所占用的时间
      */
     public static String dump(String prefix) {
         return dump(prefix, prefix);
     }
 
     /**
-     * �г����е�entry��
+     * 列出所有的entry。
      *
-     * @param prefix1 ����ǰ׺
-     * @param prefix2 ������ǰ׺
+     * @param prefix1 首行前缀
+     * @param prefix2 后续行前缀
      *
-     * @return �г�����entry����ͳ�Ƹ�����ռ�õ�ʱ��
+     * @return 列出所有entry，并统计各自所占用的时间
      */
     public static String dump(String prefix1, String prefix2) {
         Entry entry = entryStack.get();
@@ -145,18 +145,18 @@ public final class Profiler {
     }
 
     /**
-     * ȡ�õ�һ��entry��
+     * 取得第一个entry。
      *
-     * @return ��һ��entry����������ڣ��򷵻�<code>null</code>
+     * @return 第一个entry，如果不存在，则返回<code>null</code>
      */
     public static Entry getEntry() {
         return entryStack.get();
     }
 
     /**
-     * ȡ�������һ��entry��
+     * 取得最近的一个entry。
      *
-     * @return �����һ��entry����������ڣ��򷵻�<code>null</code>
+     * @return 最近的一个entry，如果不存在，则返回<code>null</code>
      */
     private static Entry getCurrentEntry() {
         Entry subEntry = entryStack.get();
@@ -173,7 +173,7 @@ public final class Profiler {
     }
 
     /**
-     * ����һ����ʱ��Ԫ��
+     * 代表一个计时单元。
      */
     public static final class Entry {
         private final List subEntries  = new ArrayList(4);
@@ -185,11 +185,11 @@ public final class Profiler {
         private long         endTime;
 
         /**
-         * ����һ���µ�entry��
+         * 创建一个新的entry。
          *
-         * @param message entry����Ϣ��������<code>null</code>
-         * @param parentEntry ��entry��������<code>null</code>
-         * @param firstEntry ��һ��entry��������<code>null</code>
+         * @param message entry的信息，可以是<code>null</code>
+         * @param parentEntry 父entry，可以是<code>null</code>
+         * @param firstEntry 第一个entry，可以是<code>null</code>
          */
         private Entry(Object message, Entry parentEntry, Entry firstEntry) {
             this.message     = message;
@@ -201,7 +201,7 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��entry����Ϣ��
+         * 取得entry的信息。
          */
         public String getMessage() {
             String messageString = null;
@@ -227,9 +227,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��entry����ڵ�һ��entry����ʼʱ�䡣
+         * 取得entry相对于第一个entry的起始时间。
          *
-         * @return �����ʼʱ��
+         * @return 相对起始时间
          */
         public long getStartTime() {
             return (baseTime > 0) ? (startTime - baseTime)
@@ -237,9 +237,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��entry����ڵ�һ��entry�Ľ���ʱ�䡣
+         * 取得entry相对于第一个entry的结束时间。
          *
-         * @return ��Խ���ʱ�䣬���entry��δ�������򷵻�<code>-1</code>
+         * @return 相对结束时间，如果entry还未结束，则返回<code>-1</code>
          */
         public long getEndTime() {
             if (endTime < baseTime) {
@@ -250,9 +250,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��entry������ʱ�䡣
+         * 取得entry持续的时间。
          *
-         * @return entry������ʱ�䣬���entry��δ�������򷵻�<code>-1</code>
+         * @return entry持续的时间，如果entry还未结束，则返回<code>-1</code>
          */
         public long getDuration() {
             if (endTime < startTime) {
@@ -263,9 +263,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��entry�������õ�ʱ�䣬����ʱ���ȥ������entry���õ�ʱ�䡣
+         * 取得entry自身所用的时间，即总时间减去所有子entry所用的时间。
          *
-         * @return entry�������õ�ʱ�䣬���entry��δ�������򷵻�<code>-1</code>
+         * @return entry自身所用的时间，如果entry还未结束，则返回<code>-1</code>
          */
         public long getDurationOfSelf() {
             long duration = getDuration();
@@ -290,9 +290,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ�õ�ǰentry�ڸ�entry����ռ��ʱ��ٷֱȡ�
+         * 取得当前entry在父entry中所占的时间百分比。
          *
-         * @return �ٷֱ�
+         * @return 百分比
          */
         public double getPecentage() {
             double parentDuration = 0;
@@ -310,9 +310,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ�õ�ǰentry�ڵ�һ��entry����ռ��ʱ��ٷֱȡ�
+         * 取得当前entry在第一个entry中所占的时间百分比。
          *
-         * @return �ٷֱ�
+         * @return 百分比
          */
         public double getPecentageOfAll() {
             double firstDuration = 0;
@@ -330,34 +330,34 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��������entries��
+         * 取得所有子entries。
          *
-         * @return ������entries���б����ɸ��ģ�
+         * @return 所有子entries的列表（不可更改）
          */
         public List getSubEntries() {
             return Collections.unmodifiableList(subEntries);
         }
 
         /**
-         * ������ǰentry������¼����ʱ�䡣
+         * 结束当前entry，并记录结束时间。
          */
         private void release() {
             endTime = System.currentTimeMillis();
         }
 
         /**
-         * �жϵ�ǰentry�Ƿ������
+         * 判断当前entry是否结束。
          *
-         * @return ���entry�Ѿ��������򷵻�<code>true</code>
+         * @return 如果entry已经结束，则返回<code>true</code>
          */
         private boolean isReleased() {
             return endTime > 0;
         }
 
         /**
-         * ����һ���µ���entry��
+         * 创建一个新的子entry。
          *
-         * @param message ��entry����Ϣ
+         * @param message 子entry的信息
          */
         private void enterSubEntry(Object message) {
             Entry subEntry = new Entry(message, this, firstEntry);
@@ -366,9 +366,9 @@ public final class Profiler {
         }
 
         /**
-         * ȡ��δ��������entry��
+         * 取得未结束的子entry。
          *
-         * @return δ��������entry�����û����entry��������entry���ѽ������򷵻�<code>null</code>
+         * @return 未结束的子entry，如果没有子entry，或所有entry均已结束，则返回<code>null</code>
          */
         private Entry getUnreleasedEntry() {
             Entry subEntry = null;
@@ -385,21 +385,21 @@ public final class Profiler {
         }
 
         /**
-         * ��entryת�����ַ����ı�ʾ��
+         * 将entry转换成字符串的表示。
          *
-         * @return �ַ�����ʾ��entry
+         * @return 字符串表示的entry
          */
         public String toString() {
             return toString("", "");
         }
 
         /**
-         * ��entryת�����ַ����ı�ʾ��
+         * 将entry转换成字符串的表示。
          *
-         * @param prefix1 ����ǰ׺
-         * @param prefix2 ������ǰ׺
+         * @param prefix1 首行前缀
+         * @param prefix2 后续行前缀
          *
-         * @return �ַ�����ʾ��entry
+         * @return 字符串表示的entry
          */
         private String toString(String prefix1, String prefix2) {
             StringBuffer buffer = new StringBuffer();
@@ -410,11 +410,11 @@ public final class Profiler {
         }
 
         /**
-         * ��entryת�����ַ����ı�ʾ��
+         * 将entry转换成字符串的表示。
          *
-         * @param buffer �ַ���buffer
-         * @param prefix1 ����ǰ׺
-         * @param prefix2 ������ǰ׺
+         * @param buffer 字符串buffer
+         * @param prefix1 首行前缀
+         * @param prefix2 后续行前缀
          */
         private void toString(StringBuffer buffer, String prefix1, String prefix2) {
             buffer.append(prefix1);
@@ -427,12 +427,12 @@ public final class Profiler {
             double   percentOfAll   = getPecentageOfAll();
 
             Object[] params = new Object[] {
-                    message, // {0} - entry��Ϣ
-                    startTime, // {1} - ��ʼʱ��
-                    duration, // {2} - ������ʱ��
-                    durationOfSelf, // {3} - �������ĵ�ʱ��
-                    percent, // {4} - �ڸ�entry����ռ��ʱ�����
-                    percentOfAll // {5} - ����ʱ�������ɵ�ʱ�����
+                    message, // {0} - entry信息
+                    startTime, // {1} - 起始时间
+                    duration, // {2} - 持续总时间
+                    durationOfSelf, // {3} - 自身消耗的时间
+                    percent, // {4} - 在父entry中所占的时间比例
+                    percentOfAll // {5} - 在总时间中所旧的时间比例
             };
 
             StringBuilder pattern = new StringBuilder("{1,number} ");
@@ -469,28 +469,28 @@ public final class Profiler {
                 buffer.append('\n');
 
                 if (i == (subEntries.size() - 1)) {
-                    subEntry.toString(buffer, prefix2 + "`---", prefix2 + "    "); // ���һ��
+                    subEntry.toString(buffer, prefix2 + "`---", prefix2 + "    "); // 最后一项
                 } else if (i == 0) {
-                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // ��һ��
+                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // 第一项
                 } else {
-                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // �м���
+                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // 中间项
                 }
             }
         }
     }
 
     /**
-     * ��ʾ��Ϣ�ļ���
+     * 显示消息的级别。
      */
     public static final class MessageLevel extends IntegerEnum {
         private static final long        serialVersionUID = 3257849896026388537L;
-        public static final MessageLevel NO_MESSAGE       = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
-        public static final MessageLevel BRIEF_MESSAGE    = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
-        public static final MessageLevel DETAILED_MESSAGE = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
+        public static final MessageLevel NO_MESSAGE       = (MessageLevel) create();
+        public static final MessageLevel BRIEF_MESSAGE    = (MessageLevel) create();
+        public static final MessageLevel DETAILED_MESSAGE = (MessageLevel) create();
     }
 
     /**
-     * ����һ��profiler entry����ϸ��Ϣ��
+     * 代表一个profiler entry的详细信息。
      */
     public interface Message {
         MessageLevel getMessageLevel(Entry entry);

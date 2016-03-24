@@ -3,7 +3,7 @@ package com.ty.laboratory.objectcopier.exception;
 
 /**
  * @project hrc
- * @description 对象拷贝配置格式异常
+ * @description 瀵硅薄鎷疯礉閰嶇疆鏍煎紡寮傚父
  * @auth changtong.ty
  * @date 2014/12/9
  */

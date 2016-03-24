@@ -1,8 +1,6 @@
 package com.ty.laboratory.objectcopier.copier.visitors.impl;
 
 
-import com.ty.laboratory.objectcopier.exception.CopyFormatException;
-import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
 import com.ty.laboratory.objectcopier.copier.CopierDefaultManager;
 import com.ty.laboratory.objectcopier.copier.elements.*;
 import com.ty.laboratory.objectcopier.copier.utils.BeanCopyUtil;
@@ -10,7 +8,9 @@ import com.ty.laboratory.objectcopier.copier.utils.CopierUtils;
 import com.ty.laboratory.objectcopier.copier.utils.PropertyPair;
 import com.ty.laboratory.objectcopier.copier.utils.StyleUtil;
 import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
-import org.apache.commons.lang.StringUtils;
+import com.ty.laboratory.objectcopier.exception.CopyFormatException;
+import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,8 +24,8 @@ import java.util.Map;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½£º¾ßÌå·ÃÎÊÕß£¨Concrete Visitor£©
- * Ä¬ÈÏ·ÃÎÊÒµÎñ·ÃÎÊÕß
+ * @description è®¿é—®è€…æ¨¡å¼ï¼šå…·ä½“è®¿é—®è€…ï¼ˆConcrete Visitorï¼‰
+ * é»˜è®¤è®¿é—®ä¸šåŠ¡è®¿é—®è€…
  * @auth changtong.ty
  * @date 2014/12/11
  */
@@ -69,7 +69,7 @@ public final class BeanCopyVisitor implements CopierVisitor {
     @Override
     public void visit(Converter descrptor) throws CopyUnsuccessfullException {
         /**
-         * Ö÷ÒªÂß¼­
+         * ä¸»è¦é€»è¾‘
          * */
         if (descrptor != null && descrptor.isAvailable()) {
             Ignores ignores = descrptor.getIgnores();
@@ -115,9 +115,9 @@ public final class BeanCopyVisitor implements CopierVisitor {
             if (fields == null) {
                 fields = new ArrayList<Field>();
             }
-            //ÄÃµ½invokeObj,ÓÃÀ´Ö´ĞĞfield¶ÔÓ¦µÄget·½·¨
+            //æ‹¿åˆ°invokeObj,ç”¨æ¥æ‰§è¡Œfieldå¯¹åº”çš„getæ–¹æ³•
             switch (descrptor.getCompressorType()) {
-                case TYPE://Èç¹ûÎªÀàĞÍ×ª»¯µÄcompressor£¬ÄÃµ½sourceÖĞ¸ÃÀàĞÍµÄÊµÀı
+                case TYPE://å¦‚æœä¸ºç±»å‹è½¬åŒ–çš„compressorï¼Œæ‹¿åˆ°sourceä¸­è¯¥ç±»å‹çš„å®ä¾‹
                     Converter converter = descrptor.getConverter();
                     if (converter == null) {
                         throw new CopyUnsuccessfullException("converter shouldn't be null");
@@ -125,7 +125,7 @@ public final class BeanCopyVisitor implements CopierVisitor {
                     String name = descrptor.getName();
                     Method readMethod = BeanCopyUtil.getMethod(BeanCopyUtil.MethodType.READ, converter.getFrom(), name);
                     invokeObj = readMethod.invoke(source);
-                    if (fields.size() == 0) { //Èç¹ûÅäÖÃÖĞÃ»ÓĞÅäÖÃfield£¬±íÊ¾¶ÔÕâ¸öÀàµÄËùÓĞÊôĞÔÑ¹Ëõ¡£µÃµ½ÆäËùÓĞÊôĞÔ
+                    if (fields.size() == 0) { //å¦‚æœé…ç½®ä¸­æ²¡æœ‰é…ç½®fieldï¼Œè¡¨ç¤ºå¯¹è¿™ä¸ªç±»çš„æ‰€æœ‰å±æ€§å‹ç¼©ã€‚å¾—åˆ°å…¶æ‰€æœ‰å±æ€§
                         PropertyDescriptor[] pds = BeanCopyUtil.getPropertyDescriptors(invokeObj.getClass());
                         for (int i = 0; i < pds.length; i++) {
                             PropertyDescriptor pd = pds[i];
@@ -141,14 +141,14 @@ public final class BeanCopyVisitor implements CopierVisitor {
                         }
                     }
                     break;
-                case FIELD://Èç¹ûÎª×Ö¶ÎµÄÑ¹ËõÀàĞÍ£¬ÄÇÃ´invokeObj¾ÍÊÇsource
+                case FIELD://å¦‚æœä¸ºå­—æ®µçš„å‹ç¼©ç±»å‹ï¼Œé‚£ä¹ˆinvokeObjå°±æ˜¯source
                     invokeObj = source;
                     break;
                 default:
                     throw new CopyUnsuccessfullException("No such enum type");
             }
 
-            //µÃµ½´ı½âÊÍµÄProperty Pair
+            //å¾—åˆ°å¾…è§£é‡Šçš„Property Pair
             if (fields.size() > 0) {
                 for (int i = 0; i < fields.size(); i++) {
                     PropertyPair pair = getPropertiesValue(invokeObj, fields.get(i).getName());
@@ -183,13 +183,13 @@ public final class BeanCopyVisitor implements CopierVisitor {
             return;
         }
 
-        //Ñ¹Ëõ×°ÊÎÆ÷
+        //å‹ç¼©è£…é¥°å™¨
         if (descrptor.getCompressorDecorators() != null && descrptor.getCompressorDecorators().size() > 0) {
             for (int i = 0; i < descrptor.getCompressorDecorators().size(); i++) {
                 visit(descrptor.getCompressorDecorators().get(i));
             }
         }
-        //×Ô¶¨Òå×ª»»·½·¨
+        //è‡ªå®šä¹‰è½¬æ¢æ–¹æ³•
         if (descrptor.getMethodDecorators() != null && descrptor.getMethodDecorators().size() > 0) {
             for (int i = 0; i < descrptor.getMethodDecorators().size(); i++) {
                 visit(descrptor.getMethodDecorators().get(i));
@@ -212,7 +212,7 @@ public final class BeanCopyVisitor implements CopierVisitor {
             }
         }
 
-        //ÒÀÀµSpring BeanUtils½øĞĞÍ¬Ãû¿½±´
+        //ä¾èµ–Spring BeanUtilsè¿›è¡ŒåŒåæ‹·è´
         BeanCopyUtil.copyProperties(source, target, ignoresFieldName);
     }
 
@@ -267,7 +267,7 @@ public final class BeanCopyVisitor implements CopierVisitor {
             case KV:
                 ret = StyleUtil.toKv(propertyPairs);
                 break;
-            default://Õı³£ÓÀÔ¶²»»á×ßµ½Õâ¸ö·ÖÖ§£¬·ÀÖ¹ÓĞÈË±ä¶¯¶¨ÒåµÄÀàĞÍ
+            default://æ­£å¸¸æ°¸è¿œä¸ä¼šèµ°åˆ°è¿™ä¸ªåˆ†æ”¯ï¼Œé˜²æ­¢æœ‰äººå˜åŠ¨å®šä¹‰çš„ç±»å‹
                 ret = StyleUtil.toJson(propertyPairs);
                 log.warn("CompressorDecorator.Style may be modified.Use default interpreter.");
         }
@@ -297,17 +297,17 @@ public final class BeanCopyVisitor implements CopierVisitor {
                 }
                 Object value = readMethod.invoke(source);
 
-                //²»Í¬ÀàĞÍ×ª»»
+                //ä¸åŒç±»å‹è½¬æ¢
                 if (field.isDiffType()) {
                     Method typeMethod = copyManager.setToTypeMethod(sourcePD.getPropertyType().getName(), targetPD.getPropertyType().getName());
-                    if (typeMethod.getName().equals(CopierDefaultManager.COPY_METHOD_NAME)) {//·Ç»ù±¾×ª»»ÀàĞÍ
+                    if (typeMethod.getName().equals(CopierDefaultManager.COPY_METHOD_NAME)) {//éåŸºæœ¬è½¬æ¢ç±»å‹
                         value = typeMethod.invoke(copyManager, value, field.getTargetType());
                     } else {
                         value = typeMethod.invoke(null, value);
                     }
                 }
 
-                //Ö´ĞĞtargetµÄwrite·½·¨
+                //æ‰§è¡Œtargetçš„writeæ–¹æ³•
                 writeMethod.invoke(target, value);
             }
         } catch (IllegalAccessException e) {

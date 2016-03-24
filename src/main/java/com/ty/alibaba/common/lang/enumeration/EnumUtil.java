@@ -1,6 +1,6 @@
-package com.ty.common.lang.enumeration;
+package com.ty.alibaba.common.lang.enumeration;
 
-import com.ty.common.lang.enumeration.internal.EnumConstant;
+import com.ty.alibaba.common.lang.enumeration.internal.EnumConstant;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,47 +18,47 @@ public class EnumUtil {
     private static final Map entries = new WeakHashMap();
 
     /**
-     * ȡ��<code>Enum</code>ֵ������.
+     * 取得<code>Enum</code>值的类型.
      *
-     * @param enumClass ö������
+     * @param enumClass 枚举类型
      *
-     * @return <code>Enum</code>ֵ������
+     * @return <code>Enum</code>值的类型
      */
     public static Class getUnderlyingClass(Class enumClass) {
         return getEnumType(enumClass).getUnderlyingClass();
     }
 
     /**
-     * �ж�ָ�����Ƶ�ö�����Ƿ񱻶���.
+     * 判断指定名称的枚举量是否被定义.
      *
-     * @param enumClass ö������
-     * @param name ö����������
+     * @param enumClass 枚举类型
+     * @param name 枚举量的名称
      *
-     * @return �������, �򷵻�<code>true</code>
+     * @return 如果存在, 则返回<code>true</code>
      */
     public static boolean isNameDefined(Class enumClass, String name) {
         return getEnumType(enumClass).nameMap.containsKey(name);
     }
 
     /**
-     * �ж�ָ��ֵ��ö�����Ƿ񱻶���.
+     * 判断指定值的枚举量是否被定义.
      *
-     * @param enumClass ö������
-     * @param value ö������ֵ
+     * @param enumClass 枚举类型
+     * @param value 枚举量的值
      *
-     * @return �������, �򷵻�<code>true</code>
+     * @return 如果存在, 则返回<code>true</code>
      */
     public static boolean isValueDefined(Class enumClass, Number value) {
         return getEnumType(enumClass).valueMap.containsKey(value);
     }
 
     /**
-     * ȡ��ָ�����Ƶ�ö����.
+     * 取得指定名称的枚举量.
      *
-     * @param enumClass ö������
-     * @param name ö����������
+     * @param enumClass 枚举类型
+     * @param name 枚举量的名称
      *
-     * @return ö����, ���������, �򷵻�<code>null</code>
+     * @return 枚举量, 如果不存在, 则返回<code>null</code>
      */
     public static Enum getEnumByName(Class enumClass, String name) {
         Enum.EnumType enumType = getEnumType(enumClass);
@@ -71,69 +71,69 @@ public class EnumUtil {
     }
 
     /**
-     * ȡ��ָ��ֵ��ö����.
+     * 取得指定值的枚举量.
      *
-     * @param enumClass ö������
-     * @param value ö������ֵ
+     * @param enumClass 枚举类型
+     * @param value 枚举量的值
      *
-     * @return ö����, ���������, �򷵻�<code>null</code>
+     * @return 枚举量, 如果不存在, 则返回<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, Number value) {
         return (Enum) getEnumType(enumClass).valueMap.get(value);
     }
 
     /**
-     * ȡ��ָ��ֵ��ö����.
+     * 取得指定值的枚举量.
      *
-     * @param enumClass ö������
-     * @param value ö������ֵ
+     * @param enumClass 枚举类型
+     * @param value 枚举量的值
      *
-     * @return ö����, ���������, �򷵻�<code>null</code>
+     * @return 枚举量, 如果不存在, 则返回<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, int value) {
         return (Enum) getEnumType(enumClass).valueMap.get(new Integer(value));
     }
 
     /**
-     * ȡ��ָ��ֵ��ö����.
+     * 取得指定值的枚举量.
      *
-     * @param enumClass ö������
-     * @param value ö������ֵ
+     * @param enumClass 枚举类型
+     * @param value 枚举量的值
      *
-     * @return ö����, ���������, �򷵻�<code>null</code>
+     * @return 枚举量, 如果不存在, 则返回<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, long value) {
         return (Enum) getEnumType(enumClass).valueMap.get(new Long(value));
     }
 
     /**
-     * ȡ��ָ�����͵�����ö������<code>Map</code>, ��<code>Map</code>�������.
+     * 取得指定类型的所有枚举量的<code>Map</code>, 此<code>Map</code>是有序的.
      *
-     * @param enumClass ö������
+     * @param enumClass 枚举类型
      *
-     * @return ָ�����͵�����ö������<code>Map</code>
+     * @return 指定类型的所有枚举量的<code>Map</code>
      */
     public static Map getEnumMap(Class enumClass) {
         return Collections.unmodifiableMap(getEnumType(enumClass).nameMap);
     }
 
     /**
-     * ȡ��ָ�����͵�����ö������<code>Iterator</code>.
+     * 取得指定类型的所有枚举量的<code>Iterator</code>.
      *
-     * @param enumClass ö������
+     * @param enumClass 枚举类型
      *
-     * @return ָ�����͵�����ö������<code>Iterator</code>
+     * @return 指定类型的所有枚举量的<code>Iterator</code>
      */
     public static Iterator getEnumIterator(Class enumClass) {
         return getEnumType(enumClass).enumList.iterator();
     }
 
     /**
-     * ȡ��ָ�����<code>ClassLoader</code>��Ӧ��entry��.
+     * 取得指定类的<code>ClassLoader</code>对应的entry表.
      *
-     * @param enumClass <code>Enum</code>��
+     * @param enumClass <code>Enum</code>类
      *
-     * @return entry��
+     * @return entry表
      */
     static Map getEnumEntryMap(Class enumClass) {
         ClassLoader classLoader = enumClass.getClassLoader();
@@ -152,11 +152,11 @@ public class EnumUtil {
     }
 
     /**
-     * ȡ��<code>Enum</code>���<code>EnumType</code>
+     * 取得<code>Enum</code>类的<code>EnumType</code>
      *
-     * @param enumClass <code>Enum</code>��
+     * @param enumClass <code>Enum</code>类
      *
-     * @return <code>Enum</code>���Ӧ��<code>EnumType</code>����
+     * @return <code>Enum</code>类对应的<code>EnumType</code>对象
      */
     static Enum.EnumType getEnumType(Class enumClass) {
         if (enumClass == null) {
@@ -192,8 +192,8 @@ public class EnumUtil {
                 if (enumType != null) {
                     entryMap.put(enumClass.getName(), enumType);
 
-                    // ��JDK5���棬class loader��ɲ�����ζ�����еĳ�����װ��
-                    // ����Ĵ���ǿ��װ�䳣����
+                    // 在JDK5下面，class loader完成并不意味着所有的常量被装配
+                    // 下面的代码强制装配常量。
                     enumType.populateNames(enumClass);
                 }
             }
@@ -210,13 +210,13 @@ public class EnumUtil {
     }
 
     /**
-     * ���ҷ���.
+     * 查找方法.
      *
-     * @param enumClass ö������
-     * @param methodName ������
-     * @param paramTypes �������ͱ�
+     * @param enumClass 枚举类型
+     * @param methodName 方法名
+     * @param paramTypes 参数类型表
      *
-     * @return ��������, ��<code>null</code>��ʾδ�ҵ�
+     * @return 方法对象, 或<code>null</code>表示未找到
      */
     private static Method findStaticMethod(Class enumClass, String methodName, Class[] paramTypes) {
         Method method = null;

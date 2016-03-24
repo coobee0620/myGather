@@ -2,7 +2,7 @@ package com.ty.laboratory.objectcopier.exception;
 
 /**
  * @project hrc
- * @description ¶ÔÏó¿½±´²»³É¹¦Òì³£
+ * @description å¯¹è±¡æ‹·è´ä¸æˆåŠŸå¼‚å¸¸
  * @auth changtong.ty
  * @date 2014/12/9
  */

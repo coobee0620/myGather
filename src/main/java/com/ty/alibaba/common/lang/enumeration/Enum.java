@@ -1,9 +1,9 @@
-package com.ty.common.lang.enumeration;
+package com.ty.alibaba.common.lang.enumeration;
 
-import com.ty.common.lang.ClassLoaderUtil;
-import com.ty.common.lang.StringUtil;
-import com.ty.common.lang.enumeration.internal.EnumConstant;
-import com.ty.common.lang.enumeration.internal.NumberType;
+import com.ty.alibaba.common.lang.ClassLoaderUtil;
+import com.ty.alibaba.common.lang.StringUtil;
+import com.ty.alibaba.common.lang.enumeration.internal.EnumConstant;
+import com.ty.alibaba.common.lang.enumeration.internal.NumberType;
 
 import java.io.InvalidClassException;
 import java.io.ObjectStreamException;
@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * @project myGather
- * @description ���Ͱ�ȫ��ö������.
+ * @description 类型安全的枚举类型.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -25,55 +25,55 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     private Number            value;
 
     /* ============================================================================ */
-    /*  ����enum�ͳ�ʼ��������                                                      */
+    /*  创建enum和初始化函数。                                                      */
     /* ============================================================================ */
     /**
-     * ����һ��ö������
+     * 创建一个枚举量。
      */
     protected Enum() {
     }
 
     /**
-     * ����һ��ö������<p>ö���������ƺͳ���������ͬ����ֵ�����Զ�������</p>
+     * 创建一个枚举量。<p>枚举量的名称和常量名称相同，而值将被自动产生。</p>
      */
     protected static final Enum create() {
         return createEnum(null, null, false);
     }
 
     /**
-     * ����һ��ö������<p>ö���������ƺͳ���������ͬ����ֵ�����Զ�������</p>
+     * 创建一个枚举量。<p>枚举量的名称和常量名称相同，而值将被自动产生。</p>
      *
-     * @param name ö����������
+     * @param name 枚举量的名称
      */
     protected static final Enum create(String name) {
         return createEnum(name, null, false);
     }
 
     /**
-     * ����һ��ö����, ������ָ����ֵ.
+     * 创建一个枚举量, 并赋予指定的值.
      *
-     * @param value ö������ֵ, ���ֵ����Ϊ<code>null</code>
+     * @param value 枚举量的值, 这个值不能为<code>null</code>
      */
     static final Enum createEnum(Number value) {
         return createEnum(null, value, true);
     }
 
     /**
-     * ����һ��ö����, ������ָ����ֵ.
+     * 创建一个枚举量, 并赋予指定的值.
      *
-     * @param name ö����������
-     * @param value ö������ֵ, ���ֵ����Ϊ<code>null</code>
+     * @param name 枚举量的名称
+     * @param value 枚举量的值, 这个值不能为<code>null</code>
      */
     static final Enum createEnum(String name, Number value) {
         return createEnum(name, value, true);
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö������ֵ
-     * @param withValue �����<code>true</code>, ���ö����������ָ����ֵ, �����ö������������һ���Զ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的值
+     * @param withValue 如果是<code>true</code>, 则该枚举量被赋予指定的值, 否则该枚举量将被赋予一个自动产生的值
      */
     private static Enum createEnum(String name, Number value, boolean withValue) {
         String enumClassName                   = null;
@@ -106,15 +106,15 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
             enumObject.value = enumType.getNextValue(flagMode);
         }
 
-        // ��enum����enumList��
+        // 将enum加入enumList。
         enumType.enumList.add(enumObject);
 
-        // ��enum����valueMap, ����ж��enum��ֵ��ͬ, ��ȡ��һ��
+        // 将enum加入valueMap, 如果有多个enum的值相同, 则取第一个
         if (!enumType.valueMap.containsKey(enumObject.value)) {
             enumType.valueMap.put(enumObject.value, enumObject);
         }
 
-        // ��enum����nameMap, ����ж��enum��������ͬ, ��ȡ��һ��
+        // 将enum加入nameMap, 如果有多个enum的名字相同, 则取第一个
         if ((enumObject.name != null) && !enumType.nameMap.containsKey(enumObject.name)) {
             enumType.nameMap.put(enumObject.name, enumObject);
         }
@@ -123,9 +123,9 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ȡ�õ����ߵ�������
+     * 取得调用者的类名。
      *
-     * @return ����������
+     * @return 调用者类名
      */
     private static String getCallerClassName() {
         StackTraceElement[] callers   = new Throwable().getStackTrace();
@@ -145,12 +145,12 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /* ============================================================================ */
-    /*  Enum��Ա������                                                              */
+    /*  Enum成员函数。                                                              */
     /* ============================================================================ */
     /**
-     * ȡ��ö����������.
+     * 取得枚举量的名称.
      *
-     * @return ö����������
+     * @return 枚举量的名称
      */
     public String getName() {
         if (name == null) {
@@ -164,13 +164,13 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ����ö���������ơ�<p>��������Ѿ������ã��÷������׳��쳣��</p>
+     * 设置枚举量的名称。<p>如果名称已经被设置，该方法将抛出异常。</p>
      *
-     * @param name ö����������
+     * @param name 枚举量的名称
      *
-     * @return ��ǰenum
+     * @return 当前enum
      *
-     * @throws IllegalStateException ��������Ѿ�������
+     * @throws IllegalStateException 如果名称已经被设置
      */
     private Enum setName(String name) {
         if (this.name != null) {
@@ -183,39 +183,39 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ȡ��ö������ֵ.
+     * 取得枚举量的值.
      *
-     * @return ö������ֵ
+     * @return 枚举量的值
      */
     public Number getValue() {
         return value;
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>byte</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>byte</code>值.
      *
-     * @return <code>byte</code>ֵ
+     * @return <code>byte</code>值
      */
     public byte byteValue() {
         return (byte) intValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>short</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>short</code>值.
      *
-     * @return <code>short</code>ֵ
+     * @return <code>short</code>值
      */
     public short shortValue() {
         return (short) intValue();
     }
 
     /**
-     * ����һ��ö�����Ƚϴ�С, ���ǰ�ö������ֵ�Ƚ�.
+     * 和另一个枚举量比较大小, 就是按枚举量的值比较.
      *
-     * @param otherEnum Ҫ�Ƚϵ�ö����
+     * @param otherEnum 要比较的枚举量
      *
-     * @return �������<code>0</code>, ��ʾֵ���, ����<code>0</code>��ʾ��ǰ��ö������ֵ��<code>otherEnum</code>��,
-     *         С��<code>0</code>��ʾ��ǰ��ö������ֵ��<code>otherEnum</code>С
+     * @return 如果等于<code>0</code>, 表示值相等, 大于<code>0</code>表示当前的枚举量的值比<code>otherEnum</code>大,
+     *         小于<code>0</code>表示当前的枚举量的值比<code>otherEnum</code>小
      */
     public int compareTo(Object otherEnum) {
         if (!getClass().equals(otherEnum.getClass())) {
@@ -230,11 +230,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * �Ƚ�����ö�����Ƿ����, ��: ������ͬ, ����ֵ��ͬ(�����ֿ��Բ�ͬ).
+     * 比较两个枚举量是否相等, 即: 类型相同, 并且值相同(但名字可以不同).
      *
-     * @param obj Ҫ�ȽϵĶ���
+     * @param obj 要比较的对象
      *
-     * @return ������, �򷵻�<code>true</code>
+     * @return 如果相等, 则返回<code>true</code>
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -249,27 +249,27 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ȡ��ö������hashֵ.  �������ö������ͬ, �����ǵ�hashֵһ����ͬ.
+     * 取得枚举量的hash值.  如果两个枚举量相同, 则它们的hash值一定相同.
      *
-     * @return hashֵ
+     * @return hash值
      */
     public int hashCode() {
         return getClass().hashCode() ^ value.hashCode();
     }
 
     /**
-     * ��ö����ת�����ַ���, Ҳ����ö����������.
+     * 将枚举量转换成字符串, 也就是枚举量的名称.
      *
-     * @return ö����������
+     * @return 枚举量的名称
      */
     public String toString() {
         return getName();
     }
 
     /**
-     * ȡ���ѱ�װ�ص�class��
+     * 取得已被装载的class。
      *
-     * @return ��ǰ�����class
+     * @return 当前对象的class
      */
     public Class ensureClassLoaded() {
         Class enumClass = getClass();
@@ -280,11 +280,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ��"���л�"���̵���, ����ö������singleton.
+     * 被"序列化"过程调用, 返回枚举量的singleton.
      *
-     * @return ö������singleton
+     * @return 枚举量的singleton
      *
-     * @throws java.io.ObjectStreamException ������л�����
+     * @throws java.io.ObjectStreamException 如果序列化出错
      */
     protected Object writeReplace() throws ObjectStreamException {
         getName();
@@ -292,11 +292,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ��"�����л�"���̵���, ȷ������ö������singleton.
+     * 被"反序列化"过程调用, 确保返回枚举量的singleton.
      *
-     * @return ö������singleton
+     * @return 枚举量的singleton
      *
-     * @throws ObjectStreamException ��������л�����
+     * @throws ObjectStreamException 如果反序列化出错
      */
     protected Object readResolve() throws ObjectStreamException {
         Class    enumClass  = ensureClassLoaded();
@@ -322,7 +322,7 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ����һ��ö�����͵Ķ�����Ϣ.
+     * 代表一个枚举类型的额外信息.
      */
     protected abstract static class EnumType {
         private Number value;
@@ -331,12 +331,12 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         final List enumList = new ArrayList();
 
         /**
-         * ����ָ��ֵΪ��ǰֵ.
+         * 设置指定值为当前值.
          *
-         * @param value ��ǰֵ
-         * @param flagMode �Ƿ�Ϊλģʽ
+         * @param value 当前值
+         * @param flagMode 是否为位模式
          *
-         * @return ��ǰֵ
+         * @return 当前值
          */
         final Number setValue(Number value, boolean flagMode) {
             this.value = value;
@@ -345,11 +345,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * ȡ����һ��ֵ.
+         * 取得下一个值.
          *
-         * @param flagMode �Ƿ�Ϊλģʽ
+         * @param flagMode 是否为位模式
          *
-         * @return ��ǰֵ
+         * @return 当前值
          */
         final Number getNextValue(boolean flagMode) {
             value = getNextValue(value, flagMode);
@@ -362,9 +362,9 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * ʹ�÷���ķ�ʽװ��enum�����ơ�
+         * 使用反射的方式装配enum的名称。
          *
-         * @param enumClass enum��
+         * @param enumClass enum类
          */
         final void populateNames(Class enumClass) {
             synchronized (enumClass) {
@@ -397,28 +397,28 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * ȡ��<code>Enum</code>ֵ������.
+         * 取得<code>Enum</code>值的类型.
          *
-         * @return <code>Enum</code>ֵ������
+         * @return <code>Enum</code>值的类型
          */
         protected abstract Class getUnderlyingClass();
 
         /**
-         * ȡ��ָ��ֵ����һ��ֵ.
+         * 取得指定值的下一个值.
          *
-         * @param value ָ��ֵ
-         * @param flagMode �Ƿ�Ϊλģʽ
+         * @param value 指定值
+         * @param flagMode 是否为位模式
          *
-         * @return ���<code>value</code>Ϊ<code>null</code>, �򷵻�Ĭ�ϵĳ�ʼֵ, ���򷵻���һ��ֵ
+         * @return 如果<code>value</code>为<code>null</code>, 则返回默认的初始值, 否则返回下一个值
          */
         protected abstract Number getNextValue(Number value, boolean flagMode);
 
         /**
-         * �ж��Ƿ�Ϊ<code>0</code>.
+         * 判断是否为<code>0</code>.
          *
-         * @param value Ҫ�жϵ�ֵ
+         * @param value 要判断的值
          *
-         * @return �����, �򷵻�<code>true</code>
+         * @return 如果是, 则返回<code>true</code>
          */
         protected abstract boolean isZero(Number value);
     }

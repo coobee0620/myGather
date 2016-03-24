@@ -1,6 +1,6 @@
-package com.ty.common.lang;
+package com.ty.alibaba.common.lang;
 
-import com.ty.common.lang.exception.ChainedException;
+import com.ty.alibaba.common.lang.exception.ChainedException;
 
 /**
  * @project myGather
@@ -12,35 +12,35 @@ public class ClassInstantiationException extends ChainedException {
     private static final long serialVersionUID = 3258408422113555761L;
 
     /**
-     * ����һ���յ��쳣.
+     * 构造一个空的异常.
      */
     public ClassInstantiationException() {
         super();
     }
 
     /**
-     * ����һ���쳣, ָ���쳣����ϸ��Ϣ.
+     * 构造一个异常, 指明异常的详细信息.
      *
-     * @param message ��ϸ��Ϣ
+     * @param message 详细信息
      */
     public ClassInstantiationException(String message) {
         super(message);
     }
 
     /**
-     * ����һ���쳣, ָ����������쳣������.
+     * 构造一个异常, 指明引起这个异常的起因.
      *
-     * @param cause �쳣������
+     * @param cause 异常的起因
      */
     public ClassInstantiationException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * ����һ���쳣, ָ����������쳣������.
+     * 构造一个异常, 指明引起这个异常的起因.
      *
-     * @param message ��ϸ��Ϣ
-     * @param cause �쳣������
+     * @param message 详细信息
+     * @param cause 异常的起因
      */
     public ClassInstantiationException(String message, Throwable cause) {
         super(message, cause);

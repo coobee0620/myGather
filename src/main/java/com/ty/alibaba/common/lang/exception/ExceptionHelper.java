@@ -1,4 +1,4 @@
-package com.ty.common.lang.exception;
+package com.ty.alibaba.common.lang.exception;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -26,7 +26,7 @@ public class ExceptionHelper {
     private static Method GET_STACK_TRACE_METHOD;
 
     static {
-        // JDK1.4֧��Throwable.getStackTrace()����
+        // JDK1.4支持Throwable.getStackTrace()方法
         try {
             GET_STACK_TRACE_METHOD = Throwable.class.getMethod(GET_STACK_TRACE_METHOD_NAME,
                     new Class[0]);
@@ -35,11 +35,11 @@ public class ExceptionHelper {
     }
 
     /**
-     * ��<code>ChainedThrowable</code>ʵ����ȡ��<code>Throwable</code>����.
+     * 从<code>ChainedThrowable</code>实例中取得<code>Throwable</code>对象.
      *
-     * @param throwable <code>ChainedThrowable</code>ʵ��
+     * @param throwable <code>ChainedThrowable</code>实例
      *
-     * @return <code>Throwable</code>����
+     * @return <code>Throwable</code>对象
      */
     private static Throwable getThrowable(ChainedThrowable throwable) {
         if (throwable instanceof ChainedThrowableDelegate) {
@@ -50,13 +50,13 @@ public class ExceptionHelper {
     }
 
     /**
-     * ��<code>Throwable</code>ת����<code>ChainedThrowable</code>.
-     * ����Ѿ���<code>ChainedThrowable</code>��, ��ֱ�ӷ���,
-     * ��������װ��<code>ChainedThrowableDelegate</code>�з���.
+     * 将<code>Throwable</code>转换成<code>ChainedThrowable</code>.
+     * 如果已经是<code>ChainedThrowable</code>了, 则直接返回,
+     * 否则将它包装在<code>ChainedThrowableDelegate</code>中返回.
      *
-     * @param throwable <code>Throwable</code>����
+     * @param throwable <code>Throwable</code>对象
      *
-     * @return <code>ChainedThrowable</code>����
+     * @return <code>ChainedThrowable</code>对象
      */
     public static ChainedThrowable getChainedThrowable(Throwable throwable) {
         if ((throwable != null) && !(throwable instanceof ChainedThrowable)) {
@@ -67,41 +67,41 @@ public class ExceptionHelper {
     }
 
     /**
-     * ȡ�ñ�������쳣������, ���������<code>ChainedThrowable</code>,
-     * ����<code>ChainedThrowableDelegate</code>��װ������.
+     * 取得被代理的异常的起因, 如果起因不是<code>ChainedThrowable</code>,
+     * 则用<code>ChainedThrowableDelegate</code>包装并返回.
      *
-     * @param throwable �쳣
+     * @param throwable 异常
      *
-     * @return �쳣������
+     * @return 异常的起因
      */
     public static ChainedThrowable getChainedThrowableCause(ChainedThrowable throwable) {
         return getChainedThrowable(throwable.getCause());
     }
 
     /**
-     * ��ӡ����ջ����׼����.
+     * 打印调用栈到标准错误.
      *
-     * @param throwable �쳣
+     * @param throwable 异常
      */
     public static void printStackTrace(ChainedThrowable throwable) {
         printStackTrace(throwable, System.err);
     }
 
     /**
-     * ��ӡ����ջ��ָ�������.
+     * 打印调用栈到指定输出流.
      *
-     * @param throwable �쳣
-     * @param stream ����ֽ���
+     * @param throwable 异常
+     * @param stream 输出字节流
      */
     public static void printStackTrace(ChainedThrowable throwable, PrintStream stream) {
         printStackTrace(throwable, new PrintWriter(stream));
     }
 
     /**
-     * ��ӡ����ջ��ָ�������.
+     * 打印调用栈到指定输出流.
      *
-     * @param throwable �쳣
-     * @param writer ����ַ���
+     * @param throwable 异常
+     * @param writer 输出字符流
      */
     public static void printStackTrace(ChainedThrowable throwable, PrintWriter writer) {
         synchronized (writer) {
@@ -120,11 +120,11 @@ public class ExceptionHelper {
     }
 
     /**
-     * �ݹ�ش�ӡ�����쳣���ĵ���ջ.
+     * 递归地打印所有异常链的调用栈.
      *
-     * @param throwable �쳣
-     * @param writer �����
-     * @param currentStack ��ǰ�Ķ�ջ
+     * @param throwable 异常
+     * @param writer 输出流
+     * @param currentStack 当前的堆栈
      */
     private static void printStackTraceRecursive(ChainedThrowable throwable, PrintWriter writer,
                                                  String[] currentStack) {
@@ -157,11 +157,11 @@ public class ExceptionHelper {
     }
 
     /**
-     * ��ӡ�쳣��message.
+     * 打印异常的message.
      *
-     * @param throwable �쳣
-     * @param writer �����
-     * @param cause �Ƿ��������쳣
+     * @param throwable 异常
+     * @param writer 输出流
+     * @param cause 是否是起因异常
      */
     private static void printThrowableMessage(ChainedThrowable throwable, PrintWriter writer,
                                               boolean cause) {
@@ -185,11 +185,11 @@ public class ExceptionHelper {
     }
 
     /**
-     * �����쳣�ĵ���ջ, ȡ�õ�ǰ�쳣����Ϣ, �����������쳣����Ϣ.
+     * 分析异常的调用栈, 取得当前异常的信息, 不包括起因异常的信息.
      *
-     * @param throwable ȡ��ָ���쳣�ĵ���ջ
+     * @param throwable 取得指定异常的调用栈
      *
-     * @return ����ջ����
+     * @return 调用栈数组
      */
     private static String[] analyzeStackTrace(ChainedThrowable throwable) {
         if (GET_STACK_TRACE_METHOD != null) {
@@ -214,7 +214,7 @@ public class ExceptionHelper {
     }
 
     /**
-     * ����stack trace�ĸ�����.
+     * 分析stack trace的辅助类.
      */
     private static class StackTraceAnalyzer {
         private Throwable       throwable;
@@ -227,7 +227,7 @@ public class ExceptionHelper {
             this.throwable     = getThrowable(throwable);
             this.message       = this.throwable.getMessage();
 
-            // ȡ��stack trace�ַ���.
+            // 取得stack trace字符串.
             StringWriter writer = new StringWriter();
             PrintWriter  pw = new PrintWriter(writer);
 
@@ -235,7 +235,7 @@ public class ExceptionHelper {
 
             String stackTraceDump = writer.toString();
 
-            // �ָ��ַ���, ���зָ�, �����ܸmessage�ִ�
+            // 分割字符串, 按行分割, 但不能割开message字串
             int p = 0;
             int i = -1;
             int j = -1;
@@ -257,7 +257,7 @@ public class ExceptionHelper {
                     k = stackTraceDump.indexOf(STRING_LF, p);
                 }
 
-                // ����ҵ�message
+                // 如果找到message
                 if ((i != -1) && ((j == -1) || (i <= j)) && ((k == -1) || (i <= k))) {
                     includesMessage     = true;
                     p                   = i + message.length();
@@ -271,10 +271,10 @@ public class ExceptionHelper {
                         k = -1;
                     }
 
-                    // ����ֱ������
+                    // 继续直到换行
                 }
 
-                // ����ҵ�����CR��CRLF
+                // 如果找到换行CR或CRLF
                 if ((j != -1) && ((k == -1) || (j < k))) {
                     p = j + 1;
 
@@ -294,7 +294,7 @@ public class ExceptionHelper {
                     continue;
                 }
 
-                // ����ҵ�LF
+                // 如果找到LF
                 if (k != -1) {
                     int q = k + 1;
 
@@ -304,7 +304,7 @@ public class ExceptionHelper {
                     continue;
                 }
 
-                // �����û�ҵ�, ˵���������һ��
+                // 如果都没找到, 说明到了最后一行
                 int q = stackTraceDump.length();
 
                 if ((p + 1) < q) {
@@ -313,7 +313,7 @@ public class ExceptionHelper {
                 }
             }
 
-            // ѡ��"��С"��entry
+            // 选择"较小"的entry
             if (currentEntry.compareTo(selectedEntry) < 0) {
                 selectedEntry = currentEntry;
             }
@@ -323,7 +323,7 @@ public class ExceptionHelper {
             StackTraceEntry nextEntry = currentEntry.accept(line, includesMessage);
 
             if (nextEntry != null) {
-                // ѡ��"��С"��entry
+                // 选择"较小"的entry
                 if (currentEntry.compareTo(selectedEntry) < 0) {
                     selectedEntry = currentEntry;
                 }
@@ -343,8 +343,8 @@ public class ExceptionHelper {
             private int  count             = 0;
 
             StackTraceEntry accept(String line, boolean includesMessage) {
-                // �����...at XXX.java(Line...), ����뵽lines�б���.
-                // ���򴴽��������µ�entry.
+                // 如果是...at XXX.java(Line...), 则加入到lines列表中.
+                // 否则创建并返回新的entry.
                 if (line.startsWith(STRING_STACK_TRACE_PREFIX)) {
                     lines.add(line);
                     count++;
@@ -356,7 +356,7 @@ public class ExceptionHelper {
                     return newEntry;
                 }
 
-                // ����Ȩ��
+                // 设置权重
                 if (includesMessage) {
                     this.includesMessage = 1;
                 }
@@ -374,7 +374,7 @@ public class ExceptionHelper {
                 int             otherWeight = otherEntry.includesMessage
                         + otherEntry.includesThrowable;
 
-                // weight�������ǰ, ���weight��ͬ, ��countС������ǰ
+                // weight大的排在前, 如果weight相同, 则count小的排在前
                 if (thisWeight == otherWeight) {
                     return count - otherEntry.count;
                 } else {

@@ -2,9 +2,9 @@ package com.ty.laboratory.objectcopier.copier.utils;
 
 /**
  * @project hrc
- * @description 来自com.sun.corba.se.spi.orb.StringPair
- * 将getFirst和getSecond设置为protected，对子类的使用者屏蔽这两个方法
- * 便于子类重写这两个方法时重写成业务相关的名称
+ * @description 鏉ヨ嚜com.sun.corba.se.spi.orb.StringPair
+ * 灏唃etFirst鍜実etSecond璁剧疆涓簆rotected锛屽瀛愮被鐨勪娇鐢ㄨ�呭睆钄借繖涓や釜鏂规硶
+ * 渚夸簬瀛愮被閲嶅啓杩欎袱涓柟娉曟椂閲嶅啓鎴愪笟鍔＄浉鍏崇殑鍚嶇О
  * @auth changtong.ty
  * @date 2014/12/2
  */

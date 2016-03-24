@@ -1,4 +1,4 @@
-package com.ty.common.lang.enumeration.internal;
+package com.ty.alibaba.common.lang.enumeration.internal;
 
 /**
  * @project myGather
@@ -10,7 +10,7 @@ public interface EnumConstant {
     String CREATE_ENUM_TYPE_METHOD_NAME = "createEnumType";
     String FLAG_SET_INNER_CLASS_NAME = "FlagSet";
 
-    // Enum�ĳ�����Ϣ.
+    // Enum的出错信息.
     String ENUM_NAME_IS_EMPTY             = "The Enum name must not be empty";
     String ENUM_VALUE_IS_NULL             = "The Enum value must not be null";
     String DUPLICATED_ENUM_NAME           = "Duplicated name \"{0}\" of Enum class \"{1}\"";
@@ -22,7 +22,7 @@ public interface EnumConstant {
     String ENUM_IS_NOT_A_FLAG             = "The Enum class \"{0}\" is not an implementation of Flags";
     String CREATE_FLAG_SET_IS_UNSUPPORTED = "Creating FlagSet is not supported by Enum class \"{0}\".  Make sure there is a static inner class \"{0}.FlagSet\" with a constructor without parameters";
 
-    // FlagSet�ĳ�����Ϣ
+    // FlagSet的出错信息
     String ILLEGAL_CLASS                     = "Class \"{0}\" is not a subclass of \"{1}\"";
     String ILLEGAL_INTERFACE                 = "Class \"{0}\" is not an implementation of \"{1}\"";
     String CLONE_NOT_SUPPORTED               = "Clone not supported by class \"{0}\"";

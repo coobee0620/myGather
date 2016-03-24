@@ -1,13 +1,13 @@
 package com.ty.laboratory.objectcopier.copier.elements;
 
 
+import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½µÄÔªËØ£¨Element£©
+ * @description è®¿é—®è€…æ¨¡å¼çš„å…ƒç´ ï¼ˆElementï¼‰
  * @auth changtong.ty
  * @date 2014/12/10
  */

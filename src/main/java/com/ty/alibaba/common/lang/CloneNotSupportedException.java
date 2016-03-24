@@ -1,6 +1,6 @@
-package com.ty.common.lang;
+package com.ty.alibaba.common.lang;
 
-import com.ty.common.lang.exception.ChainedRuntimeException;
+import com.ty.alibaba.common.lang.exception.ChainedRuntimeException;
 
 /**
  * @project myGather
@@ -12,35 +12,35 @@ public class CloneNotSupportedException extends ChainedRuntimeException {
     private static final long serialVersionUID = 3257281439807584562L;
 
     /**
-     * ����һ���յ��쳣.
+     * 构造一个空的异常.
      */
     public CloneNotSupportedException() {
         super();
     }
 
     /**
-     * ����һ���쳣, ָ���쳣����ϸ��Ϣ.
+     * 构造一个异常, 指明异常的详细信息.
      *
-     * @param message ��ϸ��Ϣ
+     * @param message 详细信息
      */
     public CloneNotSupportedException(String message) {
         super(message);
     }
 
     /**
-     * ����һ���쳣, ָ����������쳣������.
+     * 构造一个异常, 指明引起这个异常的起因.
      *
-     * @param cause �쳣������
+     * @param cause 异常的起因
      */
     public CloneNotSupportedException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * ����һ���쳣, ָ����������쳣������.
+     * 构造一个异常, 指明引起这个异常的起因.
      *
-     * @param message ��ϸ��Ϣ
-     * @param cause �쳣������
+     * @param message 详细信息
+     * @param cause 异常的起因
      */
     public CloneNotSupportedException(String message, Throwable cause) {
         super(message, cause);

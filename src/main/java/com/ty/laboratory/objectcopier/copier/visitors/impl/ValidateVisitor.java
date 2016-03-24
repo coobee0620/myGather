@@ -1,12 +1,12 @@
 package com.ty.laboratory.objectcopier.copier.visitors.impl;
 
-import com.ty.laboratory.objectcopier.exception.CopyFormatException;
-import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
 import com.ty.laboratory.objectcopier.constants.ObjectCopierCode;
 import com.ty.laboratory.objectcopier.copier.elements.*;
 import com.ty.laboratory.objectcopier.copier.utils.CopierUtils;
 import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
-import org.apache.commons.lang.StringUtils;
+import com.ty.laboratory.objectcopier.exception.CopyFormatException;
+import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,8 +16,8 @@ import java.util.Map;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½£º¾ßÌå·ÃÎÊÕß£¨Concrete Visitor£©
- * ´ıÑéÖ¤µÄÃèÊö·ûÔªËØÒ»¶¨²»ÄÜÎªnull£¬readerºÍµ÷ÓÃ·½±£Ö¤
+ * @description è®¿é—®è€…æ¨¡å¼ï¼šå…·ä½“è®¿é—®è€…ï¼ˆConcrete Visitorï¼‰
+ * å¾…éªŒè¯çš„æè¿°ç¬¦å…ƒç´ ä¸€å®šä¸èƒ½ä¸ºnullï¼Œreaderå’Œè°ƒç”¨æ–¹ä¿è¯
  * @auth changtong.ty
  * @date 2014/12/11
  */
@@ -137,7 +137,7 @@ public final class ValidateVisitor implements CopierVisitor {
                     CopierUtils.checkName(descrptor.getName());
                     CompressorDecorator cd = (CompressorDecorator) descrptor.getParent();
                     switch (cd.getCompressorType()) {
-                        //Èç¹û
+                        //å¦‚æœ
                         case TYPE:
                             CopierUtils.chechActualName(cd.getType(), descrptor.getName());
                             break;
@@ -160,8 +160,8 @@ public final class ValidateVisitor implements CopierVisitor {
     public void visit(CompressorDecorator descrptor) throws CopyFormatException, CopyUnsuccessfullException {
         if (descrptor != null) {
             /**
-             * ±ØĞëÓĞtarget field name
-             * ²¢ÇÒtarget field ±ØĞëÎªStringÀàĞÍ
+             * å¿…é¡»æœ‰target field name
+             * å¹¶ä¸”target field å¿…é¡»ä¸ºStringç±»å‹
              * */
             CopierUtils.checkName(descrptor.getTargetFiledName());
             Converter converter = descrptor.getConverter();
@@ -169,12 +169,12 @@ public final class ValidateVisitor implements CopierVisitor {
                 log.error(ObjectCopierCode.PARAM_ERR);
                 throw new CopyFormatException(ObjectCopierCode.PARAM_ERR + Converter.class.getName() + " should not be null");
             }
-            //target field±ØĞëÎªString
+            //target fieldå¿…é¡»ä¸ºString
             CopierUtils.checkMatch(converter.getTo(), descrptor.getTargetFiledName(), String.class.getName());
 
-            //Èç¹ûcd.nameºÍcd.typeÈ«²¿Îª¿Õ»òÈ«²»Îª¿Õ¡£±ØĞë³É¶Ô³öÏÖ
+            //å¦‚æœcd.nameå’Œcd.typeå…¨éƒ¨ä¸ºç©ºæˆ–å…¨ä¸ä¸ºç©ºã€‚å¿…é¡»æˆå¯¹å‡ºç°
             if (StringUtils.isNotBlank(descrptor.getName()) && descrptor.getType() != null) {
-                //¼ì²éconverter.fromÖĞµÄcd.nameµÄÊµ¼ÊÀàĞÍ
+                //æ£€æŸ¥converter.fromä¸­çš„cd.nameçš„å®é™…ç±»å‹
                 CopierUtils.checkMatch(converter.getFrom(), descrptor.getName(), descrptor.getType().getName());
                 descrptor.setCompressorType(CompressorDecorator.CompressorType.TYPE);
             } else if (StringUtils.isBlank(descrptor.getName()) && descrptor.getType() == null) {
@@ -185,7 +185,7 @@ public final class ValidateVisitor implements CopierVisitor {
             }
 
             /**
-             * ÑéÖ¤compressor field list
+             * éªŒè¯compressor field list
              * */
             List<Field> availableField = new ArrayList<Field>();
             List<Field> fields = descrptor.getFields();
@@ -195,7 +195,7 @@ public final class ValidateVisitor implements CopierVisitor {
                     visit(field, availableField);
                 }
             }
-            //Èç¹ûÊÇ×Ö¶ÎÑ¹ËõÆ÷£¬ÄÇÃ´field list±ØĞëÓĞÖµ
+            //å¦‚æœæ˜¯å­—æ®µå‹ç¼©å™¨ï¼Œé‚£ä¹ˆfield listå¿…é¡»æœ‰å€¼
             if (descrptor.getCompressorType() == CompressorDecorator.CompressorType.FIELD && availableField.size() == 0) {
                 String errorMsg = "Field compressor have to have a field list.";
                 log.error(ObjectCopierCode.CONFIG_ERR);
@@ -249,14 +249,14 @@ public final class ValidateVisitor implements CopierVisitor {
 
     private void checkCustomBuilt(Field field) throws CopyFormatException {
         /**
-         * ÊôĞÔ²»Í¬Ãû-Ãû³Æ¼ì²é¡£
-         * Í¨¹ı-ÉèÖÃ¿É×ö²»Í¬Ãû×ª»¯
+         * å±æ€§ä¸åŒå-åç§°æ£€æŸ¥ã€‚
+         * é€šè¿‡-è®¾ç½®å¯åšä¸åŒåè½¬åŒ–
          * */
         CopierUtils.checkName(field.getName());
         CopierUtils.checkName(field.getTargetName());
 
         /**
-         * ÊôĞÔ²»Í¬ÀàĞÍ-ÀàĞÍ¼ì²é
+         * å±æ€§ä¸åŒç±»å‹-ç±»å‹æ£€æŸ¥
          * */
         if (StringUtils.isNotBlank(field.getType()) && StringUtils.isNotBlank(field.getTargetType())) {
             Converter converter = field.getConverter();
@@ -264,7 +264,7 @@ public final class ValidateVisitor implements CopierVisitor {
                 log.error(ObjectCopierCode.PARAM_ERR);
                 throw new CopyFormatException(ObjectCopierCode.PARAM_ERR + Converter.class.getName() + " should not be null");
             }
-            //Èç¹ûÅäÖÃÖĞµÄfield.type²»Îª¿Õ£¬Ôò¼ì²étypematch
+            //å¦‚æœé…ç½®ä¸­çš„field.typeä¸ä¸ºç©ºï¼Œåˆ™æ£€æŸ¥typematch
             CopierUtils.checkMatch(converter.getFrom(), field.getName(), field.getType());
             CopierUtils.checkMatch(converter.getTo(), field.getTargetName(), field.getTargetType());
             field.setDiffType(true);

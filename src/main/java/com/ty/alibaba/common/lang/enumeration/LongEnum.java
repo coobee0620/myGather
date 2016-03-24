@@ -1,8 +1,8 @@
-package com.ty.common.lang.enumeration;
+package com.ty.alibaba.common.lang.enumeration;
 
 /**
  * @project myGather
- * @description ���Ͱ�ȫ��ö������, ����һ��������.
+ * @description 类型安全的枚举类型, 代表一个长整数.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -10,47 +10,47 @@ public abstract class LongEnum extends Enum {
     private static final long serialVersionUID = 8152633183977823349L;
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö����������ֵ
+     * @param value 枚举量的整数值
      */
     protected static final LongEnum create(long value) {
         return (LongEnum) createEnum(new Long(value));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö����������ֵ
+     * @param value 枚举量的整数值
      */
     protected static final LongEnum create(Number value) {
         return (LongEnum) createEnum(new Long(value.longValue()));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö����������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的整数值
      */
     protected static final LongEnum create(String name, long value) {
         return (LongEnum) createEnum(name, new Long(value));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö����������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的整数值
      */
     protected static final LongEnum create(String name, Number value) {
         return (LongEnum) createEnum(name, new Long(value.longValue()));
     }
 
     /**
-     * ����һ��ö�����͵�<code>EnumType</code>.
+     * 创建一个枚举类型的<code>EnumType</code>.
      *
-     * @return ö�����͵�<code>EnumType</code>
+     * @return 枚举类型的<code>EnumType</code>
      */
     protected static Object createEnumType() {
         return new EnumType() {
@@ -61,13 +61,13 @@ public abstract class LongEnum extends Enum {
             protected Number getNextValue(Number value, boolean flagMode) {
                 if (value == null) {
                     return flagMode ? new Long(1)
-                            : new Long(0); // Ĭ����ʼֵ
+                            : new Long(0); // 默认起始值
                 }
 
                 long longValue = ((Long) value).longValue();
 
                 if (flagMode) {
-                    return new Long(longValue << 1); // λģʽ
+                    return new Long(longValue << 1); // 位模式
                 } else {
                     return new Long(longValue + 1);
                 }
@@ -80,63 +80,63 @@ public abstract class LongEnum extends Enum {
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ������ֵ.
+     * 实现<code>Number</code>类, 取得整数值.
      *
-     * @return ����ֵ
+     * @return 整数值
      */
     public int intValue() {
         return ((Long) getValue()).intValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ�ó�����ֵ.
+     * 实现<code>Number</code>类, 取得长整数值.
      *
-     * @return ������ֵ
+     * @return 长整数值
      */
     public long longValue() {
         return ((Long) getValue()).longValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>double</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>double</code>值.
      *
-     * @return <code>double</code>ֵ
+     * @return <code>double</code>值
      */
     public double doubleValue() {
         return ((Long) getValue()).doubleValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>float</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>float</code>值.
      *
-     * @return <code>float</code>ֵ
+     * @return <code>float</code>值
      */
     public float floatValue() {
         return ((Long) getValue()).floatValue();
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת����ʮ�����������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成十六进制整数字符串.
      *
-     * @return ʮ�����������ַ���
+     * @return 十六进制整数字符串
      */
     public String toHexString() {
         return Long.toHexString(((Long) getValue()).intValue());
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת���ɰ˽��������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成八进制整数字符串.
      *
-     * @return �˽��������ַ���
+     * @return 八进制整数字符串
      */
     public String toOctalString() {
         return Long.toOctalString(((Long) getValue()).intValue());
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת���ɶ����������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成二进制整数字符串.
      *
-     * @return �����������ַ���
+     * @return 二进制整数字符串
      */
     public String toBinaryString() {
         return Long.toBinaryString(((Long) getValue()).intValue());

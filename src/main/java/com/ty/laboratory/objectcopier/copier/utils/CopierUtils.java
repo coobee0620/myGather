@@ -1,9 +1,9 @@
 package com.ty.laboratory.objectcopier.copier.utils;
 
+import com.ty.laboratory.objectcopier.constants.ObjectCopierCode;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.constants.ObjectCopierCode;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -47,10 +47,10 @@ public class CopierUtils {
     }
 
     /**
-     * @param fieldName   clazzÖĞµÄ×Ö¶ÎÃû³Æ
+     * @param fieldName   clazzé”Ÿå«ç¢‰æ‹·é”Ÿè¡—è®¹æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
      * @param clazz
-     * @param toMatchType ´ıÑéÖ¤µÄÀàĞÍ
-     * @desc ÑéÖ¤
+     * @param toMatchType é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·è¯é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
+     * @desc é”Ÿæ–¤æ‹·è¯
      */
     public static void checkMatch(Class clazz, String fieldName, String toMatchType) throws CopyFormatException {
         if (StringUtils.isBlank(fieldName) || clazz == null) {
@@ -67,12 +67,12 @@ public class CopierUtils {
                 throw new CopyFormatException(ObjectCopierCode.CONFIG_ERR + "Configuration error.actual type don't match for setting type.");
             }
         } catch (CopyUnsuccessfullException e) {
-            throw new CopyFormatException(e);
+            throw new  CopyFormatException(e);
         }
     }
 
     /**
-     * ¼ì²éÀàĞÍÖĞÊÇ·ñÓĞÕâ¸öÊôĞÔ
+     * é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æ¬ é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·
      */
     public static void chechActualName(Class clazz, String fieldName) throws CopyFormatException {
         try {

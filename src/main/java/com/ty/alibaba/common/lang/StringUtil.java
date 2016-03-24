@@ -1,4 +1,4 @@
-package com.ty.common.lang;
+package com.ty.alibaba.common.lang;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,33 +6,33 @@ import java.util.List;
 
 /**
  * @project myGather
- * @description �й��ַ�������Ĺ����ࡣ
+ * @description 有关字符串处理的工具类。
  *
  * <p>
- * ������е�ÿ�����������ԡ���ȫ���ش���<code>null</code>���������׳�<code>NullPointerException</code>��
+ * 这个类中的每个方法都可以“安全”地处理<code>null</code>，而不会抛出<code>NullPointerException</code>。
  * </p>
  * @auth changtong.ty
  * @date 2015/6/23
  */
 public class StringUtil {
     /* ============================================================================ */
-    /*  ������singleton��                                                           */
+    /*  常量和singleton。                                                           */
     /* ============================================================================ */
 
-    /** ���ַ����� */
+    /** 空字符串。 */
     public static final String EMPTY_STRING = "";
 
     /* ============================================================================ */
-    /*  �пպ�����                                                                  */
+    /*  判空函数。                                                                  */
     /*                                                                              */
-    /*  ���·��������ж�һ���ַ����Ƿ�Ϊ��                                          */
+    /*  以下方法用来判定一个字符串是否为：                                          */
     /*  1. null                                                                     */
     /*  2. empty - ""                                                               */
-    /*  3. blank - "ȫ���ǿհ�" - �հ���Character.isWhitespace�����塣              */
+    /*  3. blank - "全部是空白" - 空白由Character.isWhitespace所定义。              */
     /* ============================================================================ */
 
     /**
-     * ����ַ����Ƿ�Ϊ<code>null</code>����ַ���<code>""</code>��
+     * 检查字符串是否为<code>null</code>或空字符串<code>""</code>。
      * <pre>
      * StringUtil.isEmpty(null)      = true
      * StringUtil.isEmpty("")        = true
@@ -41,16 +41,16 @@ public class StringUtil {
      * StringUtil.isEmpty("  bob  ") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ���Ϊ��, �򷵻�<code>true</code>
+     * @return 如果为空, 则返回<code>true</code>
      */
     public static boolean isEmpty(String str) {
         return ((str == null) || (str.length() == 0));
     }
 
     /**
-     * ����ַ����Ƿ���<code>null</code>�Ϳ��ַ���<code>""</code>��
+     * 检查字符串是否不是<code>null</code>和空字符串<code>""</code>。
      * <pre>
      * StringUtil.isEmpty(null)      = false
      * StringUtil.isEmpty("")        = false
@@ -59,16 +59,16 @@ public class StringUtil {
      * StringUtil.isEmpty("  bob  ") = true
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return �����Ϊ��, �򷵻�<code>true</code>
+     * @return 如果不为空, 则返回<code>true</code>
      */
     public static boolean isNotEmpty(String str) {
         return ((str != null) && (str.length() > 0));
     }
 
     /**
-     * ����ַ����Ƿ��ǿհף�<code>null</code>�����ַ���<code>""</code>��ֻ�пհ��ַ���
+     * 检查字符串是否是空白：<code>null</code>、空字符串<code>""</code>或只有空白字符。
      * <pre>
      * StringUtil.isBlank(null)      = true
      * StringUtil.isBlank("")        = true
@@ -77,9 +77,9 @@ public class StringUtil {
      * StringUtil.isBlank("  bob  ") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ���Ϊ�հ�, �򷵻�<code>true</code>
+     * @return 如果为空白, 则返回<code>true</code>
      */
     public static boolean isBlank(String str) {
         int length;
@@ -98,7 +98,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ����Ƿ��ǿհף�<code>null</code>�����ַ���<code>""</code>��ֻ�пհ��ַ���
+     * 检查字符串是否不是空白：<code>null</code>、空字符串<code>""</code>或只有空白字符。
      * <pre>
      * StringUtil.isBlank(null)      = false
      * StringUtil.isBlank("")        = false
@@ -107,9 +107,9 @@ public class StringUtil {
      * StringUtil.isBlank("  bob  ") = true
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ���Ϊ�հ�, �򷵻�<code>true</code>
+     * @return 如果为空白, 则返回<code>true</code>
      */
     public static boolean isNotBlank(String str) {
         int length;
@@ -128,13 +128,13 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  Ĭ��ֵ������                                                                */
+    /*  默认值函数。                                                                */
     /*                                                                              */
-    /*  ���ַ���Ϊnull��empty��blankʱ�����ַ���ת����ָ����Ĭ���ַ�����            */
+    /*  当字符串为null、empty或blank时，将字符串转换成指定的默认字符串。            */
     /* ============================================================================ */
 
     /**
-     * ����ַ�����<code>null</code>���򷵻ؿ��ַ���<code>""</code>�����򷵻��ַ�������
+     * 如果字符串是<code>null</code>，则返回空字符串<code>""</code>，否则返回字符串本身。
      * <pre>
      * StringUtil.defaultIfNull(null)  = ""
      * StringUtil.defaultIfNull("")    = ""
@@ -142,9 +142,9 @@ public class StringUtil {
      * StringUtil.defaultIfNull("bat") = "bat"
      * </pre>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return �ַ����������ַ���<code>""</code>
+     * @return 字符串本身或空字符串<code>""</code>
      */
     public static String defaultIfNull(String str) {
         return (str == null) ? EMPTY_STRING
@@ -152,7 +152,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ�����<code>null</code>���򷵻�ָ��Ĭ���ַ��������򷵻��ַ�������
+     * 如果字符串是<code>null</code>，则返回指定默认字符串，否则返回字符串本身。
      * <pre>
      * StringUtil.defaultIfNull(null, "default")  = "default"
      * StringUtil.defaultIfNull("", "default")    = ""
@@ -160,10 +160,10 @@ public class StringUtil {
      * StringUtil.defaultIfNull("bat", "default") = "bat"
      * </pre>
      *
-     * @param str Ҫת�����ַ���
-     * @param defaultStr Ĭ���ַ���
+     * @param str 要转换的字符串
+     * @param defaultStr 默认字符串
      *
-     * @return �ַ��������ָ����Ĭ���ַ���
+     * @return 字符串本身或指定的默认字符串
      */
     public static String defaultIfNull(String str, String defaultStr) {
         return (str == null) ? defaultStr
@@ -171,10 +171,10 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ�����<code>null</code>����ַ���<code>""</code>���򷵻ؿ��ַ���<code>""</code>�����򷵻��ַ�������
+     * 如果字符串是<code>null</code>或空字符串<code>""</code>，则返回空字符串<code>""</code>，否则返回字符串本身。
      *
      * <p>
-     * �˷���ʵ���Ϻ�<code>defaultIfNull(String)</code>��Ч��
+     * 此方法实际上和<code>defaultIfNull(String)</code>等效。
      * <pre>
      * StringUtil.defaultIfEmpty(null)  = ""
      * StringUtil.defaultIfEmpty("")    = ""
@@ -183,9 +183,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return �ַ����������ַ���<code>""</code>
+     * @return 字符串本身或空字符串<code>""</code>
      */
     public static String defaultIfEmpty(String str) {
         return (str == null) ? EMPTY_STRING
@@ -193,7 +193,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ�����<code>null</code>����ַ���<code>""</code>���򷵻�ָ��Ĭ���ַ��������򷵻��ַ�������
+     * 如果字符串是<code>null</code>或空字符串<code>""</code>，则返回指定默认字符串，否则返回字符串本身。
      * <pre>
      * StringUtil.defaultIfEmpty(null, "default")  = "default"
      * StringUtil.defaultIfEmpty("", "default")    = "default"
@@ -201,10 +201,10 @@ public class StringUtil {
      * StringUtil.defaultIfEmpty("bat", "default") = "bat"
      * </pre>
      *
-     * @param str Ҫת�����ַ���
-     * @param defaultStr Ĭ���ַ���
+     * @param str 要转换的字符串
+     * @param defaultStr 默认字符串
      *
-     * @return �ַ��������ָ����Ĭ���ַ���
+     * @return 字符串本身或指定的默认字符串
      */
     public static String defaultIfEmpty(String str, String defaultStr) {
         return ((str == null) || (str.length() == 0)) ? defaultStr
@@ -212,7 +212,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ����ǿհף�<code>null</code>�����ַ���<code>""</code>��ֻ�пհ��ַ����򷵻ؿ��ַ���<code>""</code>�����򷵻��ַ�������
+     * 如果字符串是空白：<code>null</code>、空字符串<code>""</code>或只有空白字符，则返回空字符串<code>""</code>，否则返回字符串本身。
      * <pre>
      * StringUtil.defaultIfBlank(null)  = ""
      * StringUtil.defaultIfBlank("")    = ""
@@ -220,9 +220,9 @@ public class StringUtil {
      * StringUtil.defaultIfBlank("bat") = "bat"
      * </pre>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return �ַ����������ַ���<code>""</code>
+     * @return 字符串本身或空字符串<code>""</code>
      */
     public static String defaultIfBlank(String str) {
         return isBlank(str) ? EMPTY_STRING
@@ -230,7 +230,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ�����<code>null</code>����ַ���<code>""</code>���򷵻�ָ��Ĭ���ַ��������򷵻��ַ�������
+     * 如果字符串是<code>null</code>或空字符串<code>""</code>，则返回指定默认字符串，否则返回字符串本身。
      * <pre>
      * StringUtil.defaultIfBlank(null, "default")  = "default"
      * StringUtil.defaultIfBlank("", "default")    = "default"
@@ -238,10 +238,10 @@ public class StringUtil {
      * StringUtil.defaultIfBlank("bat", "default") = "bat"
      * </pre>
      *
-     * @param str Ҫת�����ַ���
-     * @param defaultStr Ĭ���ַ���
+     * @param str 要转换的字符串
+     * @param defaultStr 默认字符串
      *
-     * @return �ַ��������ָ����Ĭ���ַ���
+     * @return 字符串本身或指定的默认字符串
      */
     public static String defaultIfBlank(String str, String defaultStr) {
         return isBlank(str) ? defaultStr
@@ -249,17 +249,17 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ȥ�հף���ָ���ַ����ĺ�����                                                */
+    /*  去空白（或指定字符）的函数。                                                */
     /*                                                                              */
-    /*  ���·���������ȥһ���ִ��еĿհ׻�ָ���ַ���                                */
+    /*  以下方法用来除去一个字串中的空白或指定字符。                                */
     /* ============================================================================ */
 
     /**
-     * ��ȥ�ַ���ͷβ���Ŀհף�����ַ�����<code>null</code>����Ȼ����<code>null</code>��
+     * 除去字符串头尾部的空白，如果字符串是<code>null</code>，依然返回<code>null</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trim(null)          = null
      * StringUtil.trim("")            = ""
@@ -269,16 +269,16 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     public static String trim(String str) {
         return trim(str, null, 0);
     }
 
     /**
-     * ��ȥ�ַ���ͷβ����ָ���ַ�������ַ�����<code>null</code>����Ȼ����<code>null</code>��
+     * 除去字符串头尾部的指定字符，如果字符串是<code>null</code>，依然返回<code>null</code>。
      * <pre>
      * StringUtil.trim(null, *)          = null
      * StringUtil.trim("", *)            = ""
@@ -289,21 +289,21 @@ public class StringUtil {
      * StringUtil.trim("  abcyx", "xyz") = "  abc"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param stripChars Ҫ��ȥ���ַ������Ϊ<code>null</code>��ʾ��ȥ�հ��ַ�
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为<code>null</code>表示除去空白字符
      *
-     * @return ��ȥָ���ַ���ĵ��ַ��������ԭ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 除去指定字符后的的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     public static String trim(String str, String stripChars) {
         return trim(str, stripChars, 0);
     }
 
     /**
-     * ��ȥ�ַ���ͷ���Ŀհף�����ַ�����<code>null</code>���򷵻�<code>null</code>��
+     * 除去字符串头部的空白，如果字符串是<code>null</code>，则返回<code>null</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trimStart(null)         = null
      * StringUtil.trimStart("")           = ""
@@ -314,16 +314,16 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimStart(String str) {
         return trim(str, null, -1);
     }
 
     /**
-     * ��ȥ�ַ���ͷ����ָ���ַ�������ַ�����<code>null</code>����Ȼ����<code>null</code>��
+     * 除去字符串头部的指定字符，如果字符串是<code>null</code>，依然返回<code>null</code>。
      * <pre>
      * StringUtil.trimStart(null, *)          = null
      * StringUtil.trimStart("", *)            = ""
@@ -335,21 +335,21 @@ public class StringUtil {
      * StringUtil.trimStart("yxabc  ", "xyz") = "abc  "
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param stripChars Ҫ��ȥ���ַ������Ϊ<code>null</code>��ʾ��ȥ�հ��ַ�
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为<code>null</code>表示除去空白字符
      *
-     * @return ��ȥָ���ַ���ĵ��ַ��������ԭ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 除去指定字符后的的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     public static String trimStart(String str, String stripChars) {
         return trim(str, stripChars, -1);
     }
 
     /**
-     * ��ȥ�ַ���β���Ŀհף�����ַ�����<code>null</code>���򷵻�<code>null</code>��
+     * 除去字符串尾部的空白，如果字符串是<code>null</code>，则返回<code>null</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trimEnd(null)       = null
      * StringUtil.trimEnd("")         = ""
@@ -360,16 +360,16 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimEnd(String str) {
         return trim(str, null, 1);
     }
 
     /**
-     * ��ȥ�ַ���β����ָ���ַ�������ַ�����<code>null</code>����Ȼ����<code>null</code>��
+     * 除去字符串尾部的指定字符，如果字符串是<code>null</code>，依然返回<code>null</code>。
      * <pre>
      * StringUtil.trimEnd(null, *)          = null
      * StringUtil.trimEnd("", *)            = ""
@@ -381,21 +381,21 @@ public class StringUtil {
      * StringUtil.trimEnd("  abcyx", "xyz") = "  abc"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param stripChars Ҫ��ȥ���ַ������Ϊ<code>null</code>��ʾ��ȥ�հ��ַ�
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为<code>null</code>表示除去空白字符
      *
-     * @return ��ȥָ���ַ���ĵ��ַ��������ԭ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 除去指定字符后的的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     public static String trimEnd(String str, String stripChars) {
         return trim(str, stripChars, 1);
     }
 
     /**
-     * ��ȥ�ַ���ͷβ���Ŀհף��������ַ����ǿ��ַ���<code>""</code>���򷵻�<code>null</code>��
+     * 除去字符串头尾部的空白，如果结果字符串是空字符串<code>""</code>，则返回<code>null</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trimToNull(null)          = null
      * StringUtil.trimToNull("")            = null
@@ -405,20 +405,20 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimToNull(String str) {
         return trimToNull(str, null);
     }
 
     /**
-     * ��ȥ�ַ���ͷβ���Ŀհף��������ַ����ǿ��ַ���<code>""</code>���򷵻�<code>null</code>��
+     * 除去字符串头尾部的空白，如果结果字符串是空字符串<code>""</code>，则返回<code>null</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trim(null, *)          = null
      * StringUtil.trim("", *)            = null
@@ -430,10 +430,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
-     * @param stripChars Ҫ��ȥ���ַ������Ϊ<code>null</code>��ʾ��ȥ�հ��ַ�
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为<code>null</code>表示除去空白字符
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimToNull(String str, String stripChars) {
         String result = trim(str, stripChars);
@@ -446,11 +446,11 @@ public class StringUtil {
     }
 
     /**
-     * ��ȥ�ַ���ͷβ���Ŀհף�����ַ�����<code>null</code>���򷵻ؿ��ַ���<code>""</code>��
+     * 除去字符串头尾部的空白，如果字符串是<code>null</code>，则返回空字符串<code>""</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trimToEmpty(null)          = ""
      * StringUtil.trimToEmpty("")            = ""
@@ -460,20 +460,20 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimToEmpty(String str) {
         return trimToEmpty(str, null);
     }
 
     /**
-     * ��ȥ�ַ���ͷβ���Ŀհף�����ַ�����<code>null</code>���򷵻ؿ��ַ���<code>""</code>��
+     * 除去字符串头尾部的空白，如果字符串是<code>null</code>，则返回空字符串<code>""</code>。
      *
      * <p>
-     * ע�⣬��<code>String.trim</code>��ͬ���˷���ʹ��<code>Character.isWhitespace</code>���ж��հף�
-     * ������Գ�ȥӢ���ַ���֮��������հף������Ŀո�
+     * 注意，和<code>String.trim</code>不同，此方法使用<code>Character.isWhitespace</code>来判定空白，
+     * 因而可以除去英文字符集之外的其它空白，如中文空格。
      * <pre>
      * StringUtil.trim(null, *)          = ""
      * StringUtil.trim("", *)            = ""
@@ -485,9 +485,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ��ȥ�հ׵��ַ��������ԭ�ִ�Ϊ<code>null</code>�����ַ���Ϊ<code>""</code>���򷵻�<code>null</code>
+     * @return 除去空白的字符串，如果原字串为<code>null</code>或结果字符串为<code>""</code>，则返回<code>null</code>
      */
     public static String trimToEmpty(String str, String stripChars) {
         String result = trim(str, stripChars);
@@ -500,7 +500,7 @@ public class StringUtil {
     }
 
     /**
-     * ��ȥ�ַ���ͷβ����ָ���ַ�������ַ�����<code>null</code>����Ȼ����<code>null</code>��
+     * 除去字符串头尾部的指定字符，如果字符串是<code>null</code>，依然返回<code>null</code>。
      * <pre>
      * StringUtil.trim(null, *)          = null
      * StringUtil.trim("", *)            = ""
@@ -511,11 +511,11 @@ public class StringUtil {
      * StringUtil.trim("  abcyx", "xyz") = "  abc"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param stripChars Ҫ��ȥ���ַ������Ϊ<code>null</code>��ʾ��ȥ�հ��ַ�
-     * @param mode <code>-1</code>��ʾtrimStart��<code>0</code>��ʾtrimȫ����<code>1</code>��ʾtrimEnd
+     * @param str 要处理的字符串
+     * @param stripChars 要除去的字符，如果为<code>null</code>表示除去空白字符
+     * @param mode <code>-1</code>表示trimStart，<code>0</code>表示trim全部，<code>1</code>表示trimEnd
      *
-     * @return ��ȥָ���ַ���ĵ��ַ��������ԭ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 除去指定字符后的的字符串，如果原字串为<code>null</code>，则返回<code>null</code>
      */
     private static String trim(String str, String stripChars, int mode) {
         if (str == null) {
@@ -526,7 +526,7 @@ public class StringUtil {
         int start = 0;
         int end   = length;
 
-        // ɨ���ַ���ͷ��
+        // 扫描字符串头部
         if (mode <= 0) {
             if (stripChars == null) {
                 while ((start < end) && (Character.isWhitespace(str.charAt(start)))) {
@@ -541,7 +541,7 @@ public class StringUtil {
             }
         }
 
-        // ɨ���ַ���β��
+        // 扫描字符串尾部
         if (mode >= 0) {
             if (stripChars == null) {
                 while ((start < end) && (Character.isWhitespace(str.charAt(end - 1)))) {
@@ -564,13 +564,13 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ȽϺ�����                                                                  */
+    /*  比较函数。                                                                  */
     /*                                                                              */
-    /*  ���·��������Ƚ������ַ����Ƿ���ͬ��                                        */
+    /*  以下方法用来比较两个字符串是否相同。                                        */
     /* ============================================================================ */
 
     /**
-     * �Ƚ������ַ�������Сд���У���
+     * 比较两个字符串（大小写敏感）。
      * <pre>
      * StringUtil.equals(null, null)   = true
      * StringUtil.equals(null, "abc")  = false
@@ -579,10 +579,10 @@ public class StringUtil {
      * StringUtil.equals("abc", "ABC") = false
      * </pre>
      *
-     * @param str1 Ҫ�Ƚϵ��ַ���1
-     * @param str2 Ҫ�Ƚϵ��ַ���2
+     * @param str1 要比较的字符串1
+     * @param str2 要比较的字符串2
      *
-     * @return ��������ַ�����ͬ�����߶���<code>null</code>���򷵻�<code>true</code>
+     * @return 如果两个字符串相同，或者都是<code>null</code>，则返回<code>true</code>
      */
     public static boolean equals(String str1, String str2) {
         if (str1 == null) {
@@ -593,7 +593,7 @@ public class StringUtil {
     }
 
     /**
-     * �Ƚ������ַ�������Сд�����У���
+     * 比较两个字符串（大小写不敏感）。
      * <pre>
      * StringUtil.equalsIgnoreCase(null, null)   = true
      * StringUtil.equalsIgnoreCase(null, "abc")  = false
@@ -602,10 +602,10 @@ public class StringUtil {
      * StringUtil.equalsIgnoreCase("abc", "ABC") = true
      * </pre>
      *
-     * @param str1 Ҫ�Ƚϵ��ַ���1
-     * @param str2 Ҫ�Ƚϵ��ַ���2
+     * @param str1 要比较的字符串1
+     * @param str2 要比较的字符串2
      *
-     * @return ��������ַ�����ͬ�����߶���<code>null</code>���򷵻�<code>true</code>
+     * @return 如果两个字符串相同，或者都是<code>null</code>，则返回<code>true</code>
      */
     public static boolean equalsIgnoreCase(String str1, String str2) {
         if (str1 == null) {
@@ -616,16 +616,16 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ַ��������ж�������                                                        */
+    /*  字符串类型判定函数。                                                        */
     /*                                                                              */
-    /*  �ж��ַ����������Ƿ�Ϊ����ĸ�����֡��հ׵�                                  */
+    /*  判定字符串的类型是否为：字母、数字、空白等                                  */
     /* ============================================================================ */
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode��ĸ��
+     * 判断字符串是否只包含unicode字母。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isAlpha(null)   = false
@@ -636,9 +636,9 @@ public class StringUtil {
      * StringUtil.isAlpha("ab-c") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode��ĸ��ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode字母组成，则返回<code>true</code>
      */
     public static boolean isAlpha(String str) {
         if (str == null) {
@@ -657,10 +657,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode��ĸ�Ϳո�<code>' '</code>��
+     * 判断字符串是否只包含unicode字母和空格<code>' '</code>。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isAlphaSpace(null)   = false
@@ -672,9 +672,9 @@ public class StringUtil {
      * StringUtil.isAlphaSpace("ab-c") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode��ĸ�Ϳո���ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode字母和空格组成，则返回<code>true</code>
      */
     public static boolean isAlphaSpace(String str) {
         if (str == null) {
@@ -693,10 +693,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode��ĸ�����֡�
+     * 判断字符串是否只包含unicode字母和数字。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isAlphanumeric(null)   = false
@@ -708,9 +708,9 @@ public class StringUtil {
      * StringUtil.isAlphanumeric("ab-c") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode��ĸ������ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode字母数字组成，则返回<code>true</code>
      */
     public static boolean isAlphanumeric(String str) {
         if (str == null) {
@@ -729,10 +729,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode��ĸ���ֺͿո�<code>' '</code>��
+     * 判断字符串是否只包含unicode字母数字和空格<code>' '</code>。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isAlphanumericSpace(null)   = false
@@ -744,9 +744,9 @@ public class StringUtil {
      * StringUtil.isAlphanumericSpace("ab-c") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode��ĸ���ֺͿո���ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode字母数字和空格组成，则返回<code>true</code>
      */
     public static boolean isAlphanumericSpace(String str) {
         if (str == null) {
@@ -765,10 +765,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode���֡�
+     * 判断字符串是否只包含unicode数字。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isNumeric(null)   = false
@@ -781,9 +781,9 @@ public class StringUtil {
      * StringUtil.isNumeric("12.3") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode������ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode数字组成，则返回<code>true</code>
      */
     public static boolean isNumeric(String str) {
         if (str == null) {
@@ -802,10 +802,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode���ֺͿո�<code>' '</code>��
+     * 判断字符串是否只包含unicode数字和空格<code>' '</code>。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isNumericSpace(null)   = false
@@ -818,9 +818,9 @@ public class StringUtil {
      * StringUtil.isNumericSpace("12.3") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode���ֺͿո���ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode数字和空格组成，则返回<code>true</code>
      */
     public static boolean isNumericSpace(String str) {
         if (str == null) {
@@ -839,10 +839,10 @@ public class StringUtil {
     }
 
     /**
-     * �ж��ַ����Ƿ�ֻ����unicode�հס�
+     * 判断字符串是否只包含unicode空白。
      *
      * <p>
-     * <code>null</code>������<code>false</code>�����ַ���<code>""</code>������<code>true</code>��
+     * <code>null</code>将返回<code>false</code>，空字符串<code>""</code>将返回<code>true</code>。
      * </p>
      * <pre>
      * StringUtil.isWhitespace(null)   = false
@@ -853,9 +853,9 @@ public class StringUtil {
      * StringUtil.isWhitespace("ab-c") = false
      * </pre>
      *
-     * @param str Ҫ�����ַ���
+     * @param str 要检查的字符串
      *
-     * @return ����ַ�����<code>null</code>����ȫ��unicode�հ���ɣ��򷵻�<code>true</code>
+     * @return 如果字符串非<code>null</code>并且全由unicode空白组成，则返回<code>true</code>
      */
     public static boolean isWhitespace(String str) {
         if (str == null) {
@@ -874,14 +874,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ��Сдת����                                                                */
+    /*  大小写转换。                                                                */
     /* ============================================================================ */
 
     /**
-     * ���ַ���ת���ɴ�д��
+     * 将字符串转换成大写。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toUpperCase(null)  = null
      * StringUtil.toUpperCase("")    = ""
@@ -889,9 +889,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return ��д�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 大写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toUpperCase(String str) {
         if (str == null) {
@@ -902,10 +902,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���ת����Сд��
+     * 将字符串转换成小写。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toLowerCase(null)  = null
      * StringUtil.toLowerCase("")    = ""
@@ -913,9 +913,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return ��д�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 大写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toLowerCase(String str) {
         if (str == null) {
@@ -926,10 +926,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ��������ַ�ת�ɴ�д��<code>Character.toTitleCase</code>���������ַ����䡣
+     * 将字符串的首字符转成大写（<code>Character.toTitleCase</code>），其它字符不变。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.capitalize(null)  = null
      * StringUtil.capitalize("")    = ""
@@ -938,9 +938,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return ���ַ�Ϊ��д���ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 首字符为大写的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String capitalize(String str) {
         int strLen;
@@ -954,10 +954,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ��������ַ�ת��Сд�������ַ����䡣
+     * 将字符串的首字符转成小写，其它字符不变。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.uncapitalize(null)  = null
      * StringUtil.uncapitalize("")    = ""
@@ -966,9 +966,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return ���ַ�ΪСд���ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 首字符为小写的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String uncapitalize(String str) {
         int strLen;
@@ -982,10 +982,10 @@ public class StringUtil {
     }
 
     /**
-     * ��ת�ַ����Ĵ�Сд��
+     * 反转字符串的大小写。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.swapCase(null)                 = null
      * StringUtil.swapCase("")                   = ""
@@ -993,9 +993,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return ��Сд����ת���ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 大小写被反转的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String swapCase(String str) {
         int strLen;
@@ -1026,10 +1026,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���ת����camel case��
+     * 将字符串转换成camel case。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toCamelCase(null)  = null
      * StringUtil.toCamelCase("")    = ""
@@ -1041,22 +1041,22 @@ public class StringUtil {
      * </p>
      *
      * <p>
-     * �˷����ᱣ�������»��ߺͿհ���������зָ�����
+     * 此方法会保留除了下划线和空白以外的所有分隔符。
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return camel case�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return camel case字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toCamelCase(String str) {
         return CAMEL_CASE_TOKENIZER.parse(str);
     }
 
     /**
-     * ���ַ���ת����pascal case��
+     * 将字符串转换成pascal case。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toPascalCase(null)  = null
      * StringUtil.toPascalCase("")    = ""
@@ -1068,22 +1068,22 @@ public class StringUtil {
      * </p>
      *
      * <p>
-     * �˷����ᱣ�������»��ߺͿհ���������зָ�����
+     * 此方法会保留除了下划线和空白以外的所有分隔符。
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return pascal case�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return pascal case字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toPascalCase(String str) {
         return PASCAL_CASE_TOKENIZER.parse(str);
     }
 
     /**
-     * ���ַ���ת�����»��߷ָ��Ĵ�д�ַ�����
+     * 将字符串转换成下划线分隔的大写字符串。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toUpperCaseWithUnderscores(null)  = null
      * StringUtil.toUpperCaseWithUnderscores("")    = ""
@@ -1096,22 +1096,22 @@ public class StringUtil {
      * </p>
      *
      * <p>
-     * �˷����ᱣ�����˿հ���������зָ�����
+     * 此方法会保留除了空白以外的所有分隔符。
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return �»��߷ָ��Ĵ�д�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 下划线分隔的大写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toUpperCaseWithUnderscores(String str) {
         return UPPER_CASE_WITH_UNDERSCORES_TOKENIZER.parse(str);
     }
 
     /**
-     * ���ַ���ת�����»��߷ָ���Сд�ַ�����
+     * 将字符串转换成下划线分隔的小写字符串。
      *
      * <p>
-     * ����ַ�����<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串是<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.toLowerCaseWithUnderscores(null)  = null
      * StringUtil.toLowerCaseWithUnderscores("")    = ""
@@ -1124,18 +1124,18 @@ public class StringUtil {
      * </p>
      *
      * <p>
-     * �˷����ᱣ�����˿հ���������зָ�����
+     * 此方法会保留除了空白以外的所有分隔符。
      * </p>
      *
-     * @param str Ҫת�����ַ���
+     * @param str 要转换的字符串
      *
-     * @return �»��߷ָ���Сд�ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 下划线分隔的小写字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String toLowerCaseWithUnderscores(String str) {
         return LOWER_CASE_WITH_UNDERSCORES_TOKENIZER.parse(str);
     }
 
-    /** �������ʵĽ������� */
+    /** 解析单词的解析器。 */
     private static final WordTokenizer CAMEL_CASE_TOKENIZER = new WordTokenizer() {
         protected void startSentence(StringBuffer buffer, char ch) {
             buffer.append(Character.toLowerCase(ch));
@@ -1281,7 +1281,7 @@ public class StringUtil {
     };
 
     /**
-     * �����������﷨�����ɵ�<code>SENTENCE</code>��
+     * 解析出下列语法所构成的<code>SENTENCE</code>。
      * <pre>
      *  SENTENCE = WORD (DELIMITER* WORD)*
      *
@@ -1304,7 +1304,7 @@ public class StringUtil {
         protected static final char UNDERSCORE = '_';
 
         /**
-         * Parse sentence��
+         * Parse sentence。
          */
         public String parse(String str) {
             if (StringUtil.isEmpty(str)) {
@@ -1317,12 +1317,12 @@ public class StringUtil {
             for (int index = 0; index < length; index++) {
                 char ch = str.charAt(index);
 
-                // ���Կհס�
+                // 忽略空白。
                 if (Character.isWhitespace(ch)) {
                     continue;
                 }
 
-                // ��д��ĸ��ʼ��UpperCaseWord����TitleCaseWord��
+                // 大写字母开始：UpperCaseWord或是TitleCaseWord。
                 if (Character.isUpperCase(ch)) {
                     int wordIndex = index + 1;
 
@@ -1339,9 +1339,9 @@ public class StringUtil {
                         }
                     }
 
-                    // 1. wordIndex == length��˵�����һ����ĸΪ��д����upperCaseWord����֮��
-                    // 2. wordIndex == index��˵��index��Ϊһ��titleCaseWord��
-                    // 3. wordIndex > index��˵��index��wordIndex - 1��ȫ���Ǵ�д����upperCaseWord����
+                    // 1. wordIndex == length，说明最后一个字母为大写，以upperCaseWord处理之。
+                    // 2. wordIndex == index，说明index处为一个titleCaseWord。
+                    // 3. wordIndex > index，说明index到wordIndex - 1处全部是大写，以upperCaseWord处理。
                     if ((wordIndex == length) || (wordIndex > index)) {
                         index = parseUpperCaseWord(buffer, str, index, wordIndex);
                     } else {
@@ -1351,19 +1351,19 @@ public class StringUtil {
                     continue;
                 }
 
-                // Сд��ĸ��ʼ��LowerCaseWord��
+                // 小写字母开始：LowerCaseWord。
                 if (Character.isLowerCase(ch)) {
                     index = parseLowerCaseWord(buffer, str, index);
                     continue;
                 }
 
-                // ���ֿ�ʼ��DigitWord��
+                // 数字开始：DigitWord。
                 if (Character.isDigit(ch)) {
                     index = parseDigitWord(buffer, str, index);
                     continue;
                 }
 
-                // ����ĸ���ֿ�ʼ��Delimiter��
+                // 非字母数字开始：Delimiter。
                 inDelimiter(buffer, ch);
             }
 
@@ -1373,14 +1373,14 @@ public class StringUtil {
         private int parseUpperCaseWord(StringBuffer buffer, String str, int index, int length) {
             char ch = str.charAt(index++);
 
-            // ����ĸ����Ȼ������Ϊ��д��
+            // 首字母，必然存在且为大写。
             if (buffer.length() == 0) {
                 startSentence(buffer, ch);
             } else {
                 startWord(buffer, ch);
             }
 
-            // ������ĸ����ΪСд��
+            // 后续字母，必为小写。
             for (; index < length; index++) {
                 ch = str.charAt(index);
                 inWord(buffer, ch);
@@ -1392,14 +1392,14 @@ public class StringUtil {
         private int parseLowerCaseWord(StringBuffer buffer, String str, int index) {
             char ch = str.charAt(index++);
 
-            // ����ĸ����Ȼ������ΪСд��
+            // 首字母，必然存在且为小写。
             if (buffer.length() == 0) {
                 startSentence(buffer, ch);
             } else {
                 startWord(buffer, ch);
             }
 
-            // ������ĸ����ΪСд��
+            // 后续字母，必为小写。
             int length = str.length();
 
             for (; index < length; index++) {
@@ -1418,14 +1418,14 @@ public class StringUtil {
         private int parseTitleCaseWord(StringBuffer buffer, String str, int index) {
             char ch = str.charAt(index++);
 
-            // ����ĸ����Ȼ������Ϊ��д��
+            // 首字母，必然存在且为大写。
             if (buffer.length() == 0) {
                 startSentence(buffer, ch);
             } else {
                 startWord(buffer, ch);
             }
 
-            // ������ĸ����ΪСд��
+            // 后续字母，必为小写。
             int length = str.length();
 
             for (; index < length; index++) {
@@ -1444,14 +1444,14 @@ public class StringUtil {
         private int parseDigitWord(StringBuffer buffer, String str, int index) {
             char ch = str.charAt(index++);
 
-            // ���ַ�����Ȼ������Ϊ���֡�
+            // 首字符，必然存在且为数字。
             if (buffer.length() == 0) {
                 startDigitSentence(buffer, ch);
             } else {
                 startDigitWord(buffer, ch);
             }
 
-            // �����ַ�����Ϊ���֡�
+            // 后续字符，必为数字。
             int length = str.length();
 
             for (; index < length; index++) {
@@ -1488,16 +1488,16 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ַ����ָ����                                                            */
+    /*  字符串分割函数。                                                            */
     /*                                                                              */
-    /*  ���ַ�����ָ���ָ����ָ                                                  */
+    /*  将字符串按指定分隔符分割。                                                  */
     /* ============================================================================ */
 
     /**
-     * ���ַ������հ��ַ��ָ
+     * 将字符串按空白字符分割。
      *
      * <p>
-     * �ָ������������Ŀ�������У������ķָ����ͱ�����һ��������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 分隔符不会出现在目标数组中，连续的分隔符就被看作一个。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.split(null)       = null
      * StringUtil.split("")         = []
@@ -1507,19 +1507,19 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ�ָ���ַ���
+     * @param str 要分割的字符串
      *
-     * @return �ָ����ַ������飬���ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 分割后的字符串数组，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String[] split(String str) {
         return split(str, null, -1);
     }
 
     /**
-     * ���ַ�����ָ���ַ��ָ
+     * 将字符串按指定字符分割。
      *
      * <p>
-     * �ָ������������Ŀ�������У������ķָ����ͱ�����һ��������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 分隔符不会出现在目标数组中，连续的分隔符就被看作一个。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.split(null, *)         = null
      * StringUtil.split("", *)           = []
@@ -1530,10 +1530,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ�ָ���ַ���
-     * @param separatorChar �ָ���
+     * @param str 要分割的字符串
+     * @param separatorChar 分隔符
      *
-     * @return �ָ����ַ������飬���ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 分割后的字符串数组，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String[] split(String str, char separatorChar) {
         if (str == null) {
@@ -1574,10 +1574,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ�����ָ���ַ��ָ
+     * 将字符串按指定字符分割。
      *
      * <p>
-     * �ָ������������Ŀ�������У������ķָ����ͱ�����һ��������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 分隔符不会出现在目标数组中，连续的分隔符就被看作一个。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.split(null, *)                = null
      * StringUtil.split("", *)                  = []
@@ -1589,20 +1589,20 @@ public class StringUtil {
      *  </pre>
      * </p>
      *
-     * @param str Ҫ�ָ���ַ���
-     * @param separatorChars �ָ���
+     * @param str 要分割的字符串
+     * @param separatorChars 分隔符
      *
-     * @return �ָ����ַ������飬���ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 分割后的字符串数组，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String[] split(String str, String separatorChars) {
         return split(str, separatorChars, -1);
     }
 
     /**
-     * ���ַ�����ָ���ַ��ָ
+     * 将字符串按指定字符分割。
      *
      * <p>
-     * �ָ������������Ŀ�������У������ķָ����ͱ�����һ��������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 分隔符不会出现在目标数组中，连续的分隔符就被看作一个。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.split(null, *, *)                 = null
      * StringUtil.split("", *, *)                   = []
@@ -1614,11 +1614,11 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ�ָ���ַ���
-     * @param separatorChars �ָ���
-     * @param max ���ص�����������������С�ڵ���0�����ʾ������
+     * @param str 要分割的字符串
+     * @param separatorChars 分隔符
+     * @param max 返回的数组的最大个数，如果小于等于0，则表示无限制
      *
-     * @return �ָ����ַ������飬���ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 分割后的字符串数组，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String[] split(String str, String separatorChars, int max) {
         if (str == null) {
@@ -1638,7 +1638,7 @@ public class StringUtil {
         boolean match     = false;
 
         if (separatorChars == null) {
-            // null��ʾʹ�ÿհ���Ϊ�ָ���
+            // null表示使用空白作为分隔符
             while (i < length) {
                 if (Character.isWhitespace(str.charAt(i))) {
                     if (match) {
@@ -1658,7 +1658,7 @@ public class StringUtil {
                 i++;
             }
         } else if (separatorChars.length() == 1) {
-            // �Ż��ָ�������Ϊ1������
+            // 优化分隔符长度为1的情形
             char sep = separatorChars.charAt(0);
 
             while (i < length) {
@@ -1680,7 +1680,7 @@ public class StringUtil {
                 i++;
             }
         } else {
-            // һ������
+            // 一般情形
             while (i < length) {
                 if (separatorChars.indexOf(str.charAt(i)) >= 0) {
                     if (match) {
@@ -1709,13 +1709,13 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ַ������Ӻ�����                                                            */
+    /*  字符串连接函数。                                                            */
     /*                                                                              */
-    /*  ���������ָ���ָ������ӳ��ַ�����                                        */
+    /*  将多个对象按指定分隔符连接成字符串。                                        */
     /* ============================================================================ */
 
     /**
-     * �������е�Ԫ�����ӳ�һ���ַ�����
+     * 将数组中的元素连接成一个字符串。
      * <pre>
      * StringUtil.join(null)            = null
      * StringUtil.join([])              = ""
@@ -1724,16 +1724,16 @@ public class StringUtil {
      * StringUtil.join([null, "", "a"]) = "a"
      * </pre>
      *
-     * @param array Ҫ���ӵ�����
+     * @param array 要连接的数组
      *
-     * @return ���Ӻ���ַ��������ԭ����Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 连接后的字符串，如果原数组为<code>null</code>，则返回<code>null</code>
      */
     public static String join(Object[] array) {
         return join(array, null);
     }
 
     /**
-     * �������е�Ԫ�����ӳ�һ���ַ�����
+     * 将数组中的元素连接成一个字符串。
      * <pre>
      * StringUtil.join(null, *)               = null
      * StringUtil.join([], *)                 = ""
@@ -1743,10 +1743,10 @@ public class StringUtil {
      * StringUtil.join([null, "", "a"], ';')  = ";;a"
      * </pre>
      *
-     * @param array Ҫ���ӵ�����
-     * @param separator �ָ���
+     * @param array 要连接的数组
+     * @param separator 分隔符
      *
-     * @return ���Ӻ���ַ��������ԭ����Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 连接后的字符串，如果原数组为<code>null</code>，则返回<code>null</code>
      */
     public static String join(Object[] array, char separator) {
         if (array == null) {
@@ -1773,7 +1773,7 @@ public class StringUtil {
     }
 
     /**
-     * �������е�Ԫ�����ӳ�һ���ַ�����
+     * 将数组中的元素连接成一个字符串。
      * <pre>
      * StringUtil.join(null, *)                = null
      * StringUtil.join([], *)                  = ""
@@ -1784,10 +1784,10 @@ public class StringUtil {
      * StringUtil.join([null, "", "a"], ',')   = ",,a"
      * </pre>
      *
-     * @param array Ҫ���ӵ�����
-     * @param separator �ָ���
+     * @param array 要连接的数组
+     * @param separator 分隔符
      *
-     * @return ���Ӻ���ַ��������ԭ����Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 连接后的字符串，如果原数组为<code>null</code>，则返回<code>null</code>
      */
     public static String join(Object[] array, String separator) {
         if (array == null) {
@@ -1802,7 +1802,7 @@ public class StringUtil {
 
         // ArraySize ==  0: Len = 0
         // ArraySize > 0:   Len = NofStrings *(len(firstString) + len(separator))
-        //           (���ƴ�Լ���е��ַ�����һ����)
+        //           (估计大约所有的字符串都一样长)
         int bufSize = (arraySize == 0) ? 0
                 : (arraySize * (((array[0] == null) ? 16
                 : array[0].toString()
@@ -1826,7 +1826,7 @@ public class StringUtil {
     }
 
     /**
-     * ��<code>Iterator</code>�е�Ԫ�����ӳ�һ���ַ�����
+     * 将<code>Iterator</code>中的元素连接成一个字符串。
      * <pre>
      * StringUtil.join(null, *)                = null
      * StringUtil.join([], *)                  = ""
@@ -1837,17 +1837,17 @@ public class StringUtil {
      * StringUtil.join([null, "", "a"], ',')   = ",,a"
      * </pre>
      *
-     * @param iterator Ҫ���ӵ�<code>Iterator</code>
-     * @param separator �ָ���
+     * @param iterator 要连接的<code>Iterator</code>
+     * @param separator 分隔符
      *
-     * @return ���Ӻ���ַ��������ԭ����Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 连接后的字符串，如果原数组为<code>null</code>，则返回<code>null</code>
      */
     public static String join(Iterator iterator, char separator) {
         if (iterator == null) {
             return null;
         }
 
-        StringBuffer buf = new StringBuffer(256); // JavaĬ��ֵ��16, ����ƫС
+        StringBuffer buf = new StringBuffer(256); // Java默认值是16, 可能偏小
 
         while (iterator.hasNext()) {
             Object obj = iterator.next();
@@ -1865,7 +1865,7 @@ public class StringUtil {
     }
 
     /**
-     * ��<code>Iterator</code>�е�Ԫ�����ӳ�һ���ַ�����
+     * 将<code>Iterator</code>中的元素连接成一个字符串。
      * <pre>
      * StringUtil.join(null, *)                = null
      * StringUtil.join([], *)                  = ""
@@ -1876,17 +1876,17 @@ public class StringUtil {
      * StringUtil.join([null, "", "a"], ',')   = ",,a"
      * </pre>
      *
-     * @param iterator Ҫ���ӵ�<code>Iterator</code>
-     * @param separator �ָ���
+     * @param iterator 要连接的<code>Iterator</code>
+     * @param separator 分隔符
      *
-     * @return ���Ӻ���ַ��������ԭ����Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 连接后的字符串，如果原数组为<code>null</code>，则返回<code>null</code>
      */
     public static String join(Iterator iterator, String separator) {
         if (iterator == null) {
             return null;
         }
 
-        StringBuffer buf = new StringBuffer(256); // JavaĬ��ֵ��16, ����ƫС
+        StringBuffer buf = new StringBuffer(256); // Java默认值是16, 可能偏小
 
         while (iterator.hasNext()) {
             Object obj = iterator.next();
@@ -1904,13 +1904,13 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ַ������Һ��� ���� �ַ����ַ�����                                          */
+    /*  字符串查找函数 ―― 字符或字符串。                                          */
     /*                                                                              */
-    /*  ���ַ����в���ָ���ַ����ַ�����                                            */
+    /*  在字符串中查找指定字符或字符串。                                            */
     /* ============================================================================ */
 
     /**
-     * ���ַ����в���ָ���ַ��������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 在字符串中查找指定字符，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOf(null, *)         = -1
      * StringUtil.indexOf("", *)           = -1
@@ -1918,10 +1918,10 @@ public class StringUtil {
      * StringUtil.indexOf("aabaabaa", 'b') = 2
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ���ҵ��ַ�
+     * @param str 要扫描的字符串
+     * @param searchChar 要查找的字符
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOf(String str, char searchChar) {
         if ((str == null) || (str.length() == 0)) {
@@ -1932,7 +1932,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ��������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 在字符串中查找指定字符，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOf(null, *, *)          = -1
      * StringUtil.indexOf("", *, *)            = -1
@@ -1942,11 +1942,11 @@ public class StringUtil {
      * StringUtil.indexOf("aabaabaa", 'b', -1) = 2
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ���ҵ��ַ�
-     * @param startPos ��ʼ����������ֵ�����С��0������0
+     * @param str 要扫描的字符串
+     * @param searchChar 要查找的字符
+     * @param startPos 开始搜索的索引值，如果小于0，则看作0
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOf(String str, char searchChar, int startPos) {
         if ((str == null) || (str.length() == 0)) {
@@ -1957,7 +1957,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ����������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 在字符串中查找指定字符串，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOf(null, *)          = -1
      * StringUtil.indexOf(*, null)          = -1
@@ -1968,10 +1968,10 @@ public class StringUtil {
      * StringUtil.indexOf("aabaabaa", "")   = 0
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStr Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param searchStr 要查找的字符串
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOf(String str, String searchStr) {
         if ((str == null) || (searchStr == null)) {
@@ -1982,7 +1982,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ����������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 在字符串中查找指定字符串，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOf(null, *, *)          = -1
      * StringUtil.indexOf(*, null, *)          = -1
@@ -1997,18 +1997,18 @@ public class StringUtil {
      * StringUtil.indexOf("abc", "", 9)        = 3
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStr Ҫ���ҵ��ַ���
-     * @param startPos ��ʼ����������ֵ�����С��0������0
+     * @param str 要扫描的字符串
+     * @param searchStr 要查找的字符串
+     * @param startPos 开始搜索的索引值，如果小于0，则看作0
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOf(String str, String searchStr, int startPos) {
         if ((str == null) || (searchStr == null)) {
             return -1;
         }
 
-        // JDK1.3�����°汾��bug��������ȷ������������
+        // JDK1.3及以下版本的bug：不能正确处理下面的情况
         if ((searchStr.length() == 0) && (startPos >= str.length())) {
             return str.length();
         }
@@ -2017,8 +2017,8 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ������е��ַ��������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�����Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
+     * 在字符串中查找指定字符集合中的字符，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符集合为<code>null</code>或空，也返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOfAny(null, *)                = -1
      * StringUtil.indexOfAny("", *)                  = -1
@@ -2029,10 +2029,10 @@ public class StringUtil {
      * StringUtil.indexOfAny("aba", ['z'])           = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChars Ҫ�������ַ�����
+     * @param str 要扫描的字符串
+     * @param searchChars 要搜索的字符集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOfAny(String str, char[] searchChars) {
         if ((str == null) || (str.length() == 0) || (searchChars == null)
@@ -2054,8 +2054,8 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ������е��ַ��������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�����Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
+     * 在字符串中查找指定字符集合中的字符，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符集合为<code>null</code>或空，也返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOfAny(null, *)            = -1
      * StringUtil.indexOfAny("", *)              = -1
@@ -2066,10 +2066,10 @@ public class StringUtil {
      * StringUtil.indexOfAny("aba","z")          = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChars Ҫ�������ַ�����
+     * @param str 要扫描的字符串
+     * @param searchChars 要搜索的字符集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOfAny(String str, String searchChars) {
         if ((str == null) || (str.length() == 0) || (searchChars == null)
@@ -2091,9 +2091,9 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в���ָ���ַ��������е��ַ����������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�������Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
-     * ����ַ������ϰ���<code>""</code>�������ַ�����Ϊ<code>null</code>���򷵻�<code>str.length()</code>
+     * 在字符串中查找指定字符串集合中的字符串，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符串集合为<code>null</code>或空，也返回<code>-1</code>。
+     * 如果字符串集合包括<code>""</code>，并且字符串不为<code>null</code>，则返回<code>str.length()</code>
      * <pre>
      * StringUtil.indexOfAny(null, *)                     = -1
      * StringUtil.indexOfAny(*, null)                     = -1
@@ -2107,10 +2107,10 @@ public class StringUtil {
      * StringUtil.indexOfAny("", ["a"])                   = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStrs Ҫ�������ַ�������
+     * @param str 要扫描的字符串
+     * @param searchStrs 要搜索的字符串集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOfAny(String str, String[] searchStrs) {
         if ((str == null) || (searchStrs == null)) {
@@ -2147,8 +2147,8 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в��Ҳ���ָ���ַ������е��ַ��������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�����Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
+     * 在字符串中查找不在指定字符集合中的字符，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符集合为<code>null</code>或空，也返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOfAnyBut(null, *)             = -1
      * StringUtil.indexOfAnyBut("", *)               = -1
@@ -2159,10 +2159,10 @@ public class StringUtil {
      * StringUtil.indexOfAnyBut("aba", 'ab')         = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChars Ҫ�������ַ�����
+     * @param str 要扫描的字符串
+     * @param searchChars 要搜索的字符集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOfAnyBut(String str, char[] searchChars) {
         if ((str == null) || (str.length() == 0) || (searchChars == null)
@@ -2187,8 +2187,8 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ����в��Ҳ���ָ���ַ������е��ַ��������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�����Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
+     * 在字符串中查找不在指定字符集合中的字符，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符集合为<code>null</code>或空，也返回<code>-1</code>。
      * <pre>
      * StringUtil.indexOfAnyBut(null, *)            = -1
      * StringUtil.indexOfAnyBut("", *)              = -1
@@ -2199,10 +2199,10 @@ public class StringUtil {
      * StringUtil.indexOfAnyBut("aba","ab")         = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChars Ҫ�������ַ�����
+     * @param str 要扫描的字符串
+     * @param searchChars 要搜索的字符集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int indexOfAnyBut(String str, String searchChars) {
         if ((str == null) || (str.length() == 0) || (searchChars == null)
@@ -2220,7 +2220,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���β����ʼ����ָ���ַ��������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 从字符串尾部开始查找指定字符，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.lastIndexOf(null, *)         = -1
      * StringUtil.lastIndexOf("", *)           = -1
@@ -2228,10 +2228,10 @@ public class StringUtil {
      * StringUtil.lastIndexOf("aabaabaa", 'b') = 5
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ���ҵ��ַ�
+     * @param str 要扫描的字符串
+     * @param searchChar 要查找的字符
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int lastIndexOf(String str, char searchChar) {
         if ((str == null) || (str.length() == 0)) {
@@ -2242,7 +2242,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���β����ʼ����ָ���ַ��������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 从字符串尾部开始查找指定字符，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.lastIndexOf(null, *, *)          = -1
      * StringUtil.lastIndexOf("", *,  *)           = -1
@@ -2254,11 +2254,11 @@ public class StringUtil {
      * StringUtil.lastIndexOf("aabaabaa", 'a', 0)  = 0
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ���ҵ��ַ�
-     * @param startPos ��ָ��������ʼ��ǰ����
+     * @param str 要扫描的字符串
+     * @param searchChar 要查找的字符
+     * @param startPos 从指定索引开始向前搜索
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int lastIndexOf(String str, char searchChar, int startPos) {
         if ((str == null) || (str.length() == 0)) {
@@ -2269,7 +2269,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���β����ʼ����ָ���ַ����������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 从字符串尾部开始查找指定字符串，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.lastIndexOf(null, *)         = -1
      * StringUtil.lastIndexOf("", *)           = -1
@@ -2277,10 +2277,10 @@ public class StringUtil {
      * StringUtil.lastIndexOf("aabaabaa", 'b') = 5
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStr Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param searchStr 要查找的字符串
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int lastIndexOf(String str, String searchStr) {
         if ((str == null) || (searchStr == null)) {
@@ -2291,7 +2291,7 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���β����ʼ����ָ���ַ����������ص�һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>��
+     * 从字符串尾部开始查找指定字符串，并返回第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>。
      * <pre>
      * StringUtil.lastIndexOf(null, *, *)          = -1
      * StringUtil.lastIndexOf(*, null, *)          = -1
@@ -2304,11 +2304,11 @@ public class StringUtil {
      * StringUtil.lastIndexOf("aabaabaa", "b", 0)  = -1
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStr Ҫ���ҵ��ַ���
-     * @param startPos ��ָ��������ʼ��ǰ����
+     * @param str 要扫描的字符串
+     * @param searchStr 要查找的字符串
+     * @param startPos 从指定索引开始向前搜索
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int lastIndexOf(String str, String searchStr, int startPos) {
         if ((str == null) || (searchStr == null)) {
@@ -2319,9 +2319,9 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���β����ʼ����ָ���ַ��������е��ַ����������ص�һ��ƥ�����ʼ������ ����ַ���Ϊ<code>null</code>���򷵻�<code>-1</code>��
-     * ����ַ�������Ϊ<code>null</code>��գ�Ҳ����<code>-1</code>��
-     * ����ַ������ϰ���<code>""</code>�������ַ�����Ϊ<code>null</code>���򷵻�<code>str.length()</code>
+     * 从字符串尾部开始查找指定字符串集合中的字符串，并返回第一个匹配的起始索引。 如果字符串为<code>null</code>，则返回<code>-1</code>。
+     * 如果字符串集合为<code>null</code>或空，也返回<code>-1</code>。
+     * 如果字符串集合包括<code>""</code>，并且字符串不为<code>null</code>，则返回<code>str.length()</code>
      * <pre>
      * StringUtil.lastIndexOfAny(null, *)                   = -1
      * StringUtil.lastIndexOfAny(*, null)                   = -1
@@ -2334,10 +2334,10 @@ public class StringUtil {
      * StringUtil.lastIndexOfAny("zzabyycdxx", ["mn",""])   = 10
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStrs Ҫ�������ַ�������
+     * @param str 要扫描的字符串
+     * @param searchStrs 要搜索的字符串集合
      *
-     * @return ��һ��ƥ�������ֵ������ַ���Ϊ<code>null</code>��δ�ҵ����򷵻�<code>-1</code>
+     * @return 第一个匹配的索引值。如果字符串为<code>null</code>或未找到，则返回<code>-1</code>
      */
     public static int lastIndexOfAny(String str, String[] searchStrs) {
         if ((str == null) || (searchStrs == null)) {
@@ -2366,7 +2366,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ����ָ�����ַ�������ַ���Ϊ<code>null</code>��������<code>false</code>��
+     * 检查字符串中是否包含指定的字符。如果字符串为<code>null</code>，将返回<code>false</code>。
      * <pre>
      * StringUtil.contains(null, *)    = false
      * StringUtil.contains("", *)      = false
@@ -2374,10 +2374,10 @@ public class StringUtil {
      * StringUtil.contains("abc", 'z') = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ���ҵ��ַ�
+     * @param str 要扫描的字符串
+     * @param searchChar 要查找的字符
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean contains(String str, char searchChar) {
         if ((str == null) || (str.length() == 0)) {
@@ -2388,7 +2388,7 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ����ָ�����ַ���������ַ���Ϊ<code>null</code>��������<code>false</code>��
+     * 检查字符串中是否包含指定的字符串。如果字符串为<code>null</code>，将返回<code>false</code>。
      * <pre>
      * StringUtil.contains(null, *)     = false
      * StringUtil.contains(*, null)     = false
@@ -2398,10 +2398,10 @@ public class StringUtil {
      * StringUtil.contains("abc", "z")  = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchStr Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param searchStr 要查找的字符串
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean contains(String str, String searchStr) {
         if ((str == null) || (searchStr == null)) {
@@ -2412,11 +2412,11 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ�ֻ����ָ���ַ������е��ַ���
+     * 检查字符串是是否只包含指定字符集合中的字符。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>false</code>��
-     * ����ַ�����Ϊ<code>null</code>�򷵻�<code>false</code>�� ���ǿ��ַ�����Զ����<code>true</code>.
+     * 如果字符串为<code>null</code>，则返回<code>false</code>。
+     * 如果字符集合为<code>null</code>则返回<code>false</code>。 但是空字符串永远返回<code>true</code>.
      * </p>
      * <pre>
      * StringUtil.containsOnly(null, *)       = false
@@ -2428,10 +2428,10 @@ public class StringUtil {
      * StringUtil.containsOnly("abz", 'abc')  = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param valid Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param valid 要查找的字符串
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean containsOnly(String str, char[] valid) {
         if ((valid == null) || (str == null)) {
@@ -2450,11 +2450,11 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ�ֻ����ָ���ַ������е��ַ���
+     * 检查字符串是是否只包含指定字符集合中的字符。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>false</code>��
-     * ����ַ�����Ϊ<code>null</code>�򷵻�<code>false</code>�� ���ǿ��ַ�����Զ����<code>true</code>.
+     * 如果字符串为<code>null</code>，则返回<code>false</code>。
+     * 如果字符集合为<code>null</code>则返回<code>false</code>。 但是空字符串永远返回<code>true</code>.
      * </p>
      * <pre>
      * StringUtil.containsOnly(null, *)       = false
@@ -2466,10 +2466,10 @@ public class StringUtil {
      * StringUtil.containsOnly("abz", "abc")  = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param valid Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param valid 要查找的字符串
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean containsOnly(String str, String valid) {
         if ((str == null) || (valid == null)) {
@@ -2480,11 +2480,11 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ񲻰���ָ���ַ������е��ַ���
+     * 检查字符串是是否不包含指定字符集合中的字符。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>false</code>�� ����ַ�����Ϊ<code>null</code>�򷵻�<code>true</code>��
-     * ���ǿ��ַ�����Զ����<code>true</code>.
+     * 如果字符串为<code>null</code>，则返回<code>false</code>。 如果字符集合为<code>null</code>则返回<code>true</code>。
+     * 但是空字符串永远返回<code>true</code>.
      * </p>
      * <pre>
      * StringUtil.containsNone(null, *)       = true
@@ -2496,10 +2496,10 @@ public class StringUtil {
      * StringUtil.containsNone("abz", 'xyz')  = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param invalid Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param invalid 要查找的字符串
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean containsNone(String str, char[] invalid) {
         if ((str == null) || (invalid == null)) {
@@ -2523,11 +2523,11 @@ public class StringUtil {
     }
 
     /**
-     * ����ַ������Ƿ񲻰���ָ���ַ������е��ַ���
+     * 检查字符串是是否不包含指定字符集合中的字符。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>false</code>�� ����ַ�����Ϊ<code>null</code>�򷵻�<code>true</code>��
-     * ���ǿ��ַ�����Զ����<code>true</code>.
+     * 如果字符串为<code>null</code>，则返回<code>false</code>。 如果字符集合为<code>null</code>则返回<code>true</code>。
+     * 但是空字符串永远返回<code>true</code>.
      * </p>
      * <pre>
      * StringUtil.containsNone(null, *)       = true
@@ -2539,10 +2539,10 @@ public class StringUtil {
      * StringUtil.containsNone("abz", "xyz")  = false
      * </pre>
      *
-     * @param str Ҫɨ����ַ���
-     * @param invalidChars Ҫ���ҵ��ַ���
+     * @param str 要扫描的字符串
+     * @param invalidChars 要查找的字符串
      *
-     * @return ����ҵ����򷵻�<code>true</code>
+     * @return 如果找到，则返回<code>true</code>
      */
     public static boolean containsNone(String str, String invalidChars) {
         if ((str == null) || (invalidChars == null)) {
@@ -2553,10 +2553,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡ��ָ���Ӵ����ַ����г��ֵĴ�����
+     * 取得指定子串在字符串中出现的次数。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>��գ��򷵻�<code>0</code>��
+     * 如果字符串为<code>null</code>或空，则返回<code>0</code>。
      * <pre>
      * StringUtil.countMatches(null, *)       = 0
      * StringUtil.countMatches("", *)         = 0
@@ -2568,10 +2568,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫɨ����ַ���
-     * @param subStr ���ַ���
+     * @param str 要扫描的字符串
+     * @param subStr 子字符串
      *
-     * @return �Ӵ����ַ����г��ֵĴ���������ַ���Ϊ<code>null</code>��գ��򷵻�<code>0</code>
+     * @return 子串在字符串中出现的次数，如果字符串为<code>null</code>或空，则返回<code>0</code>
      */
     public static int countMatches(String str, String subStr) {
         if ((str == null) || (str.length() == 0) || (subStr == null) || (subStr.length() == 0)) {
@@ -2590,14 +2590,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ȡ�Ӵ�������                                                                */
+    /*  取子串函数。                                                                */
     /* ============================================================================ */
 
     /**
-     * ȡָ���ַ������Ӵ���
+     * 取指定字符串的子串。
      *
      * <p>
-     * �������������β����ʼ���㡣����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 负的索引代表从尾部开始计算。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.substring(null, *)   = null
      * StringUtil.substring("", *)     = ""
@@ -2609,10 +2609,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param start ��ʼ���������Ϊ��������ʾ��β������
+     * @param str 字符串
+     * @param start 起始索引，如果为负数，表示从尾部查找
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substring(String str, int start) {
         if (str == null) {
@@ -2635,10 +2635,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡָ���ַ������Ӵ���
+     * 取指定字符串的子串。
      *
      * <p>
-     * �������������β����ʼ���㡣����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 负的索引代表从尾部开始计算。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.substring(null, *, *)    = null
      * StringUtil.substring("", * ,  *)    = "";
@@ -2652,11 +2652,11 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param start ��ʼ���������Ϊ��������ʾ��β������
-     * @param end ���������������������Ϊ��������ʾ��β������
+     * @param str 字符串
+     * @param start 起始索引，如果为负数，表示从尾部计算
+     * @param end 结束索引（不含），如果为负数，表示从尾部计算
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substring(String str, int start, int end) {
         if (str == null) {
@@ -2691,7 +2691,7 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�ó���Ϊָ���ַ���������ߵ��Ӵ���
+     * 取得长度为指定字符数的最左边的子串。
      * <pre>
      * StringUtil.left(null, *)    = null
      * StringUtil.left(*, -ve)     = ""
@@ -2701,10 +2701,10 @@ public class StringUtil {
      * StringUtil.left("abc", 4)   = "abc"
      * </pre>
      *
-     * @param str �ַ���
-     * @param len �����Ӵ��ĳ���
+     * @param str 字符串
+     * @param len 最左子串的长度
      *
-     * @return �Ӵ������ԭʼ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始字串为<code>null</code>，则返回<code>null</code>
      */
     public static String left(String str, int len) {
         if (str == null) {
@@ -2723,7 +2723,7 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�ó���Ϊָ���ַ��������ұߵ��Ӵ���
+     * 取得长度为指定字符数的最右边的子串。
      * <pre>
      * StringUtil.right(null, *)    = null
      * StringUtil.right(*, -ve)     = ""
@@ -2733,10 +2733,10 @@ public class StringUtil {
      * StringUtil.right("abc", 4)   = "abc"
      * </pre>
      *
-     * @param str �ַ���
-     * @param len �����Ӵ��ĳ���
+     * @param str 字符串
+     * @param len 最右子串的长度
      *
-     * @return �Ӵ������ԭʼ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始字串为<code>null</code>，则返回<code>null</code>
      */
     public static String right(String str, int len) {
         if (str == null) {
@@ -2755,7 +2755,7 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�ô�ָ��������ʼ����ġ�����Ϊָ���ַ������Ӵ���
+     * 取得从指定索引开始计算的、长度为指定字符数的子串。
      * <pre>
      * StringUtil.mid(null, *, *)    = null
      * StringUtil.mid(*, *, -ve)     = ""
@@ -2767,11 +2767,11 @@ public class StringUtil {
      * StringUtil.mid("abc", -2, 2)  = "ab"
      * </pre>
      *
-     * @param str �ַ���
-     * @param pos ��ʼ���������Ϊ����������<code>0</code>
-     * @param len �Ӵ��ĳ��ȣ����Ϊ��������������Ϊ<code>0</code>
+     * @param str 字符串
+     * @param pos 起始索引，如果为负数，则看作<code>0</code>
+     * @param len 子串的长度，如果为负数，则看作长度为<code>0</code>
      *
-     * @return �Ӵ������ԭʼ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始字串为<code>null</code>，则返回<code>null</code>
      */
     public static String mid(String str, int pos, int len) {
         if (str == null) {
@@ -2794,14 +2794,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ������ȡ�Ӵ�������                                                          */
+    /*  搜索并取子串函数。                                                          */
     /* ============================================================================ */
 
     /**
-     * ȡ�õ�һ�����ֵķָ��Ӵ�֮ǰ���Ӵ���
+     * 取得第一个出现的分隔子串之前的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>��δ�ҵ����Ӵ����򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>或未找到该子串，则返回原字符串。
      * <pre>
      * StringUtil.substringBefore(null, *)      = null
      * StringUtil.substringBefore("", *)        = ""
@@ -2814,10 +2814,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param separator Ҫ�����ķָ��Ӵ�
+     * @param str 字符串
+     * @param separator 要搜索的分隔子串
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substringBefore(String str, String separator) {
         if ((str == null) || (separator == null) || (str.length() == 0)) {
@@ -2838,10 +2838,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�õ�һ�����ֵķָ��Ӵ�֮����Ӵ���
+     * 取得第一个出现的分隔子串之后的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>��δ�ҵ����Ӵ����򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>或未找到该子串，则返回原字符串。
      * <pre>
      * StringUtil.substringAfter(null, *)      = null
      * StringUtil.substringAfter("", *)        = ""
@@ -2854,10 +2854,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param separator Ҫ�����ķָ��Ӵ�
+     * @param str 字符串
+     * @param separator 要搜索的分隔子串
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substringAfter(String str, String separator) {
         if ((str == null) || (str.length() == 0)) {
@@ -2878,10 +2878,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�����һ���ķָ��Ӵ�֮ǰ���Ӵ���
+     * 取得最后一个的分隔子串之前的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>��δ�ҵ����Ӵ����򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>或未找到该子串，则返回原字符串。
      * <pre>
      * StringUtil.substringBeforeLast(null, *)      = null
      * StringUtil.substringBeforeLast("", *)        = ""
@@ -2894,10 +2894,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param separator Ҫ�����ķָ��Ӵ�
+     * @param str 字符串
+     * @param separator 要搜索的分隔子串
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substringBeforeLast(String str, String separator) {
         if ((str == null) || (separator == null) || (str.length() == 0)
@@ -2915,10 +2915,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�����һ���ķָ��Ӵ�֮����Ӵ���
+     * 取得最后一个的分隔子串之后的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>��δ�ҵ����Ӵ����򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>或未找到该子串，则返回原字符串。
      * <pre>
      * StringUtil.substringAfterLast(null, *)      = null
      * StringUtil.substringAfterLast("", *)        = ""
@@ -2932,10 +2932,10 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param separator Ҫ�����ķָ��Ӵ�
+     * @param str 字符串
+     * @param separator 要搜索的分隔子串
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>，则返回<code>null</code>
      */
     public static String substringAfterLast(String str, String separator) {
         if ((str == null) || (str.length() == 0)) {
@@ -2956,10 +2956,10 @@ public class StringUtil {
     }
 
     /**
-     * ȡ��ָ���ָ�����ǰ���γ���֮����Ӵ���
+     * 取得指定分隔符的前两次出现之间的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.substringBetween(null, *)            = null
      * StringUtil.substringBetween("", "")             = ""
@@ -2970,20 +2970,20 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param tag Ҫ�����ķָ��Ӵ�
+     * @param str 字符串
+     * @param tag 要搜索的分隔子串
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>��δ�ҵ��ָ��Ӵ����򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>或未找到分隔子串，则返回<code>null</code>
      */
     public static String substringBetween(String str, String tag) {
         return substringBetween(str, tag, tag, 0);
     }
 
     /**
-     * ȡ�������ָ���֮����Ӵ���
+     * 取得两个分隔符之间的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.substringBetween(null, *, *)          = null
      * StringUtil.substringBetween("", "", "")          = ""
@@ -2996,21 +2996,21 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param open Ҫ�����ķָ��Ӵ�1
-     * @param close Ҫ�����ķָ��Ӵ�2
+     * @param str 字符串
+     * @param open 要搜索的分隔子串1
+     * @param close 要搜索的分隔子串2
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>��δ�ҵ��ָ��Ӵ����򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>或未找到分隔子串，则返回<code>null</code>
      */
     public static String substringBetween(String str, String open, String close) {
         return substringBetween(str, open, close, 0);
     }
 
     /**
-     * ȡ�������ָ���֮����Ӵ���
+     * 取得两个分隔符之间的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ����ָ��Ӵ�Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 如果分隔子串为<code>null</code>，则返回<code>null</code>。
      * <pre>
      * StringUtil.substringBetween(null, *, *)          = null
      * StringUtil.substringBetween("", "", "")          = ""
@@ -3023,12 +3023,12 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str �ַ���
-     * @param open Ҫ�����ķָ��Ӵ�1
-     * @param close Ҫ�����ķָ��Ӵ�2
-     * @param fromIndex ��ָ��index������
+     * @param str 字符串
+     * @param open 要搜索的分隔子串1
+     * @param close 要搜索的分隔子串2
+     * @param fromIndex 从指定index处搜索
      *
-     * @return �Ӵ������ԭʼ��Ϊ<code>null</code>��δ�ҵ��ָ��Ӵ����򷵻�<code>null</code>
+     * @return 子串，如果原始串为<code>null</code>或未找到分隔子串，则返回<code>null</code>
      */
     public static String substringBetween(String str, String open, String close, int fromIndex) {
         if ((str == null) || (open == null) || (close == null)) {
@@ -3049,11 +3049,11 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ɾ���ַ���                                                                  */
+    /*  删除字符。                                                                  */
     /* ============================================================================ */
 
     /**
-     * ɾ��������<code>Character.isWhitespace(char)</code>��������Ŀհס�
+     * 删除所有在<code>Character.isWhitespace(char)</code>中所定义的空白。
      * <pre>
      * StringUtil.deleteWhitespace(null)         = null
      * StringUtil.deleteWhitespace("")           = ""
@@ -3061,9 +3061,9 @@ public class StringUtil {
      * StringUtil.deleteWhitespace("   ab  c  ") = "abc"
      * </pre>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ȥ�հ׺���ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 去空白后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String deleteWhitespace(String str) {
         if (str == null) {
@@ -3083,14 +3083,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �滻�Ӵ���                                                                  */
+    /*  替换子串。                                                                  */
     /* ============================================================================ */
 
     /**
-     * �滻ָ�����Ӵ���ֻ�滻��һ�����ֵ��Ӵ���
+     * 替换指定的子串，只替换第一个出现的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>�򷵻�<code>null</code>�����ָ���Ӵ�Ϊ<code>null</code>���򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>则返回<code>null</code>，如果指定子串为<code>null</code>，则返回原字符串。
      * <pre>
      * StringUtil.replaceOnce(null, *, *)        = null
      * StringUtil.replaceOnce("", *, *)          = ""
@@ -3102,21 +3102,21 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param text Ҫɨ����ַ���
-     * @param repl Ҫ�������Ӵ�
-     * @param with �滻�ַ���
+     * @param text 要扫描的字符串
+     * @param repl 要搜索的子串
+     * @param with 替换字符串
      *
-     * @return ���滻����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被替换后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String replaceOnce(String text, String repl, String with) {
         return replace(text, repl, with, 1);
     }
 
     /**
-     * �滻ָ�����Ӵ����滻���г��ֵ��Ӵ���
+     * 替换指定的子串，替换所有出现的子串。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>�򷵻�<code>null</code>�����ָ���Ӵ�Ϊ<code>null</code>���򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>则返回<code>null</code>，如果指定子串为<code>null</code>，则返回原字符串。
      * <pre>
      * StringUtil.replace(null, *, *)        = null
      * StringUtil.replace("", *, *)          = ""
@@ -3128,21 +3128,21 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param text Ҫɨ����ַ���
-     * @param repl Ҫ�������Ӵ�
-     * @param with �滻�ַ���
+     * @param text 要扫描的字符串
+     * @param repl 要搜索的子串
+     * @param with 替换字符串
      *
-     * @return ���滻����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被替换后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String replace(String text, String repl, String with) {
         return replace(text, repl, with, -1);
     }
 
     /**
-     * �滻ָ�����Ӵ����滻ָ���Ĵ�����
+     * 替换指定的子串，替换指定的次数。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>�򷵻�<code>null</code>�����ָ���Ӵ�Ϊ<code>null</code>���򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>则返回<code>null</code>，如果指定子串为<code>null</code>，则返回原字符串。
      * <pre>
      * StringUtil.replace(null, *, *, *)         = null
      * StringUtil.replace("", *, *, *)           = ""
@@ -3157,12 +3157,12 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param text Ҫɨ����ַ���
-     * @param repl Ҫ�������Ӵ�
-     * @param with �滻�ַ���
+     * @param text 要扫描的字符串
+     * @param repl 要搜索的子串
+     * @param with 替换字符串
      * @param max maximum number of values to replace, or <code>-1</code> if no maximum
      *
-     * @return ���滻����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被替换后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String replace(String text, String repl, String with, int max) {
         if ((text == null) || (repl == null) || (with == null) || (repl.length() == 0)
@@ -3188,10 +3188,10 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���������ָ�����ַ����滻����һ����
+     * 将字符串中所有指定的字符，替换成另一个。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>�򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>则返回<code>null</code>。
      * <pre>
      * StringUtil.replaceChars(null, *, *)        = null
      * StringUtil.replaceChars("", *, *)          = ""
@@ -3200,11 +3200,11 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChar Ҫ�������ַ�
-     * @param replaceChar �滻�ַ�
+     * @param str 要扫描的字符串
+     * @param searchChar 要搜索的字符
+     * @param replaceChar 替换字符
      *
-     * @return ���滻����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被替换后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String replaceChars(String str, char searchChar, char replaceChar) {
         if (str == null) {
@@ -3215,18 +3215,18 @@ public class StringUtil {
     }
 
     /**
-     * ���ַ���������ָ�����ַ����滻����һ����
+     * 将字符串中所有指定的字符，替换成另一个。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>�򷵻�<code>null</code>����������ַ���Ϊ<code>null</code>��գ��򷵻�ԭ�ַ�����
+     * 如果字符串为<code>null</code>则返回<code>null</code>。如果搜索字符串为<code>null</code>或空，则返回原字符串。
      * </p>
      *
      * <p>
-     * ���磺 <code>replaceChars(&quot;hello&quot;, &quot;ho&quot;, &quot;jy&quot;) = jelly</code>��
+     * 例如： <code>replaceChars(&quot;hello&quot;, &quot;ho&quot;, &quot;jy&quot;) = jelly</code>。
      * </p>
      *
      * <p>
-     * ͨ�������ַ������滻�ַ����ǵȳ��ģ���������ַ������滻�ַ��������������ַ�����ɾ���� ��������ַ������滻�ַ����̣���ȱ�ٵ��ַ��������ԡ�
+     * 通常搜索字符串和替换字符串是等长的，如果搜索字符串比替换字符串长，则多余的字符将被删除。 如果搜索字符串比替换字符串短，则缺少的字符将被忽略。
      * <pre>
      * StringUtil.replaceChars(null, *, *)           = null
      * StringUtil.replaceChars("", *, *)             = ""
@@ -3240,11 +3240,11 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫɨ����ַ���
-     * @param searchChars Ҫ�������ַ���
-     * @param replaceChars �滻�ַ���
+     * @param str 要扫描的字符串
+     * @param searchChars 要搜索的字符串
+     * @param replaceChars 替换字符串
      *
-     * @return ���滻����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被替换后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String replaceChars(String str, String searchChars, String replaceChars) {
         if ((str == null) || (str.length() == 0) || (searchChars == null)
@@ -3260,7 +3260,7 @@ public class StringUtil {
             char searchChar = searchChars.charAt(i);
 
             if ((replaceChars == null) || (i >= replaceChars.length())) {
-                // ɾ��
+                // 删除
                 int pos = 0;
 
                 for (int j = 0; j < len; j++) {
@@ -3273,7 +3273,7 @@ public class StringUtil {
 
                 len = pos;
             } else {
-                // �滻
+                // 替换
                 for (int j = 0; j < len; j++) {
                     if (chars[j] == searchChar) {
                         chars[j]     = replaceChars.charAt(i);
@@ -3291,10 +3291,10 @@ public class StringUtil {
     }
 
     /**
-     * ��ָ�����Ӵ�����һָ���Ӵ����ǡ�
+     * 将指定的子串用另一指定子串覆盖。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>�� ��������ֵ��������<code>0</code>��Խ�������ֵ�������ó��ַ����ĳ�����ͬ��ֵ��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。 负的索引值将被看作<code>0</code>，越界的索引值将被设置成字符串的长度相同的值。
      * <pre>
      * StringUtil.overlay(null, *, *, *)            = null
      * StringUtil.overlay("", "abc", 0, 0)          = "abc"
@@ -3310,12 +3310,12 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫɨ����ַ���
-     * @param overlay �������ǵ��ַ���
-     * @param start ��ʼ����
-     * @param end ��������
+     * @param str 要扫描的字符串
+     * @param overlay 用来覆盖的字符串
+     * @param start 起始索引
+     * @param end 结束索引
      *
-     * @return �����Ǻ���ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 被覆盖后的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String overlay(String str, String overlay, int start, int end) {
         if (str == null) {
@@ -3356,14 +3356,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  Perl����chomp��chop������                                                 */
+    /*  Perl风格的chomp和chop函数。                                                 */
     /* ============================================================================ */
 
     /**
-     * ɾ���ַ���ĩβ�Ļ��з�������ַ������Ի��н�β����ʲôҲ������
+     * 删除字符串末尾的换行符。如果字符串不以换行结尾，则什么也不做。
      *
      * <p>
-     * ���з����������Σ�&quot;<code>\n</code>&quot;��&quot;<code>\r</code>&quot;��&quot;<code>\r\n</code>&quot;��
+     * 换行符有三种情形：&quot;<code>\n</code>&quot;、&quot;<code>\r</code>&quot;、&quot;<code>\r\n</code>&quot;。
      * <pre>
      * StringUtil.chomp(null)          = null
      * StringUtil.chomp("")            = ""
@@ -3379,9 +3379,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ���Ի��н�β���ַ��������ԭʼ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 不以换行结尾的字符串，如果原始字串为<code>null</code>，则返回<code>null</code>
      */
     public static String chomp(String str) {
         if ((str == null) || (str.length() == 0)) {
@@ -3414,7 +3414,7 @@ public class StringUtil {
     }
 
     /**
-     * ɾ���ַ���ĩβ��ָ���ַ���������ַ������Ը��ַ�����β����ʲôҲ������
+     * 删除字符串末尾的指定字符串。如果字符串不以该字符串结尾，则什么也不做。
      * <pre>
      * StringUtil.chomp(null, *)         = null
      * StringUtil.chomp("", *)           = ""
@@ -3428,10 +3428,10 @@ public class StringUtil {
      * StringUtil.chomp("foo", null)     = "foo"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param separator Ҫɾ�����ַ���
+     * @param str 要处理的字符串
+     * @param separator 要删除的字符串
      *
-     * @return ����ָ���ַ�����β���ַ��������ԭʼ�ִ�Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 不以指定字符串结尾的字符串，如果原始字串为<code>null</code>，则返回<code>null</code>
      */
     public static String chomp(String str, String separator) {
         if ((str == null) || (str.length() == 0) || (separator == null)) {
@@ -3446,10 +3446,10 @@ public class StringUtil {
     }
 
     /**
-     * ɾ�����һ���ַ���
+     * 删除最后一个字符。
      *
      * <p>
-     * ����ַ�����<code>\r\n</code>��β����ͬʱɾ�����ǡ�
+     * 如果字符串以<code>\r\n</code>结尾，则同时删除它们。
      * <pre>
      * StringUtil.chop(null)          = null
      * StringUtil.chop("")            = ""
@@ -3465,9 +3465,9 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ������ַ���
+     * @param str 要处理的字符串
      *
-     * @return ɾ�����һ���ַ����ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 删除最后一个字符的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String chop(String str) {
         if (str == null) {
@@ -3494,11 +3494,11 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �ظ�/�����ַ�����                                                           */
+    /*  重复/对齐字符串。                                                           */
     /* ============================================================================ */
 
     /**
-     * ��ָ���ַ����ظ�n�顣
+     * 将指定字符串重复n遍。
      * <pre>
      * StringUtil.repeat(null, 2)   = null
      * StringUtil.repeat("", 0)     = ""
@@ -3509,10 +3509,10 @@ public class StringUtil {
      * StringUtil.repeat("a", -2)   = ""
      * </pre>
      *
-     * @param str Ҫ�ظ����ַ���
-     * @param repeat �ظ����������С��<code>0</code>������<code>0</code>
+     * @param str 要重复的字符串
+     * @param repeat 重复次数，如果小于<code>0</code>，则看作<code>0</code>
      *
-     * @return �ظ�n�ε��ַ��������ԭʼ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 重复n次的字符串，如果原始字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String repeat(String str, int repeat) {
         if (str == null) {
@@ -3569,7 +3569,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ��������ַ������ÿո�<code>' '</code>����ұߡ�
+     * 扩展并左对齐字符串，用空格<code>' '</code>填充右边。
      * <pre>
      * StringUtil.alignLeft(null, *)   = null
      * StringUtil.alignLeft("", 3)     = "   "
@@ -3579,17 +3579,17 @@ public class StringUtil {
      * StringUtil.alignLeft("bat", -1) = "bat"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignLeft(String str, int size) {
         return alignLeft(str, size, ' ');
     }
 
     /**
-     * ��չ��������ַ�������ָ���ַ�����ұߡ�
+     * 扩展并左对齐字符串，用指定字符填充右边。
      * <pre>
      * StringUtil.alignLeft(null, *, *)     = null
      * StringUtil.alignLeft("", 3, 'z')     = "zzz"
@@ -3599,11 +3599,11 @@ public class StringUtil {
      * StringUtil.alignLeft("bat", -1, 'z') = "bat"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padChar ����ַ�
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padChar 填充字符
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignLeft(String str, int size, char padChar) {
         if (str == null) {
@@ -3620,7 +3620,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ��������ַ�������ָ���ַ�������ұߡ�
+     * 扩展并左对齐字符串，用指定字符串填充右边。
      * <pre>
      * StringUtil.alignLeft(null, *, *)      = null
      * StringUtil.alignLeft("", 3, "z")      = "zzz"
@@ -3633,11 +3633,11 @@ public class StringUtil {
      * StringUtil.alignLeft("bat", 5, "")    = "bat  "
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padStr ����ַ���
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padStr 填充字符串
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignLeft(String str, int size, String padStr) {
         if (str == null) {
@@ -3673,7 +3673,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ���Ҷ����ַ������ÿո�<code>' '</code>�����ߡ�
+     * 扩展并右对齐字符串，用空格<code>' '</code>填充左边。
      * <pre>
      * StringUtil.alignRight(null, *)   = null
      * StringUtil.alignRight("", 3)     = "   "
@@ -3683,17 +3683,17 @@ public class StringUtil {
      * StringUtil.alignRight("bat", -1) = "bat"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignRight(String str, int size) {
         return alignRight(str, size, ' ');
     }
 
     /**
-     * ��չ���Ҷ����ַ�������ָ���ַ������ߡ�
+     * 扩展并右对齐字符串，用指定字符填充左边。
      * <pre>
      * StringUtil.alignRight(null, *, *)     = null
      * StringUtil.alignRight("", 3, 'z')     = "zzz"
@@ -3703,11 +3703,11 @@ public class StringUtil {
      * StringUtil.alignRight("bat", -1, 'z') = "bat"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padChar ����ַ�
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padChar 填充字符
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignRight(String str, int size, char padChar) {
         if (str == null) {
@@ -3724,7 +3724,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ���Ҷ����ַ�������ָ���ַ��������ߡ�
+     * 扩展并右对齐字符串，用指定字符串填充左边。
      * <pre>
      * StringUtil.alignRight(null, *, *)      = null
      * StringUtil.alignRight("", 3, "z")      = "zzz"
@@ -3737,11 +3737,11 @@ public class StringUtil {
      * StringUtil.alignRight("bat", 5, "")    = "  bat"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padStr ����ַ���
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padStr 填充字符串
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String alignRight(String str, int size, String padStr) {
         if (str == null) {
@@ -3777,7 +3777,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ�������ַ������ÿո�<code>' '</code>������ߡ�
+     * 扩展并居中字符串，用空格<code>' '</code>填充两边。
      * <pre>
      * StringUtil.center(null, *)   = null
      * StringUtil.center("", 4)     = "    "
@@ -3787,17 +3787,17 @@ public class StringUtil {
      * StringUtil.center("a", 4)    = " a  "
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String center(String str, int size) {
         return center(str, size, ' ');
     }
 
     /**
-     * ��չ�������ַ�������ָ���ַ�������ߡ�
+     * 扩展并居中字符串，用指定字符填充两边。
      * <pre>
      * StringUtil.center(null, *, *)     = null
      * StringUtil.center("", 4, ' ')     = "    "
@@ -3808,11 +3808,11 @@ public class StringUtil {
      * StringUtil.center("a", 4, 'y')    = "yayy"
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padChar ����ַ�
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padChar 填充字符
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String center(String str, int size, char padChar) {
         if ((str == null) || (size <= 0)) {
@@ -3832,7 +3832,7 @@ public class StringUtil {
     }
 
     /**
-     * ��չ�������ַ�������ָ���ַ���������ߡ�
+     * 扩展并居中字符串，用指定字符串填充两边。
      * <pre>
      * StringUtil.center(null, *, *)     = null
      * StringUtil.center("", 4, " ")     = "    "
@@ -3845,11 +3845,11 @@ public class StringUtil {
      * StringUtil.center("abc", 7, "")   = "  abc  "
      * </pre>
      *
-     * @param str Ҫ������ַ���
-     * @param size ��չ�ַ�����ָ�����
-     * @param padStr ����ַ���
+     * @param str 要对齐的字符串
+     * @param size 扩展字符串到指定宽度
+     * @param padStr 填充字符串
      *
-     * @return ��չ����ַ���������ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 扩展后的字符串，如果字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String center(String str, int size, String padStr) {
         if ((str == null) || (size <= 0)) {
@@ -3873,14 +3873,14 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ��ת�ַ�����                                                                */
+    /*  反转字符串。                                                                */
     /* ============================================================================ */
 
     /**
-     * ��ת�ַ����е��ַ�˳��
+     * 反转字符串中的字符顺序。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。
      * </p>
      * <pre>
      * StringUtil.reverse(null)  = null
@@ -3888,9 +3888,9 @@ public class StringUtil {
      * StringUtil.reverse("bat") = "tab"
      * </pre>
      *
-     * @param str Ҫ��ת���ַ���
+     * @param str 要反转的字符串
      *
-     * @return ��ת����ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 反转后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String reverse(String str) {
         if ((str == null) || (str.length() == 0)) {
@@ -3901,10 +3901,10 @@ public class StringUtil {
     }
 
     /**
-     * ��תָ���ָ����ָ��ĸ��Ӵ���˳��
+     * 反转指定分隔符分隔的各子串的顺序。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。
      * </p>
      * <pre>
      * StringUtil.reverseDelimited(null, *)      = null
@@ -3913,10 +3913,10 @@ public class StringUtil {
      * StringUtil.reverseDelimited("a.b.c", '.') = "c.b.a"
      * </pre>
      *
-     * @param str Ҫ��ת���ַ���
-     * @param separatorChar �ָ���
+     * @param str 要反转的字符串
+     * @param separatorChar 分隔符
      *
-     * @return ��ת����ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 反转后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String reverseDelimited(String str, char separatorChar) {
         if (str == null) {
@@ -3931,10 +3931,10 @@ public class StringUtil {
     }
 
     /**
-     * ��תָ���ָ����ָ��ĸ��Ӵ���˳��
+     * 反转指定分隔符分隔的各子串的顺序。
      *
      * <p>
-     * ����ַ���Ϊ<code>null</code>���򷵻�<code>null</code>��
+     * 如果字符串为<code>null</code>，则返回<code>null</code>。
      * </p>
      * <pre>
      * StringUtil.reverseDelimited(null, *, *)          = null
@@ -3945,11 +3945,11 @@ public class StringUtil {
      * StringUtil.reverseDelimited("a.b.c", ".", null)  = "c b a"
      * </pre>
      *
-     * @param str Ҫ��ת���ַ���
-     * @param separatorChars �ָ��������Ϊ<code>null</code>����Ĭ��ʹ�ÿհ��ַ�
-     * @param separator ���������Ӵ��ķָ��������Ϊ<code>null</code>��Ĭ��ʹ�ÿո�
+     * @param str 要反转的字符串
+     * @param separatorChars 分隔符，如果为<code>null</code>，则默认使用空白字符
+     * @param separator 用来连接子串的分隔符，如果为<code>null</code>，默认使用空格
      *
-     * @return ��ת����ַ��������ԭ�ַ���Ϊ<code>null</code>���򷵻�<code>null</code>
+     * @return 反转后的字符串，如果原字符串为<code>null</code>，则返回<code>null</code>
      */
     public static String reverseDelimited(String str, String separatorChars, String separator) {
         if (str == null) {
@@ -3968,24 +3968,24 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  ȡ���ַ��������ԡ�                                                          */
+    /*  取得字符串的缩略。                                                          */
     /* ============================================================================ */
 
     /**
-     * ���ַ���ת����ָ�����ȵ����ԣ����磺 ��"Now is the time for all good men"ת����"Now is the time for..."��
+     * 将字符串转换成指定长度的缩略，例如： 将"Now is the time for all good men"转换成"Now is the time for..."。
      *
      * <ul>
      * <li>
-     * ���<code>str</code>��<code>maxWidth</code>�̣�ֱ�ӷ��أ�
+     * 如果<code>str</code>比<code>maxWidth</code>短，直接返回；
      * </li>
      * <li>
-     * ������ת�������ԣ�<code>substring(str, 0, max-3) + "..."</code>��
+     * 否则将它转换成缩略：<code>substring(str, 0, max-3) + "..."</code>；
      * </li>
      * <li>
-     * ���<code>maxWidth</code>С��<code>4</code>�׳�<code>IllegalArgumentException</code>��
+     * 如果<code>maxWidth</code>小于<code>4</code>抛出<code>IllegalArgumentException</code>；
      * </li>
      * <li>
-     * ���ص��ַ��������ܳ���ָ����<code>maxWidth</code>��
+     * 返回的字符串不可能长于指定的<code>maxWidth</code>。
      * </li>
      * </ul>
      *
@@ -3999,25 +3999,25 @@ public class StringUtil {
      * StringUtil.abbreviate("abcdefg", 3) = IllegalArgumentException
      * </pre>
      *
-     * @param str Ҫ�����ַ���
-     * @param maxWidth ��󳤶ȣ���С��<code>4</code>�����С��<code>4</code>������<code>4</code>
+     * @param str 要检查的字符串
+     * @param maxWidth 最大长度，不小于<code>4</code>，如果小于<code>4</code>，则看作<code>4</code>
      *
-     * @return �ַ������ԣ����ԭʼ�ַ���Ϊ<code>null</code>�򷵻�<code>null</code>
+     * @return 字符串缩略，如果原始字符串为<code>null</code>则返回<code>null</code>
      */
     public static String abbreviate(String str, int maxWidth) {
         return abbreviate(str, 0, maxWidth);
     }
 
     /**
-     * ���ַ���ת����ָ�����ȵ����ԣ����磺 ��"Now is the time for all good men"ת����"...is the time for..."��
+     * 将字符串转换成指定长度的缩略，例如： 将"Now is the time for all good men"转换成"...is the time for..."。
      *
      * <p>
-     * ��<code>abbreviate(String, int)</code>���ƣ�����������һ������߽硱ƫ������
-     * ע�⣬����߽硱�����ַ�δ�س����ڽ���ַ���������ߣ���һ�������ڽ���ַ����С�
+     * 和<code>abbreviate(String, int)</code>类似，但是增加了一个“左边界”偏移量。
+     * 注意，“左边界”处的字符未必出现在结果字符串的最左边，但一定出现在结果字符串中。
      * </p>
      *
      * <p>
-     * ���ص��ַ��������ܳ���ָ����<code>maxWidth</code>��
+     * 返回的字符串不可能长于指定的<code>maxWidth</code>。
      * <pre>
      * StringUtil.abbreviate(null, *, *)                = null
      * StringUtil.abbreviate("", 0, 4)                  = ""
@@ -4035,18 +4035,18 @@ public class StringUtil {
      * </pre>
      * </p>
      *
-     * @param str Ҫ�����ַ���
-     * @param offset ��߽�ƫ����
-     * @param maxWidth ��󳤶ȣ���С��<code>4</code>�����С��<code>4</code>������<code>4</code>
+     * @param str 要检查的字符串
+     * @param offset 左边界偏移量
+     * @param maxWidth 最大长度，不小于<code>4</code>，如果小于<code>4</code>，则看作<code>4</code>
      *
-     * @return �ַ������ԣ����ԭʼ�ַ���Ϊ<code>null</code>�򷵻�<code>null</code>
+     * @return 字符串缩略，如果原始字符串为<code>null</code>则返回<code>null</code>
      */
     public static String abbreviate(String str, int offset, int maxWidth) {
         if (str == null) {
             return null;
         }
 
-        // ���������
+        // 调整最大宽度
         if (maxWidth < 4) {
             maxWidth = 4;
         }
@@ -4067,7 +4067,7 @@ public class StringUtil {
             return str.substring(0, maxWidth - 3) + "...";
         }
 
-        // ���������
+        // 调整最大宽度
         if (maxWidth < 7) {
             maxWidth = 7;
         }
@@ -4080,13 +4080,13 @@ public class StringUtil {
     }
 
     /* ============================================================================ */
-    /*  �Ƚ������ַ�������ͬ��                                                      */
+    /*  比较两个字符串的异同。                                                      */
     /*                                                                              */
-    /*  �����ַ���֮��Ĳ��죬�Ƚ��ַ��������ƶȡ�                                  */
+    /*  查找字符串之间的差异，比较字符串的相似度。                                  */
     /* ============================================================================ */
 
     /**
-     * �Ƚ������ַ�����ȡ�õڶ����ַ����У��͵�һ���ַ�����ͬ�Ĳ��֡�
+     * 比较两个字符串，取得第二个字符串中，和第一个字符串不同的部分。
      * <pre>
      * StringUtil.difference("i am a machine", "i am a robot")  = "robot"
      * StringUtil.difference(null, null)                        = null
@@ -4100,10 +4100,10 @@ public class StringUtil {
      * StringUtil.difference("abcde", "xyz")                    = "xyz"
      * </pre>
      *
-     * @param str1 �ַ���1
-     * @param str2 �ַ���2
+     * @param str1 字符串1
+     * @param str2 字符串2
      *
-     * @return �ڶ����ַ����У��͵�һ���ַ�����ͬ�Ĳ��֡���������ַ�����ͬ���򷵻ؿ��ַ���<code>""</code>
+     * @return 第二个字符串中，和第一个字符串不同的部分。如果两个字符串相同，则返回空字符串<code>""</code>
      */
     public static String difference(String str1, String str2) {
         if (str1 == null) {
@@ -4124,7 +4124,7 @@ public class StringUtil {
     }
 
     /**
-     * �Ƚ������ַ�����ȡ�����ַ�����ʼ��ͬ������ֵ��
+     * 比较两个字符串，取得两字符串开始不同的索引值。
      * <pre>
      * StringUtil.indexOfDifference("i am a machine", "i am a robot")   = 7
      * StringUtil.indexOfDifference(null, null)                         = -1
@@ -4138,10 +4138,10 @@ public class StringUtil {
      * StringUtil.indexOfDifference("abcde", "xyz")                     = 0
      * </pre>
      *
-     * @param str1 �ַ���1
-     * @param str2 �ַ���2
+     * @param str1 字符串1
+     * @param str2 字符串2
      *
-     * @return ���ַ�����ʼ�������������ֵ��������ַ�����ͬ���򷵻�<code>-1</code>
+     * @return 两字符串开始产生差异的索引值，如果两字符串相同，则返回<code>-1</code>
      */
     public static int indexOfDifference(String str1, String str2) {
         if ((str1 == str2) || (str1 == null) || (str2 == null)) {
@@ -4164,11 +4164,11 @@ public class StringUtil {
     }
 
     /**
-     * ȡ�������ַ��������ƶȣ�<code>0</code>�����ַ�����ȣ�����Խ���ʾ�ַ���Խ����
+     * 取得两个字符串的相似度，<code>0</code>代表字符串相等，数字越大表示字符串越不像。
      *
      * <p>
-     * ����㷨ȡ��<a href="http://www.merriampark.com/ld.htm">http://www.merriampark.com/ld.htm</a>��
-     * ��������Ǵ��ַ���1ת�䵽�ַ���2����Ҫ��ɾ����������滻�Ĳ�������
+     * 这个算法取自<a href="http://www.merriampark.com/ld.htm">http://www.merriampark.com/ld.htm</a>。
+     * 它计算的是从字符串1转变到字符串2所需要的删除、插入和替换的步骤数。
      * </p>
      * <pre>
      * StringUtil.getLevenshteinDistance(null, *)             = IllegalArgumentException
@@ -4184,10 +4184,10 @@ public class StringUtil {
      * StringUtil.getLevenshteinDistance("hello", "hallo")    = 1
      * </pre>
      *
-     * @param s ��һ���ַ����������<code>null</code>���������ַ���
-     * @param t �ڶ����ַ����������<code>null</code>���������ַ���
+     * @param s 第一个字符串，如果是<code>null</code>，则看作空字符串
+     * @param t 第二个字符串，如果是<code>null</code>，则看作空字符串
      *
-     * @return ���ƶ�ֵ
+     * @return 相似度值
      */
     public static int getLevenshteinDistance(String s, String t) {
         s     = defaultIfNull(s);
@@ -4250,13 +4250,13 @@ public class StringUtil {
     }
 
     /**
-     * ȡ����С����
+     * 取得最小数。
      *
-     * @param a ����1
-     * @param b ����2
-     * @param c ����3
+     * @param a 整数1
+     * @param b 整数2
+     * @param c 整数3
      *
-     * @return �������е���Сֵ
+     * @return 三个数中的最小值
      */
     private static int min(int a, int b, int c) {
         if (b < a) {

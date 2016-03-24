@@ -1,4 +1,4 @@
-package com.ty.common.lang.exception;
+package com.ty.alibaba.common.lang.exception;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * @project myGather
- * @description ��Ƕ�׵��쳣����, �򻯿�Ƕ�׵��쳣��ʵ��.
+ * @description 可嵌套的异常代理, 简化可嵌套的异常的实现.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -18,10 +18,10 @@ public class ChainedThrowableDelegate
         implements ChainedThrowable {
     private static final long serialVersionUID = 3257288032683241523L;
 
-    /** ��ʾ�쳣�����ڵĳ���. */
+    /** 表示异常不存在的常量. */
     protected static final Throwable NO_CAUSE = new Throwable();
 
-    /** ����������ȡ���쳣����ķ�����. */
+    /** 常见的用来取得异常起因的方法名. */
     private static final String[] CAUSE_METHOD_NAMES = {
             "getNested", "getNestedException",
             "getNextException", "getTargetException",
@@ -30,25 +30,25 @@ public class ChainedThrowableDelegate
             "getCause"
     };
 
-    /** ����������ȡ���쳣������ֶ���. */
+    /** 常见的用来取得异常起因的字段名. */
     private static final String[] CAUSE_FIELD_NAMES = { "detail" };
 
-    /** �������<code>Throwable</code>����. */
+    /** 被代理的<code>Throwable</code>对象. */
     protected Throwable delegatedThrowable;
 
     /**
-     * ����һ��<code>Throwable</code>����.
+     * 创建一个<code>Throwable</code>代理.
      *
-     * @param throwable ��������쳣
+     * @param throwable 被代理的异常
      */
     public ChainedThrowableDelegate(Throwable throwable) {
         this.delegatedThrowable = throwable;
     }
 
     /**
-     * ȡ�ñ�������쳣������.
+     * 取得被代理的异常的起因.
      *
-     * @return �쳣������.
+     * @return 异常的起因.
      */
     public Throwable getCause() {
         Throwable cause = getCauseByWellKnownTypes(delegatedThrowable);
@@ -56,13 +56,13 @@ public class ChainedThrowableDelegate
         for (Class throwableClass = delegatedThrowable.getClass();
              (cause == null) && Throwable.class.isAssignableFrom(throwableClass);
              throwableClass = throwableClass.getSuperclass()) {
-            // ���Գ����ķ���
+            // 尝试常见的方法
             for (int i = 0; (cause == null) && (i < CAUSE_METHOD_NAMES.length); i++) {
                 cause = getCauseByMethodName(delegatedThrowable, throwableClass,
                         CAUSE_METHOD_NAMES[i]);
             }
 
-            // ���Գ������ֶ�
+            // 尝试常见的字段
             for (int i = 0; (cause == null) && (i < CAUSE_FIELD_NAMES.length); i++) {
                 cause = getCauseByFieldName(delegatedThrowable, throwableClass, CAUSE_FIELD_NAMES[i]);
             }
@@ -80,11 +80,11 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * ȡ�ó���<code>Throwable</code>����쳣����.
+     * 取得常见<code>Throwable</code>类的异常起因.
      *
-     * @param throwable �쳣
+     * @param throwable 异常
      *
-     * @return �쳣����
+     * @return 异常起因
      */
     protected Throwable getCauseByWellKnownTypes(Throwable throwable) {
         Throwable cause           = null;
@@ -112,13 +112,13 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * ͨ�������ķ�����̬��ȡ���쳣����.
+     * 通过常见的方法动态地取得异常起因.
      *
-     * @param throwable �쳣
-     * @param throwableClass �쳣��
-     * @param methodName ������
+     * @param throwable 异常
+     * @param throwableClass 异常类
+     * @param methodName 方法名
      *
-     * @return �쳣�����<code>NO_CAUSE</code>
+     * @return 异常起因或<code>NO_CAUSE</code>
      */
     protected Throwable getCauseByMethodName(Throwable throwable, Class throwableClass,
                                              String methodName) {
@@ -150,13 +150,13 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * ͨ�������ķ�����̬��ȡ���쳣����.
+     * 通过常见的方法动态地取得异常起因.
      *
-     * @param throwable �쳣
-     * @param throwableClass �쳣��
-     * @param fieldName �ֶ���
+     * @param throwable 异常
+     * @param throwableClass 异常类
+     * @param fieldName 字段名
      *
-     * @return �쳣�����<code>NO_CAUSE</code>
+     * @return 异常起因或<code>NO_CAUSE</code>
      */
     protected Throwable getCauseByFieldName(Throwable throwable, Class throwableClass,
                                             String fieldName) {
@@ -187,34 +187,34 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * ��ӡ����ջ����׼����.
+     * 打印调用栈到标准错误.
      */
     public void printStackTrace() {
         ExceptionHelper.printStackTrace(this);
     }
 
     /**
-     * ��ӡ����ջ��ָ�������.
+     * 打印调用栈到指定输出流.
      *
-     * @param stream ����ֽ���.
+     * @param stream 输出字节流.
      */
     public void printStackTrace(PrintStream stream) {
         ExceptionHelper.printStackTrace(this, stream);
     }
 
     /**
-     * ��ӡ����ջ��ָ�������.
+     * 打印调用栈到指定输出流.
      *
-     * @param writer ����ַ���.
+     * @param writer 输出字符流.
      */
     public void printStackTrace(PrintWriter writer) {
         ExceptionHelper.printStackTrace(this, writer);
     }
 
     /**
-     * ��ӡ�쳣�ĵ���ջ, �����������쳣����Ϣ.
+     * 打印异常的调用栈, 不包括起因异常的信息.
      *
-     * @param writer ��ӡ�������
+     * @param writer 打印到输出流
      */
     public void printCurrentStackTrace(PrintWriter writer) {
         if (delegatedThrowable instanceof ChainedThrowable) {

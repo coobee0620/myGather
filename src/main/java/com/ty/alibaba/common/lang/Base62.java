@@ -1,4 +1,4 @@
-package com.ty.common.lang;
+package com.ty.alibaba.common.lang;
 
 import java.util.HashSet;
 import java.util.Set;

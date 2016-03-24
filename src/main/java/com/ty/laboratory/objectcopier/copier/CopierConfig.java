@@ -2,12 +2,12 @@ package com.ty.laboratory.objectcopier.copier;
 
 
 import com.google.common.collect.ImmutableList;
-import com.ty.laboratory.objectcopier.exception.CopyFormatException;
-import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
 import com.ty.laboratory.objectcopier.copier.elements.Copier;
 import com.ty.laboratory.objectcopier.copier.utils.CopierUtils;
 import com.ty.laboratory.objectcopier.copier.visitors.impl.ValidateVisitor;
-import org.apache.commons.lang.StringUtils;
+import com.ty.laboratory.objectcopier.exception.CopyFormatException;
+import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½£º¶ÔÏó½á¹¹½ÇÉ«£¨Object Structure£©
+ * @description è®¿é—®è€…æ¨¡å¼ï¼šå¯¹è±¡ç»“æ„è§’è‰²ï¼ˆObject Structureï¼‰
  * @auth changtong.ty
  * @date 2014/12/11
  */
@@ -30,8 +30,8 @@ public class CopierConfig {
     private List<Resource> copierConfigs;
 
     /**
-     * ¹¤³§µÄ¿ª¹Ø
-     * ÔÚ¿Í»§¶Ë¶Ô¹¤³§ÑéÖ¤Ç°£¬¹¤³§²»¿ÉÓÃ
+     * å·¥å‚çš„å¼€å…³
+     * åœ¨å®¢æˆ·ç«¯å¯¹å·¥å‚éªŒè¯å‰ï¼Œå·¥å‚ä¸å¯ç”¨
      */
     private boolean available = false;
 
@@ -40,7 +40,7 @@ public class CopierConfig {
     }
 
     /**
-     * ½ö³õÊ¼»¯factoryÊÇ²»¿ÉÓÃµÄ
+     * ä»…åˆå§‹åŒ–factoryæ˜¯ä¸å¯ç”¨çš„
      */
     public void init() {
         if (copierConfigs != null && copierConfigs.size() > 0) {
@@ -55,7 +55,7 @@ public class CopierConfig {
                 try {
                     String copierKey;
                     Copier copier = reader.load(config.getInputStream());
-                    //Èç¹ûÃ¿¸öÅäÖÃÎÄ¼şµÄcopierÅäÖÃÁË£¬¾Í×÷ÎªfactoryÖĞµÄkey£¬·ñÔòÊ¹ÓÃÅäÖÃÎÄ¼şµÄ¾ø¶ÔµØÖ·×÷Îªkey
+                    //å¦‚æœæ¯ä¸ªé…ç½®æ–‡ä»¶çš„copieré…ç½®äº†ï¼Œå°±ä½œä¸ºfactoryä¸­çš„keyï¼Œå¦åˆ™ä½¿ç”¨é…ç½®æ–‡ä»¶çš„ç»å¯¹åœ°å€ä½œä¸ºkey
                     if (StringUtils.isNotBlank(copier.getId())) {
                         copierKey = copier.getId();
                     } else {
@@ -82,14 +82,14 @@ public class CopierConfig {
     }
 
     /**
-     * ÑéÖ¤¹æÔò£º
-     * 1.Èç¹ûËùÓĞcopier¶¼ÑéÖ¤²»Í¨¹ı£¬¹¤³§²»¿ÉÓÃ¡£
-     * 2.Èç¹ûÓĞÒ»¸öcopierÄÜ¹»ÑéÖ¤Í¨¹ı£¬¹¤³§¿ÉÓÃ¡£
+     * éªŒè¯è§„åˆ™ï¼š
+     * 1.å¦‚æœæ‰€æœ‰copieréƒ½éªŒè¯ä¸é€šè¿‡ï¼Œå·¥å‚ä¸å¯ç”¨ã€‚
+     * 2.å¦‚æœæœ‰ä¸€ä¸ªcopierèƒ½å¤ŸéªŒè¯é€šè¿‡ï¼Œå·¥å‚å¯ç”¨ã€‚
      */
     public void validateFactory(ValidateVisitor validateVisitor) {
         boolean validate = false;
         for (Map.Entry<String, Copier> copierEntry : this.entrySet()) {
-            //Ã¿´ÎÑ­»·»áÑéÖ¤Ò»¸öcopier¡£Èç¹ûÒÑ¾­½«validateÉèÎªtrueÄÇÃ´²»»áÔÙ´Î½øÈë·ÖÖ§¡£
+            //æ¯æ¬¡å¾ªç¯ä¼šéªŒè¯ä¸€ä¸ªcopierã€‚å¦‚æœå·²ç»å°†validateè®¾ä¸ºtrueé‚£ä¹ˆä¸ä¼šå†æ¬¡è¿›å…¥åˆ†æ”¯ã€‚
             if (validateCopier(copierEntry.getKey(), copierEntry.getValue(), validateVisitor) && !validate) {
                 validate = true;
             }
@@ -119,7 +119,7 @@ public class CopierConfig {
             return false;
         } catch (Exception e) {
             String errorMeg = new StringBuilder()
-                    .append("Catch a exception when validate£º").append("\n")
+                    .append("Catch a exception when validateï¼š").append("\n")
                     .append(e.getMessage())
                     .toString();
             log.error(errorMeg);
@@ -143,9 +143,9 @@ public class CopierConfig {
     }
 
     /**
-     * ·µ»ØfactoryÖĞµÄcopiersµÄkey
-     * all=true£¬·µ»ØÈ«²¿keys
-     * all=false,Ö»·µ»Ø¿ÉÓÃcopierµÄkeys
+     * è¿”å›factoryä¸­çš„copiersçš„key
+     * all=trueï¼Œè¿”å›å…¨éƒ¨keys
+     * all=false,åªè¿”å›å¯ç”¨copierçš„keys
      */
     public List<String> getCopierKeys(boolean all) {
         List keys = null;
@@ -168,7 +168,7 @@ public class CopierConfig {
     }
 
     /**
-     * ¸ù¾İ×ª»»ÀàĞÍÕÒµ½¶ÔÓ¦µÄcopierKey
+     * æ ¹æ®è½¬æ¢ç±»å‹æ‰¾åˆ°å¯¹åº”çš„copierKey
      */
     public String getCopierkey(String sourceType, String targetType) throws CopyUnsuccessfullException {
         if (factory == null) {

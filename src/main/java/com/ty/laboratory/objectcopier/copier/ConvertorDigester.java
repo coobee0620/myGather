@@ -1,10 +1,10 @@
 package com.ty.laboratory.objectcopier.copier;
 
 
-import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.copier.elements.*;
 import com.ty.laboratory.objectcopier.copier.utils.CopierUtils;
-import org.apache.commons.lang.StringUtils;
+import com.ty.laboratory.objectcopier.exception.CopyFormatException;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
@@ -19,7 +19,7 @@ import java.util.*;
 
 /**
  * @project hrc
- * @description ½âÎöbean×ª»¯Æ÷µÄÅäÖÃÎÄ¼ş
+ * @description è§£æbeanè½¬åŒ–å™¨çš„é…ç½®æ–‡ä»¶
  * @auth changtong.ty
  * @date 2014/12/9
  */
@@ -83,7 +83,7 @@ class ConvertorDigester {
         if (copier == null) {
             log.error("class:" + this.getClass().getName()
                     + ";\nmethod:" + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + ";\nadaptorÎª¿Õ");
+                    + ";\nadaptorä¸ºç©º");
             return;
         }
         if (copier.getConverters() == null) {
@@ -91,14 +91,14 @@ class ConvertorDigester {
             copier.setConverters(converterMap);
         }
         /**
-         * ÊôĞÔAttribute´¦Àí
+         * å±æ€§Attributeå¤„ç†
          * */
         String from = ele.attributeValue(ATR_FROM);
         String to = ele.attributeValue(ATR_TO);
         if (StringUtils.isBlank(from) || StringUtils.isBlank(to)) {
             log.warn("class:" + this.getClass().getName()
                     + ";\nmethod:" + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + ";\nÎŞĞ§µÄconverter£¡ÔÚÅäÖÃÎÄ¼şÖĞ£¬ÕÒ²»µ½converterµÄfromÊôĞÔ»òtoÊôĞÔ£¬½¨Òé²é¿´ÅäÖÃÎÄ¼ş");
+                    + ";\næ— æ•ˆçš„converterï¼åœ¨é…ç½®æ–‡ä»¶ä¸­ï¼Œæ‰¾ä¸åˆ°converterçš„fromå±æ€§æˆ–toå±æ€§ï¼Œå»ºè®®æŸ¥çœ‹é…ç½®æ–‡ä»¶");
             return;
         }
         Converter converter = new Converter();
@@ -122,12 +122,12 @@ class ConvertorDigester {
             throw new ClassNotFoundException(errorMessage, e);
         }
         /**
-         * ×ÓÔªËØ´¦Àí
+         * å­å…ƒç´ å¤„ç†
          * */
         for (Iterator<?> i = ele.elementIterator(); i.hasNext(); ) {
             Element element = (Element) i.next();
             /**
-             * ½âÎöcustom built fields
+             * è§£æcustom built fields
              * */
             if (ELE_CUSTOM_BUILT.equalsIgnoreCase(element.getName())) {
                 CustomBuilt customBuilt = parserCustomBuilt(element, converter);
@@ -136,7 +136,7 @@ class ConvertorDigester {
                 }
             }
             /**
-             * ½âÎöignores fields
+             * è§£æignores fields
              * */
             if (ELE_IGNORES.equals(element.getName())) {
                 Ignores ignores = parserIgnores(element, converter);
@@ -145,7 +145,7 @@ class ConvertorDigester {
                 }
             }
             /**
-             * ½âÎödecorator
+             * è§£ædecorator
              * */
             if (ELE_DECORATOR.equals(element.getName())) {
                 Decorator decorator = parseDecorator(element, converter);
@@ -154,12 +154,12 @@ class ConvertorDigester {
                 }
             }
         }
-        //½«converter×°ÈëAdaptorµÄconvert¹¤³§ÈİÆ÷ÖĞ
+        //å°†converterè£…å…¥Adaptorçš„convertå·¥å‚å®¹å™¨ä¸­
         copier.getConverters().put(converter.getId(), converter);
     }
 
     /**
-     * Èç¹ûÃ»ÓĞField»òÕßField¶¼²»ºÏ·¨£¬Ôò·µ»Ø¿Õ
+     * å¦‚æœæ²¡æœ‰Fieldæˆ–è€…Fieldéƒ½ä¸åˆæ³•ï¼Œåˆ™è¿”å›ç©º
      */
     private CustomBuilt parserCustomBuilt(Element ele, Converter converter) {
         CustomBuilt customBuilt = null;
@@ -173,7 +173,7 @@ class ConvertorDigester {
     }
 
     /**
-     * Èç¹ûÃ»ÓĞField»òÕßField¶¼²»ºÏ·¨£¬Ôò·µ»Ø¿Õ
+     * å¦‚æœæ²¡æœ‰Fieldæˆ–è€…Fieldéƒ½ä¸åˆæ³•ï¼Œåˆ™è¿”å›ç©º
      */
     private Ignores parserIgnores(Element ele, Converter converter) {
         Ignores ignores = null;
@@ -187,14 +187,14 @@ class ConvertorDigester {
     }
 
     /**
-     * ½âÎöField List
+     * è§£æField List
      */
     private List<Field> parserFields(Element ele, Field.ParentValidation parentValidation, Converter converter) {
         List<Field> fields = new ArrayList<Field>();
         for (Iterator<?> i = ele.elementIterator(); i.hasNext(); ) {
             Element customField = (Element) i.next();
             /**
-             * ½âÎöfield
+             * è§£æfield
              * */
             if (ELE_FIELD.equalsIgnoreCase(customField.getName())) {
                 Field field = parseField(customField, parentValidation, converter);
@@ -212,7 +212,7 @@ class ConvertorDigester {
         if (StringUtils.isBlank(name)) {
             log.error("class:" + this.getClass().getName()
                     + ";\nmethod:" + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + ";\nÎŞĞ§µÄfiled£¡filedµÄ" + ATR_NAME + "ÊôĞÔÊÇ±ØÌîÏî¡£");
+                    + ";\næ— æ•ˆçš„filedï¼filedçš„" + ATR_NAME + "å±æ€§æ˜¯å¿…å¡«é¡¹ã€‚");
             return null;
         }
         field.setName(name);
@@ -272,7 +272,7 @@ class ConvertorDigester {
     }
 
     /**
-     * Èç¹û±ØÒªÊôĞÔ²»ºÏ·¨£¬Ôò·µ»Ønull
+     * å¦‚æœå¿…è¦å±æ€§ä¸åˆæ³•ï¼Œåˆ™è¿”å›null
      */
     private CompressorDecorator parseCompressorDecorator(Element ele, Converter converter) throws ClassNotFoundException {
         String fieldName = ele.attributeValue(ATR_NAME);
@@ -282,7 +282,7 @@ class ConvertorDigester {
         if (StringUtils.isBlank(targetName)) {
             log.warn("class:" + this.getClass().getName()
                     + ";\nmethod:" + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + ";\n" + ATR_TARGET_NAME + "Îª¿Õ£¡Ìø¹ı´ËÅäÖÃ£¡");
+                    + ";\n" + ATR_TARGET_NAME + "ä¸ºç©ºï¼è·³è¿‡æ­¤é…ç½®ï¼");
             return null;
         }
         Class fieldType = null;
@@ -309,7 +309,7 @@ class ConvertorDigester {
         if (StringUtils.isBlank(className) || StringUtils.isBlank(method)) {
             log.warn("class:" + this.getClass().getName()
                     + ";\nmethod:" + Thread.currentThread().getStackTrace()[1].getMethodName()
-                    + ";\n" + ATR_NAME + "»òÕß" + ATR_METHOD + "Îª¿Õ£¡Ìø¹ı´ËÅäÖÃ£¡");
+                    + ";\n" + ATR_NAME + "æˆ–è€…" + ATR_METHOD + "ä¸ºç©ºï¼è·³è¿‡æ­¤é…ç½®ï¼");
             return null;
         }
         MethodDecorator methodDecorator = new MethodDecorator();

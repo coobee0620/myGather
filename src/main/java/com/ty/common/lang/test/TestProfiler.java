@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * ²âÊÔÏß³ÌÂñµã
+ * æµ‹è¯•çº¿ç¨‹åŸ‹ç‚¹
  * Author: guangu.lj
  * Date:  002 6.2
  * Version 1.0.0

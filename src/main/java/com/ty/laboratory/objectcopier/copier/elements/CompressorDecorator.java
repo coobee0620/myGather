@@ -1,19 +1,19 @@
 package com.ty.laboratory.objectcopier.copier.elements;
 
 
+import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 
 import java.util.List;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½:¾ßÌåÔªËØ½ÇÉ«£¨Concrete Element£©
+ * @description è®¿é—®è€…æ¨¡å¼:å…·ä½“å…ƒç´ è§’è‰²ï¼ˆConcrete Elementï¼‰
  * @auth changtong.ty
  * @date 2014/12/10
  */
-public class CompressorDecorator extends AbstractCopierDescrptor implements Decorate {
+public class CompressorDecorator extends AbstractCopierDescrptor {
     private String name;
 
     private Class type;
@@ -33,7 +33,7 @@ public class CompressorDecorator extends AbstractCopierDescrptor implements Deco
         JSON("json", "standard json"),
         KV("kv", "Key-Value")
         /**
-         * ÔİÊ±²»Ö§³ÖÆäËûÑùÊ½
+         * æš‚æ—¶ä¸æ”¯æŒå…¶ä»–æ ·å¼
          * */
         ;
 
@@ -72,8 +72,8 @@ public class CompressorDecorator extends AbstractCopierDescrptor implements Deco
     }
 
     public enum CompressorType {
-        TYPE,//Ñ¹ËõÀàĞÍÎªÀàÑ¹Ëõ¡£½«ÖÆ¶¨ÀàÖĞµÄ×Ö¶ÎÑ¹Ëõ
-        FIELD//Ñ¹ËõÀàĞÍÎª×Ö¶ÎÑ¹Ëõ¡£½«converter.fromÖĞµÄ×Ö¶ÎÑ¹Ëõ
+        TYPE,//å‹ç¼©ç±»å‹ä¸ºç±»å‹ç¼©ã€‚å°†åˆ¶å®šç±»ä¸­çš„å­—æ®µå‹ç¼©
+        FIELD//å‹ç¼©ç±»å‹ä¸ºå­—æ®µå‹ç¼©ã€‚å°†converter.fromä¸­çš„å­—æ®µå‹ç¼©
     }
 
     public String getName() {

@@ -1,10 +1,10 @@
-package com.ty.common.lang.io;
+package com.ty.alibaba.common.lang.io;
 
 import java.io.*;
 
 /**
  * @project myGather
- * @description �������Ĺ�����. ���ַ�����ֲ��IBM developer works��������, �μ�package�ĵ�.
+ * @description 基于流的工具类. 部分方法移植自IBM developer works精彩文章, 参见package文档.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -12,12 +12,12 @@ public class StreamUtil {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
 
     /**
-     * ����������ȡ����, д�뵽�������.  �˷���ʹ�ô�СΪ8192�ֽڵ�Ĭ�ϵĻ�����.
+     * 从输入流读取内容, 写入到输出流中.  此方法使用大小为8192字节的默认的缓冲区.
      *
-     * @param in ������
-     * @param out �����
+     * @param in 输入流
+     * @param out 输出流
      *
-     * @throws java.io.IOException ��������쳣
+     * @throws java.io.IOException 输入输出异常
      */
     public static void io(InputStream in, OutputStream out)
             throws IOException {
@@ -25,13 +25,13 @@ public class StreamUtil {
     }
 
     /**
-     * ����������ȡ����, д�뵽�������.  ʹ��ָ����С�Ļ�����.
+     * 从输入流读取内容, 写入到输出流中.  使用指定大小的缓冲区.
      *
-     * @param in ������
-     * @param out �����
-     * @param bufferSize ��������С(�ֽ���)
+     * @param in 输入流
+     * @param out 输出流
+     * @param bufferSize 缓冲区大小(字节数)
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static void io(InputStream in, OutputStream out, int bufferSize)
             throws IOException {
@@ -48,25 +48,25 @@ public class StreamUtil {
     }
 
     /**
-     * ����������ȡ����, д�뵽�������.  �˷���ʹ�ô�СΪ4096�ַ���Ĭ�ϵĻ�����.
+     * 从输入流读取内容, 写入到输出流中.  此方法使用大小为4096字符的默认的缓冲区.
      *
-     * @param in ������
-     * @param out �����
+     * @param in 输入流
+     * @param out 输出流
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static void io(Reader in, Writer out) throws IOException {
         io(in, out, -1);
     }
 
     /**
-     * ����������ȡ����, д�뵽�������.  ʹ��ָ����С�Ļ�����.
+     * 从输入流读取内容, 写入到输出流中.  使用指定大小的缓冲区.
      *
-     * @param in ������
-     * @param out �����
-     * @param bufferSize ��������С(�ַ���)
+     * @param in 输入流
+     * @param out 输出流
+     * @param bufferSize 缓冲区大小(字符数)
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static void io(Reader in, Writer out, int bufferSize)
             throws IOException {
@@ -83,50 +83,50 @@ public class StreamUtil {
     }
 
     /**
-     * ȡ��ͬ�����������.
+     * 取得同步化的输出流.
      *
-     * @param out Ҫ�����������
+     * @param out 要包裹的输出流
      *
-     * @return �̰߳�ȫ��ͬ���������
+     * @return 线程安全的同步化输出流
      */
     public static OutputStream synchronizedOutputStream(OutputStream out) {
         return new SynchronizedOutputStream(out);
     }
 
     /**
-     * ȡ��ͬ�����������.
+     * 取得同步化的输出流.
      *
-     * @param out Ҫ�����������
-     * @param lock ͬ����
+     * @param out 要包裹的输出流
+     * @param lock 同步锁
      *
-     * @return �̰߳�ȫ��ͬ���������
+     * @return 线程安全的同步化输出流
      */
     public static OutputStream synchronizedOutputStream(OutputStream out, Object lock) {
         return new SynchronizedOutputStream(out, lock);
     }
 
     /**
-     * ��ָ���������������ı�ȫ��������һ���ַ�����.
+     * 将指定输入流的所有文本全部读出到一个字符串中.
      *
-     * @param in Ҫ��ȡ��������
+     * @param in 要读取的输入流
      *
-     * @return ����������ȡ�õ��ı�
+     * @return 从输入流中取得的文本
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static String readText(InputStream in) throws IOException {
         return readText(in, null, -1);
     }
 
     /**
-     * ��ָ���������������ı�ȫ��������һ���ַ�����.
+     * 将指定输入流的所有文本全部读出到一个字符串中.
      *
-     * @param in Ҫ��ȡ��������
-     * @param encoding �ı����뷽ʽ
+     * @param in 要读取的输入流
+     * @param encoding 文本编码方式
      *
-     * @return ����������ȡ�õ��ı�
+     * @return 从输入流中取得的文本
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static String readText(InputStream in, String encoding)
             throws IOException {
@@ -134,15 +134,15 @@ public class StreamUtil {
     }
 
     /**
-     * ��ָ���������������ı�ȫ��������һ���ַ�����.
+     * 将指定输入流的所有文本全部读出到一个字符串中.
      *
-     * @param in Ҫ��ȡ��������
-     * @param encoding �ı����뷽ʽ
-     * @param bufferSize ��������С(�ַ���)
+     * @param in 要读取的输入流
+     * @param encoding 文本编码方式
+     * @param bufferSize 缓冲区大小(字符数)
      *
-     * @return ����������ȡ�õ��ı�
+     * @return 从输入流中取得的文本
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static String readText(InputStream in, String encoding, int bufferSize)
             throws IOException {
@@ -153,27 +153,27 @@ public class StreamUtil {
     }
 
     /**
-     * ��ָ��<code>Reader</code>�������ı�ȫ��������һ���ַ�����.
+     * 将指定<code>Reader</code>的所有文本全部读出到一个字符串中.
      *
-     * @param reader Ҫ��ȡ��<code>Reader</code>
+     * @param reader 要读取的<code>Reader</code>
      *
-     * @return ��<code>Reader</code>��ȡ�õ��ı�
+     * @return 从<code>Reader</code>中取得的文本
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static String readText(Reader reader) throws IOException {
         return readText(reader, -1);
     }
 
     /**
-     * ��ָ��<code>Reader</code>�������ı�ȫ��������һ���ַ�����.
+     * 将指定<code>Reader</code>的所有文本全部读出到一个字符串中.
      *
-     * @param reader Ҫ��ȡ��<code>Reader</code>
-     * @param bufferSize �������Ĵ�С(�ַ���)
+     * @param reader 要读取的<code>Reader</code>
+     * @param bufferSize 缓冲区的大小(字符数)
      *
-     * @return ��<code>Reader</code>��ȡ�õ��ı�
+     * @return 从<code>Reader</code>中取得的文本
      *
-     * @throws IOException ��������쳣
+     * @throws IOException 输入输出异常
      */
     public static String readText(Reader reader, int bufferSize)
             throws IOException {
@@ -184,7 +184,7 @@ public class StreamUtil {
     }
 
     /**
-     * ͬ�����������������.
+     * 同步化的输出流包裹器.
      */
     private static class SynchronizedOutputStream extends OutputStream {
         private OutputStream out;

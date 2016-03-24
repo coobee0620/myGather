@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @project htq
- * @description HTS�����쳣�������ע��ʧ��ʱ
- *              �Դ�������ΪHTSʧ�ܵĽ�������
- *              ʹ�ñ����ڴ�������������ӳٵ��ȵ�����
+ * @description HTS出现异常造成任务注册失败时
+ *              以此任务作为HTS失败的降级方案
+ *              使用本机内存任务队列左右延迟调度的容器
  * @auth changtong.ty
  * @date 2015/10/26
  */

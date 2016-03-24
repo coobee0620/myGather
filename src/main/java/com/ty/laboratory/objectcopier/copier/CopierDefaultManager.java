@@ -1,10 +1,10 @@
 package com.ty.laboratory.objectcopier.copier;
 
-import com.ty.laboratory.objectcopier.exception.CopyFormatException;
-import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
 import com.ty.laboratory.objectcopier.copier.elements.Copier;
 import com.ty.laboratory.objectcopier.copier.utils.TypeMapper;
 import com.ty.laboratory.objectcopier.copier.visitors.impl.BeanCopyVisitor;
+import com.ty.laboratory.objectcopier.exception.CopyFormatException;
+import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,15 +12,15 @@ import java.lang.reflect.Method;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½£ºclient½ÇÉ«
- * Ä¬ÈÏµÄ¶ÔÏó¿½±´¿Í»§¶Ë
+ * @description è®¿é—®è€…æ¨¡å¼ï¼šclientè§’è‰²
+ * é»˜è®¤çš„å¯¹è±¡æ‹·è´å®¢æˆ·ç«¯
  * @auth changtong.ty
  * @date 2014/12/9
  */
 public class CopierDefaultManager {
     public static final String COPY_METHOD_NAME = "copyProperties";
     /**
-     * ¿Í»§¶Ë³ÖÓĞ·ÃÎÊÕßºÍ¶ÔÏó½á¹¹½ÇÉ«£¨Object Structure£©
+     * å®¢æˆ·ç«¯æŒæœ‰è®¿é—®è€…å’Œå¯¹è±¡ç»“æ„è§’è‰²ï¼ˆObject Structureï¼‰
      */
 
     private final static Log log = LogFactory.getLog(CopierDefaultManager.class);
@@ -32,7 +32,7 @@ public class CopierDefaultManager {
     }
 
     /**
-     * ÍÆ¼öÊ¹ÓÃ
+     * æ¨èä½¿ç”¨
      */
     public boolean copyProperties(Object source, Object target, String copierKey) throws CopyUnsuccessfullException {
         if (copierConfig == null) {
@@ -92,11 +92,11 @@ public class CopierDefaultManager {
     }
 
     public Method setToTypeMethod(String sourceType, String targettype) throws NoSuchMethodException, CopyFormatException, CopyUnsuccessfullException, ClassNotFoundException {
-        //×ª»»ÀàĞÍÊÇÒÑÅäÖÃµÄconverter
+        //è½¬æ¢ç±»å‹æ˜¯å·²é…ç½®çš„converter
         if (copierConfig.getCopierkey(sourceType, targettype) != null) {
             return this.getClass().getMethod(COPY_METHOD_NAME, Object.class, String.class);
         }
-        //»ù±¾ÀàĞÍÒÔ¼°»ù±¾ÀàĞÍ°ü×ªÀàµÄ×ª»¯
+        //åŸºæœ¬ç±»å‹ä»¥åŠåŸºæœ¬ç±»å‹åŒ…è½¬ç±»çš„è½¬åŒ–
         String methodPrefix = "to";
         if (TypeMapper.isAvailableType(TypeMapper.getSimpleName(targettype))) {
             return TypeMapper.class.getMethod(methodPrefix + TypeMapper.getSimpleName(targettype), Object.class);

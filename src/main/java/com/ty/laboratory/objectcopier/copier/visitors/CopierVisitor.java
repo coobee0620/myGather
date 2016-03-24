@@ -1,15 +1,15 @@
 package com.ty.laboratory.objectcopier.copier.visitors;
 
 
+import com.ty.laboratory.objectcopier.copier.elements.*;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.copier.elements.*;
 
 import java.util.List;
 
 /**
  * @project hrc
- * @description ·ÃÎÊÕßÄ£Ê½£º³éÏó·ÃÎÊÕß
+ * @description è®¿é—®è€…æ¨¡å¼ï¼šæŠ½è±¡è®¿é—®è€…
  * @auth changtong.ty
  * @date 2014/12/11
  */

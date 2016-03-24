@@ -1,4 +1,4 @@
-package com.ty.common.lang.enumeration;
+package com.ty.alibaba.common.lang.enumeration;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,95 +13,95 @@ public abstract class BigIntegerEnum extends Enum {
     static final long serialVersionUID = 3407019802348379119L;
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö�����ĳ�������ֵ
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(long value) {
         return (BigIntegerEnum) createEnum(new BigInteger(String.valueOf(value)));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö�����ĳ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(String name, long value) {
         return (BigIntegerEnum) createEnum(name, new BigInteger(String.valueOf(value)));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö�����ĳ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(String name, String value) {
         return (BigIntegerEnum) createEnum(name, new BigInteger(value));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö�����ĳ�������ֵ
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(BigInteger value) {
         return (BigIntegerEnum) createEnum(value);
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö�����ĳ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(String name, BigInteger value) {
         return (BigIntegerEnum) createEnum(name, value);
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö�����ĳ�������ֵ
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(BigDecimal value) {
         return (BigIntegerEnum) createEnum(value.toBigInteger());
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö�����ĳ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(String name, BigDecimal value) {
         return (BigIntegerEnum) createEnum(name, value.toBigInteger());
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param value ö�����ĳ�������ֵ
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(Number value) {
         return (BigIntegerEnum) createEnum(new BigInteger(String.valueOf(value)));
     }
 
     /**
-     * ����һ��ö����.
+     * 创建一个枚举量.
      *
-     * @param name ö����������
-     * @param value ö�����ĳ�������ֵ
+     * @param name 枚举量的名称
+     * @param value 枚举量的超长整数值
      */
     protected static final BigIntegerEnum create(String name, Number value) {
         return (BigIntegerEnum) createEnum(name, new BigInteger(String.valueOf(value)));
     }
 
     /**
-     * ����һ��ö�����͵�<code>EnumType</code>.
+     * 创建一个枚举类型的<code>EnumType</code>.
      *
-     * @return ö�����͵�<code>EnumType</code>
+     * @return 枚举类型的<code>EnumType</code>
      */
     protected static Object createEnumType() {
         return new EnumType() {
@@ -112,11 +112,11 @@ public abstract class BigIntegerEnum extends Enum {
             protected Number getNextValue(Number value, boolean flagMode) {
                 if (value == null) {
                     return flagMode ? BigInteger.ONE
-                            : BigInteger.ZERO; // Ĭ����ʼֵ
+                            : BigInteger.ZERO; // 默认起始值
                 }
 
                 if (flagMode) {
-                    return ((BigInteger) value).shiftLeft(1); // λģʽ
+                    return ((BigInteger) value).shiftLeft(1); // 位模式
                 } else {
                     return ((BigInteger) value).add(BigInteger.ONE);
                 }
@@ -129,63 +129,63 @@ public abstract class BigIntegerEnum extends Enum {
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ������ֵ.
+     * 实现<code>Number</code>类, 取得整数值.
      *
-     * @return ����ֵ
+     * @return 整数值
      */
     public int intValue() {
         return ((BigInteger) getValue()).intValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ�ó�����ֵ.
+     * 实现<code>Number</code>类, 取得长整数值.
      *
-     * @return ������ֵ
+     * @return 长整数值
      */
     public long longValue() {
         return ((BigInteger) getValue()).longValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>double</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>double</code>值.
      *
-     * @return <code>double</code>ֵ
+     * @return <code>double</code>值
      */
     public double doubleValue() {
         return ((BigInteger) getValue()).doubleValue();
     }
 
     /**
-     * ʵ��<code>Number</code>��, ȡ��<code>float</code>ֵ.
+     * 实现<code>Number</code>类, 取得<code>float</code>值.
      *
-     * @return <code>float</code>ֵ
+     * @return <code>float</code>值
      */
     public float floatValue() {
         return ((BigInteger) getValue()).floatValue();
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת����ʮ�����������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成十六进制整数字符串.
      *
-     * @return ʮ�����������ַ���
+     * @return 十六进制整数字符串
      */
     public String toHexString() {
         return ((BigInteger) getValue()).toString(RADIX_HEX);
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת���ɰ˽��������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成八进制整数字符串.
      *
-     * @return �˽��������ַ���
+     * @return 八进制整数字符串
      */
     public String toOctalString() {
         return ((BigInteger) getValue()).toString(RADIX_OCT);
     }
 
     /**
-     * ʵ��<code>IntegralNumber</code>��, ת���ɶ����������ַ���.
+     * 实现<code>IntegralNumber</code>类, 转换成二进制整数字符串.
      *
-     * @return �����������ַ���
+     * @return 二进制整数字符串
      */
     public String toBinaryString() {
         return ((BigInteger) getValue()).toString(RADIX_BIN);

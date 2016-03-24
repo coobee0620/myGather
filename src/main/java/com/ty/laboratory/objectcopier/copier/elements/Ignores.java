@@ -1,8 +1,8 @@
 package com.ty.laboratory.objectcopier.copier.elements;
 
+import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.copier.visitors.CopierVisitor;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * @auth changtong.ty
  * @date 2014/12/12
  */
-public class Ignores extends AbstractCopierDescrptor implements Decorate {
+public class Ignores extends AbstractCopierDescrptor {
     private List<Field> fields;
 
     private Converter converter;

@@ -32,13 +32,13 @@ public class HtsManager {
                 try {
                     delayQueue.take().call();
                 } catch (InterruptedException e) {
-                    log.error("DelayCosumerÍË³öÖĞ¶Ï");
+                    log.error("DelayCosumeré€€å‡ºä¸­æ–­");
                     break;
                 } catch (Throwable t) {
-                    log.error("DelayCosumer·¢ÉúÎ´ÖªÒì³£", t);
+                    log.error("DelayCosumerå‘ç”ŸæœªçŸ¥å¼‚å¸¸", t);
                 }
             }
-            log.error("DelayCosumerÏß³Ì½áÊø");
+            log.error("DelayCosumerçº¿ç¨‹ç»“æŸ");
         }
     }
 

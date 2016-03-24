@@ -1,8 +1,8 @@
 package com.ty.laboratory.objectcopier.copier;
 
+import com.ty.laboratory.objectcopier.copier.utils.TypeMapper;
 import com.ty.laboratory.objectcopier.exception.CopyFormatException;
 import com.ty.laboratory.objectcopier.exception.CopyUnsuccessfullException;
-import com.ty.laboratory.objectcopier.copier.utils.TypeMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -27,11 +27,11 @@ public class CopyContext {
 
 
     public Method setToTypeMethod(String sourceType, String targettype) throws NoSuchMethodException, CopyFormatException, CopyUnsuccessfullException, ClassNotFoundException {
-        //转换类型是已配置的converter
+        //杞崲绫诲瀷鏄凡閰嶇疆鐨刢onverter
         if (copierConfig.getCopierkey(sourceType, targettype) != null) {
             return this.getClass().getMethod(COPY_METHOD_NAME, Object.class, String.class);
         }
-        //基本类型以及基本类型包转类的转化
+        //鍩烘湰绫诲瀷浠ュ強鍩烘湰绫诲瀷鍖呰浆绫荤殑杞寲
         String methodPrefix = "to";
         if (TypeMapper.isAvailableType(TypeMapper.getSimpleName(targettype))) {
             return TypeMapper.class.getMethod(methodPrefix + TypeMapper.getSimpleName(targettype), Object.class);
