@@ -1,8 +1,8 @@
-package com.ty.alibaba.common.lang.diagnostic;
+package com.ty.common.lang.diagnostic;
 
-import com.ty.alibaba.common.lang.ObjectUtil;
-import com.ty.alibaba.common.lang.StringUtil;
-import com.ty.alibaba.common.lang.enumeration.IntegerEnum;
+import com.ty.common.lang.ObjectUtil;
+import com.ty.common.lang.StringUtil;
+import com.ty.common.lang.enumeration.IntegerEnum;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @project myGather
- * @description ÓÃÀ´²âÊÔ²¢Í³¼ÆÏß³ÌÖ´ÐÐÊ±¼äµÄ¹¤¾ß¡£
+ * @description ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½Í³ï¿½ï¿½ï¿½ß³ï¿½Ö´ï¿½ï¿½Ê±ï¿½ï¿½Ä¹ï¿½ï¿½ß¡ï¿½
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -19,35 +19,35 @@ public final class Profiler {
     private static final ThreadLocal<Entry> entryStack = new ThreadLocal<Entry>();
 
     /**
-     * ¿ªÊ¼¼ÆÊ±¡£
+     * ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½
      */
     public static void start() {
         start((String) null);
     }
 
     /**
-     * ¿ªÊ¼¼ÆÊ±¡£
+     * ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½
      *
-     * @param message µÚÒ»¸öentryµÄÐÅÏ¢
+     * @param message ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢
      */
     public static void start(String message) {
         entryStack.set(new Entry(message, null, null));
     }
 
     /**
-     * ¿ªÊ¼¼ÆÊ±¡£
+     * ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½
      *
-     * @param message µÚÒ»¸öentryµÄÐÅÏ¢
+     * @param message ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢
      */
     public static void start(Message message) {
         entryStack.set(new Entry(message, null, null));
     }
 
     /**
-     * Çå³ý¼ÆÊ±Æ÷¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * Çå³ýÒÔºó±ØÐëÔÙ´Îµ÷ÓÃ<code>start</code>·½¿ÉÖØÐÂ¼ÆÊ±¡£
+     * ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½Ù´Îµï¿½ï¿½ï¿½<code>start</code>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Ê±ï¿½ï¿½
      * </p>
      */
     public static void reset() {
@@ -55,9 +55,9 @@ public final class Profiler {
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÐÂµÄentry£¬²¢¼ÆÊ±¡£
+     * ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½Âµï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
      *
-     * @param message ÐÂentryµÄÐÅÏ¢
+     * @param message ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢
      */
     public static void enter(String message) {
         Entry currentEntry = getCurrentEntry();
@@ -68,9 +68,9 @@ public final class Profiler {
     }
 
     /**
-     * ¿ªÊ¼Ò»¸öÐÂµÄentry£¬²¢¼ÆÊ±¡£
+     * ï¿½ï¿½Ê¼Ò»ï¿½ï¿½ï¿½Âµï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
      *
-     * @param message ÐÂentryµÄÐÅÏ¢
+     * @param message ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢
      */
     public static void enter(Message message) {
         Entry currentEntry = getCurrentEntry();
@@ -81,7 +81,7 @@ public final class Profiler {
     }
 
     /**
-     * ½áÊø×î½üµÄÒ»¸öentry£¬¼ÇÂ¼½áÊøÊ±¼ä¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
      */
     public static void release() {
         Entry currentEntry = getCurrentEntry();
@@ -92,9 +92,9 @@ public final class Profiler {
     }
 
     /**
-     * È¡µÃºÄ·ÑµÄ×ÜÊ±¼ä¡£
+     * È¡ï¿½ÃºÄ·Ñµï¿½ï¿½ï¿½Ê±ï¿½ä¡£
      *
-     * @return ºÄ·ÑµÄ×ÜÊ±¼ä£¬Èç¹ûÎ´¿ªÊ¼¼ÆÊ±£¬Ôò·µ»Ø<code>-1</code>
+     * @return ï¿½Ä·Ñµï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½Î´ï¿½ï¿½Ê¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ò·µ»ï¿½<code>-1</code>
      */
     public static long getDuration() {
         Entry entry = entryStack.get();
@@ -107,32 +107,32 @@ public final class Profiler {
     }
 
     /**
-     * ÁÐ³öËùÓÐµÄentry¡£
+     * ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ðµï¿½entryï¿½ï¿½
      *
-     * @return ÁÐ³öËùÓÐentry£¬²¢Í³¼Æ¸÷×ÔËùÕ¼ÓÃµÄÊ±¼ä
+     * @return ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Ãµï¿½Ê±ï¿½ï¿½
      */
     public static String dump() {
         return dump("", "");
     }
 
     /**
-     * ÁÐ³öËùÓÐµÄentry¡£
+     * ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ðµï¿½entryï¿½ï¿½
      *
      * @param prefix Ç°×º
      *
-     * @return ÁÐ³öËùÓÐentry£¬²¢Í³¼Æ¸÷×ÔËùÕ¼ÓÃµÄÊ±¼ä
+     * @return ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Ãµï¿½Ê±ï¿½ï¿½
      */
     public static String dump(String prefix) {
         return dump(prefix, prefix);
     }
 
     /**
-     * ÁÐ³öËùÓÐµÄentry¡£
+     * ï¿½Ð³ï¿½ï¿½ï¿½ï¿½Ðµï¿½entryï¿½ï¿½
      *
-     * @param prefix1 Ê×ÐÐÇ°×º
-     * @param prefix2 ºóÐøÐÐÇ°×º
+     * @param prefix1 ï¿½ï¿½ï¿½ï¿½Ç°×º
+     * @param prefix2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×º
      *
-     * @return ÁÐ³öËùÓÐentry£¬²¢Í³¼Æ¸÷×ÔËùÕ¼ÓÃµÄÊ±¼ä
+     * @return ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Í³ï¿½Æ¸ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Ãµï¿½Ê±ï¿½ï¿½
      */
     public static String dump(String prefix1, String prefix2) {
         Entry entry = entryStack.get();
@@ -145,18 +145,18 @@ public final class Profiler {
     }
 
     /**
-     * È¡µÃµÚÒ»¸öentry¡£
+     * È¡ï¿½Ãµï¿½Ò»ï¿½ï¿½entryï¿½ï¿½
      *
-     * @return µÚÒ»¸öentry£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>
+     * @return ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static Entry getEntry() {
         return entryStack.get();
     }
 
     /**
-     * È¡µÃ×î½üµÄÒ»¸öentry¡£
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½
      *
-     * @return ×î½üµÄÒ»¸öentry£¬Èç¹û²»´æÔÚ£¬Ôò·µ»Ø<code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ò·µ»ï¿½<code>null</code>
      */
     private static Entry getCurrentEntry() {
         Entry subEntry = entryStack.get();
@@ -173,7 +173,7 @@ public final class Profiler {
     }
 
     /**
-     * ´ú±íÒ»¸ö¼ÆÊ±µ¥Ôª¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ôªï¿½ï¿½
      */
     public static final class Entry {
         private final List subEntries  = new ArrayList(4);
@@ -185,11 +185,11 @@ public final class Profiler {
         private long         endTime;
 
         /**
-         * ´´½¨Ò»¸öÐÂµÄentry¡£
+         * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½entryï¿½ï¿½
          *
-         * @param message entryµÄÐÅÏ¢£¬¿ÉÒÔÊÇ<code>null</code>
-         * @param parentEntry ¸¸entry£¬¿ÉÒÔÊÇ<code>null</code>
-         * @param firstEntry µÚÒ»¸öentry£¬¿ÉÒÔÊÇ<code>null</code>
+         * @param message entryï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>null</code>
+         * @param parentEntry ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>null</code>
+         * @param firstEntry ï¿½ï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>null</code>
          */
         private Entry(Object message, Entry parentEntry, Entry firstEntry) {
             this.message     = message;
@@ -201,7 +201,7 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃentryµÄÐÅÏ¢¡£
+         * È¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
          */
         public String getMessage() {
             String messageString = null;
@@ -227,9 +227,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃentryÏà¶ÔÓÚµÚÒ»¸öentryµÄÆðÊ¼Ê±¼ä¡£
+         * È¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ä¡£
          *
-         * @return Ïà¶ÔÆðÊ¼Ê±¼ä
+         * @return ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
          */
         public long getStartTime() {
             return (baseTime > 0) ? (startTime - baseTime)
@@ -237,9 +237,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃentryÏà¶ÔÓÚµÚÒ»¸öentryµÄ½áÊøÊ±¼ä¡£
+         * È¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½ï¿½entryï¿½Ä½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
          *
-         * @return Ïà¶Ô½áÊøÊ±¼ä£¬Èç¹ûentry»¹Î´½áÊø£¬Ôò·µ»Ø<code>-1</code>
+         * @return ï¿½ï¿½Ô½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½entryï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½<code>-1</code>
          */
         public long getEndTime() {
             if (endTime < baseTime) {
@@ -250,9 +250,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃentry³ÖÐøµÄÊ±¼ä¡£
+         * È¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
          *
-         * @return entry³ÖÐøµÄÊ±¼ä£¬Èç¹ûentry»¹Î´½áÊø£¬Ôò·µ»Ø<code>-1</code>
+         * @return entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½entryï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½<code>-1</code>
          */
         public long getDuration() {
             if (endTime < startTime) {
@@ -263,9 +263,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃentry×ÔÉíËùÓÃµÄÊ±¼ä£¬¼´×ÜÊ±¼ä¼õÈ¥ËùÓÐ×ÓentryËùÓÃµÄÊ±¼ä¡£
+         * È¡ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½Ãµï¿½Ê±ï¿½ä¡£
          *
-         * @return entry×ÔÉíËùÓÃµÄÊ±¼ä£¬Èç¹ûentry»¹Î´½áÊø£¬Ôò·µ»Ø<code>-1</code>
+         * @return entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½entryï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½<code>-1</code>
          */
         public long getDurationOfSelf() {
             long duration = getDuration();
@@ -290,9 +290,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃµ±Ç°entryÔÚ¸¸entryÖÐËùÕ¼µÄÊ±¼ä°Ù·Ö±È¡£
+         * È¡ï¿½Ãµï¿½Ç°entryï¿½Ú¸ï¿½entryï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Ê±ï¿½ï¿½Ù·Ö±È¡ï¿½
          *
-         * @return °Ù·Ö±È
+         * @return ï¿½Ù·Ö±ï¿½
          */
         public double getPecentage() {
             double parentDuration = 0;
@@ -310,9 +310,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃµ±Ç°entryÔÚµÚÒ»¸öentryÖÐËùÕ¼µÄÊ±¼ä°Ù·Ö±È¡£
+         * È¡ï¿½Ãµï¿½Ç°entryï¿½Úµï¿½Ò»ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Ê±ï¿½ï¿½Ù·Ö±È¡ï¿½
          *
-         * @return °Ù·Ö±È
+         * @return ï¿½Ù·Ö±ï¿½
          */
         public double getPecentageOfAll() {
             double firstDuration = 0;
@@ -330,34 +330,34 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃËùÓÐ×Óentries¡£
+         * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entriesï¿½ï¿½
          *
-         * @return ËùÓÐ×ÓentriesµÄÁÐ±í£¨²»¿É¸ü¸Ä£©
+         * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entriesï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½É¸ï¿½ï¿½Ä£ï¿½
          */
         public List getSubEntries() {
             return Collections.unmodifiableList(subEntries);
         }
 
         /**
-         * ½áÊøµ±Ç°entry£¬²¢¼ÇÂ¼½áÊøÊ±¼ä¡£
+         * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
          */
         private void release() {
             endTime = System.currentTimeMillis();
         }
 
         /**
-         * ÅÐ¶Ïµ±Ç°entryÊÇ·ñ½áÊø¡£
+         * ï¿½Ð¶Ïµï¿½Ç°entryï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          *
-         * @return Èç¹ûentryÒÑ¾­½áÊø£¬Ôò·µ»Ø<code>true</code>
+         * @return ï¿½ï¿½ï¿½entryï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½<code>true</code>
          */
         private boolean isReleased() {
             return endTime > 0;
         }
 
         /**
-         * ´´½¨Ò»¸öÐÂµÄ×Óentry¡£
+         * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½entryï¿½ï¿½
          *
-         * @param message ×ÓentryµÄÐÅÏ¢
+         * @param message ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½Ï¢
          */
         private void enterSubEntry(Object message) {
             Entry subEntry = new Entry(message, this, firstEntry);
@@ -366,9 +366,9 @@ public final class Profiler {
         }
 
         /**
-         * È¡µÃÎ´½áÊøµÄ×Óentry¡£
+         * È¡ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½
          *
-         * @return Î´½áÊøµÄ×Óentry£¬Èç¹ûÃ»ÓÐ×Óentry£¬»òËùÓÐentry¾ùÒÑ½áÊø£¬Ôò·µ»Ø<code>null</code>
+         * @return Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½entryï¿½ï¿½ï¿½Ñ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½<code>null</code>
          */
         private Entry getUnreleasedEntry() {
             Entry subEntry = null;
@@ -385,21 +385,21 @@ public final class Profiler {
         }
 
         /**
-         * ½«entry×ª»»³É×Ö·û´®µÄ±íÊ¾¡£
+         * ï¿½ï¿½entry×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ê¾ï¿½ï¿½
          *
-         * @return ×Ö·û´®±íÊ¾µÄentry
+         * @return ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½entry
          */
         public String toString() {
             return toString("", "");
         }
 
         /**
-         * ½«entry×ª»»³É×Ö·û´®µÄ±íÊ¾¡£
+         * ï¿½ï¿½entry×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ê¾ï¿½ï¿½
          *
-         * @param prefix1 Ê×ÐÐÇ°×º
-         * @param prefix2 ºóÐøÐÐÇ°×º
+         * @param prefix1 ï¿½ï¿½ï¿½ï¿½Ç°×º
+         * @param prefix2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×º
          *
-         * @return ×Ö·û´®±íÊ¾µÄentry
+         * @return ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½entry
          */
         private String toString(String prefix1, String prefix2) {
             StringBuffer buffer = new StringBuffer();
@@ -410,11 +410,11 @@ public final class Profiler {
         }
 
         /**
-         * ½«entry×ª»»³É×Ö·û´®µÄ±íÊ¾¡£
+         * ï¿½ï¿½entry×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ê¾ï¿½ï¿½
          *
-         * @param buffer ×Ö·û´®buffer
-         * @param prefix1 Ê×ÐÐÇ°×º
-         * @param prefix2 ºóÐøÐÐÇ°×º
+         * @param buffer ï¿½Ö·ï¿½ï¿½ï¿½buffer
+         * @param prefix1 ï¿½ï¿½ï¿½ï¿½Ç°×º
+         * @param prefix2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×º
          */
         private void toString(StringBuffer buffer, String prefix1, String prefix2) {
             buffer.append(prefix1);
@@ -427,12 +427,12 @@ public final class Profiler {
             double   percentOfAll   = getPecentageOfAll();
 
             Object[] params = new Object[] {
-                    message, // {0} - entryÐÅÏ¢
-                    startTime, // {1} - ÆðÊ¼Ê±¼ä
-                    duration, // {2} - ³ÖÐø×ÜÊ±¼ä
-                    durationOfSelf, // {3} - ×ÔÉíÏûºÄµÄÊ±¼ä
-                    percent, // {4} - ÔÚ¸¸entryÖÐËùÕ¼µÄÊ±¼ä±ÈÀý
-                    percentOfAll // {5} - ÔÚ×ÜÊ±¼äÖÐËù¾ÉµÄÊ±¼ä±ÈÀý
+                    message, // {0} - entryï¿½ï¿½Ï¢
+                    startTime, // {1} - ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
+                    duration, // {2} - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+                    durationOfSelf, // {3} - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ê±ï¿½ï¿½
+                    percent, // {4} - ï¿½Ú¸ï¿½entryï¿½ï¿½ï¿½ï¿½Õ¼ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
+                    percentOfAll // {5} - ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
             };
 
             StringBuilder pattern = new StringBuilder("{1,number} ");
@@ -469,28 +469,28 @@ public final class Profiler {
                 buffer.append('\n');
 
                 if (i == (subEntries.size() - 1)) {
-                    subEntry.toString(buffer, prefix2 + "`---", prefix2 + "    "); // ×îºóÒ»Ïî
+                    subEntry.toString(buffer, prefix2 + "`---", prefix2 + "    "); // ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
                 } else if (i == 0) {
-                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // µÚÒ»Ïî
+                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // ï¿½ï¿½Ò»ï¿½ï¿½
                 } else {
-                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // ÖÐ¼äÏî
+                    subEntry.toString(buffer, prefix2 + "+---", prefix2 + "|   "); // ï¿½Ð¼ï¿½ï¿½ï¿½
                 }
             }
         }
     }
 
     /**
-     * ÏÔÊ¾ÏûÏ¢µÄ¼¶±ð¡£
+     * ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½Ä¼ï¿½ï¿½ï¿½
      */
     public static final class MessageLevel extends IntegerEnum {
         private static final long        serialVersionUID = 3257849896026388537L;
-        public static final MessageLevel NO_MESSAGE       = (MessageLevel) create();
-        public static final MessageLevel BRIEF_MESSAGE    = (MessageLevel) create();
-        public static final MessageLevel DETAILED_MESSAGE = (MessageLevel) create();
+        public static final MessageLevel NO_MESSAGE       = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
+        public static final MessageLevel BRIEF_MESSAGE    = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
+        public static final MessageLevel DETAILED_MESSAGE = (MessageLevel) com.ty.alibaba.common.lang.enumeration.Enum.create();
     }
 
     /**
-     * ´ú±íÒ»¸öprofiler entryµÄÏêÏ¸ÐÅÏ¢¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½profiler entryï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢ï¿½ï¿½
      */
     public interface Message {
         MessageLevel getMessageLevel(Entry entry);

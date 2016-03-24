@@ -1,10 +1,10 @@
-package com.ty.alibaba.common.lang.io;
+package com.ty.common.lang.io;
 
 import java.io.*;
 
 /**
  * @project myGather
- * @description ╗∙╙┌┴ў╡─╣д╛▀└р. ▓┐╖╓╖╜╖и╥╞╓▓╫╘IBM developer works╛л▓╩╬─╒┬, ▓╬╝√package╬─╡╡.
+ * @description я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─╣я┐╜я┐╜я┐╜я┐╜я┐╜. я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜╓▓я┐╜я┐╜IBM developer worksя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜, я┐╜╬╝я┐╜packageя┐╜─╡я┐╜.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -12,12 +12,12 @@ public class StreamUtil {
     private static final int DEFAULT_BUFFER_SIZE = 8192;
 
     /**
-     * ┤╙╩ф╚ы┴ў╢┴╚б─┌╚▌, ╨┤╚ы╡╜╩ф│Ў┴ў╓╨.  ┤╦╖╜╖и╩╣╙├┤є╨б╬к8192╫╓╜┌╡──м╚╧╡─╗║│х╟°.
+     * я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜, ╨┤я┐╜ы╡╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.  я┐╜╦╖я┐╜я┐╜я┐╜╩╣я┐╜├┤я┐╜╨б╬к8192я┐╜╓╜┌╡я┐╜─мя┐╜╧╡─╗я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╩ф╚ы┴ў
-     * @param out ╩ф│Ў┴ў
+     * @param in я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param out я┐╜я┐╜я┐╜я┐╜я┐╜
      *
-     * @throws java.io.IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws java.io.IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static void io(InputStream in, OutputStream out)
             throws IOException {
@@ -25,13 +25,13 @@ public class StreamUtil {
     }
 
     /**
-     * ┤╙╩ф╚ы┴ў╢┴╚б─┌╚▌, ╨┤╚ы╡╜╩ф│Ў┴ў╓╨.  ╩╣╙├╓╕╢и┤є╨б╡─╗║│х╟°.
+     * я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜, ╨┤я┐╜ы╡╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.  ╩╣я┐╜я┐╜╓╕я┐╜я┐╜я┐╜я┐╜╨бя┐╜─╗я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╩ф╚ы┴ў
-     * @param out ╩ф│Ў┴ў
-     * @param bufferSize ╗║│х╟°┤є╨б(╫╓╜┌╩¤)
+     * @param in я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param out я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param bufferSize я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╨б(я┐╜╓╜я┐╜я┐╜я┐╜)
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static void io(InputStream in, OutputStream out, int bufferSize)
             throws IOException {
@@ -48,25 +48,25 @@ public class StreamUtil {
     }
 
     /**
-     * ┤╙╩ф╚ы┴ў╢┴╚б─┌╚▌, ╨┤╚ы╡╜╩ф│Ў┴ў╓╨.  ┤╦╖╜╖и╩╣╙├┤є╨б╬к4096╫╓╖√╡──м╚╧╡─╗║│х╟°.
+     * я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜, ╨┤я┐╜ы╡╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.  я┐╜╦╖я┐╜я┐╜я┐╜╩╣я┐╜├┤я┐╜╨б╬к4096я┐╜╓╖я┐╜я┐╜я┐╜─мя┐╜╧╡─╗я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╩ф╚ы┴ў
-     * @param out ╩ф│Ў┴ў
+     * @param in я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param out я┐╜я┐╜я┐╜я┐╜я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static void io(Reader in, Writer out) throws IOException {
         io(in, out, -1);
     }
 
     /**
-     * ┤╙╩ф╚ы┴ў╢┴╚б─┌╚▌, ╨┤╚ы╡╜╩ф│Ў┴ў╓╨.  ╩╣╙├╓╕╢и┤є╨б╡─╗║│х╟°.
+     * я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜, ╨┤я┐╜ы╡╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.  ╩╣я┐╜я┐╜╓╕я┐╜я┐╜я┐╜я┐╜╨бя┐╜─╗я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╩ф╚ы┴ў
-     * @param out ╩ф│Ў┴ў
-     * @param bufferSize ╗║│х╟°┤є╨б(╫╓╖√╩¤)
+     * @param in я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param out я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param bufferSize я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╨б(я┐╜╓╖я┐╜я┐╜я┐╜)
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static void io(Reader in, Writer out, int bufferSize)
             throws IOException {
@@ -83,50 +83,50 @@ public class StreamUtil {
     }
 
     /**
-     * ╚б╡├═м▓╜╗п╡─╩ф│Ў┴ў.
+     * ╚бя┐╜я┐╜═мя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param out ╥к░№╣№╡─╩ф│Ў┴ў
+     * @param out ╥кя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
      *
-     * @return ╧▀│╠░▓╚л╡─═м▓╜╗п╩ф│Ў┴ў
+     * @return я┐╜▀│╠░я┐╜╚ля┐╜я┐╜═мя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
      */
     public static OutputStream synchronizedOutputStream(OutputStream out) {
         return new SynchronizedOutputStream(out);
     }
 
     /**
-     * ╚б╡├═м▓╜╗п╡─╩ф│Ў┴ў.
+     * ╚бя┐╜я┐╜═мя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param out ╥к░№╣№╡─╩ф│Ў┴ў
-     * @param lock ═м▓╜╦°
+     * @param out ╥кя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param lock ═мя┐╜я┐╜я┐╜я┐╜
      *
-     * @return ╧▀│╠░▓╚л╡─═м▓╜╗п╩ф│Ў┴ў
+     * @return я┐╜▀│╠░я┐╜╚ля┐╜я┐╜═мя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
      */
     public static OutputStream synchronizedOutputStream(OutputStream out, Object lock) {
         return new SynchronizedOutputStream(out, lock);
     }
 
     /**
-     * ╜л╓╕╢и╩ф╚ы┴ў╡─╦∙╙╨╬─▒╛╚л▓┐╢┴│Ў╡╜╥╗╕Ў╫╓╖√┤о╓╨.
+     * я┐╜я┐╜╓╕я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─▒я┐╜╚ля┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╥╗я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╥к╢┴╚б╡─╩ф╚ы┴ў
+     * @param in ╥кя┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
      *
-     * @return ┤╙╩ф╚ы┴ў╓╨╚б╡├╡─╬─▒╛
+     * @return я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜├╡я┐╜я┐╜─▒я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static String readText(InputStream in) throws IOException {
         return readText(in, null, -1);
     }
 
     /**
-     * ╜л╓╕╢и╩ф╚ы┴ў╡─╦∙╙╨╬─▒╛╚л▓┐╢┴│Ў╡╜╥╗╕Ў╫╓╖√┤о╓╨.
+     * я┐╜я┐╜╓╕я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─▒я┐╜╚ля┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╥╗я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╥к╢┴╚б╡─╩ф╚ы┴ў
-     * @param encoding ╬─▒╛▒р┬ы╖╜╩╜
+     * @param in ╥кя┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param encoding я┐╜─▒я┐╜я┐╜я┐╜я┐╜ы╖╜╩╜
      *
-     * @return ┤╙╩ф╚ы┴ў╓╨╚б╡├╡─╬─▒╛
+     * @return я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜├╡я┐╜я┐╜─▒я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static String readText(InputStream in, String encoding)
             throws IOException {
@@ -134,15 +134,15 @@ public class StreamUtil {
     }
 
     /**
-     * ╜л╓╕╢и╩ф╚ы┴ў╡─╦∙╙╨╬─▒╛╚л▓┐╢┴│Ў╡╜╥╗╕Ў╫╓╖√┤о╓╨.
+     * я┐╜я┐╜╓╕я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─▒я┐╜╚ля┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╥╗я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param in ╥к╢┴╚б╡─╩ф╚ы┴ў
-     * @param encoding ╬─▒╛▒р┬ы╖╜╩╜
-     * @param bufferSize ╗║│х╟°┤є╨б(╫╓╖√╩¤)
+     * @param in ╥кя┐╜я┐╜╚бя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜
+     * @param encoding я┐╜─▒я┐╜я┐╜я┐╜я┐╜ы╖╜╩╜
+     * @param bufferSize я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╨б(я┐╜╓╖я┐╜я┐╜я┐╜)
      *
-     * @return ┤╙╩ф╚ы┴ў╓╨╚б╡├╡─╬─▒╛
+     * @return я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╚бя┐╜├╡я┐╜я┐╜─▒я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static String readText(InputStream in, String encoding, int bufferSize)
             throws IOException {
@@ -153,27 +153,27 @@ public class StreamUtil {
     }
 
     /**
-     * ╜л╓╕╢и<code>Reader</code>╡─╦∙╙╨╬─▒╛╚л▓┐╢┴│Ў╡╜╥╗╕Ў╫╓╖√┤о╓╨.
+     * я┐╜я┐╜╓╕я┐╜я┐╜<code>Reader</code>я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─▒я┐╜╚ля┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╥╗я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param reader ╥к╢┴╚б╡─<code>Reader</code>
+     * @param reader ╥кя┐╜я┐╜╚бя┐╜я┐╜<code>Reader</code>
      *
-     * @return ┤╙<code>Reader</code>╓╨╚б╡├╡─╬─▒╛
+     * @return я┐╜я┐╜<code>Reader</code>я┐╜я┐╜╚бя┐╜├╡я┐╜я┐╜─▒я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static String readText(Reader reader) throws IOException {
         return readText(reader, -1);
     }
 
     /**
-     * ╜л╓╕╢и<code>Reader</code>╡─╦∙╙╨╬─▒╛╚л▓┐╢┴│Ў╡╜╥╗╕Ў╫╓╖√┤о╓╨.
+     * я┐╜я┐╜╓╕я┐╜я┐╜<code>Reader</code>я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─▒я┐╜╚ля┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜╥╗я┐╜я┐╜я┐╜╓╖я┐╜я┐╜я┐╜я┐╜я┐╜.
      *
-     * @param reader ╥к╢┴╚б╡─<code>Reader</code>
-     * @param bufferSize ╗║│х╟°╡─┤є╨б(╫╓╖√╩¤)
+     * @param reader ╥кя┐╜я┐╜╚бя┐╜я┐╜<code>Reader</code>
+     * @param bufferSize я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜─┤я┐╜╨б(я┐╜╓╖я┐╜я┐╜я┐╜)
      *
-     * @return ┤╙<code>Reader</code>╓╨╚б╡├╡─╬─▒╛
+     * @return я┐╜я┐╜<code>Reader</code>я┐╜я┐╜╚бя┐╜├╡я┐╜я┐╜─▒я┐╜
      *
-     * @throws IOException ╩ф╚ы╩ф│Ў╥ь│г
+     * @throws IOException я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜ь│г
      */
     public static String readText(Reader reader, int bufferSize)
             throws IOException {
@@ -184,7 +184,7 @@ public class StreamUtil {
     }
 
     /**
-     * ═м▓╜╗п╡─╩ф│Ў┴ў░№╣№╞ў.
+     * ═мя┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜.
      */
     private static class SynchronizedOutputStream extends OutputStream {
         private OutputStream out;

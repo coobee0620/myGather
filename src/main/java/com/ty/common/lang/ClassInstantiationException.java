@@ -1,6 +1,6 @@
-package com.ty.alibaba.common.lang;
+package com.ty.common.lang;
 
-import com.ty.alibaba.common.lang.exception.ChainedException;
+import com.ty.common.lang.exception.ChainedException;
 
 /**
  * @project myGather
@@ -12,35 +12,35 @@ public class ClassInstantiationException extends ChainedException {
     private static final long serialVersionUID = 3258408422113555761L;
 
     /**
-     * ¹¹ÔìÒ»¸ö¿ÕµÄÒì³£.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Õµï¿½ï¿½ì³£.
      */
     public ClassInstantiationException() {
         super();
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷Òì³£µÄÏêÏ¸ĞÅÏ¢.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢.
      *
-     * @param message ÏêÏ¸ĞÅÏ¢
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
      */
     public ClassInstantiationException(String message) {
         super(message);
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒıÆğÕâ¸öÒì³£µÄÆğÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param cause Òì³£µÄÆğÒò
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public ClassInstantiationException(Throwable cause) {
         super(cause);
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒıÆğÕâ¸öÒì³£µÄÆğÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param message ÏêÏ¸ĞÅÏ¢
-     * @param cause Òì³£µÄÆğÒò
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public ClassInstantiationException(String message, Throwable cause) {
         super(message, cause);

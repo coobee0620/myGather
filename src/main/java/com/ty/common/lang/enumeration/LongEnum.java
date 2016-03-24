@@ -1,8 +1,8 @@
-package com.ty.alibaba.common.lang.enumeration;
+package com.ty.common.lang.enumeration;
 
 /**
  * @project myGather
- * @description 类型安全的枚举类型, 代表一个长整数.
+ * @description 锟斤拷锟酵帮拷全锟斤拷枚锟斤拷锟斤拷锟斤拷, 锟斤拷锟斤拷一锟斤拷锟斤拷锟斤拷锟斤拷.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -10,47 +10,47 @@ public abstract class LongEnum extends Enum {
     private static final long serialVersionUID = 8152633183977823349L;
 
     /**
-     * 创建一个枚举量.
+     * 锟斤拷锟斤拷一锟斤拷枚锟斤拷锟斤拷.
      *
-     * @param value 枚举量的整数值
+     * @param value 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷值
      */
     protected static final LongEnum create(long value) {
         return (LongEnum) createEnum(new Long(value));
     }
 
     /**
-     * 创建一个枚举量.
+     * 锟斤拷锟斤拷一锟斤拷枚锟斤拷锟斤拷.
      *
-     * @param value 枚举量的整数值
+     * @param value 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷值
      */
     protected static final LongEnum create(Number value) {
         return (LongEnum) createEnum(new Long(value.longValue()));
     }
 
     /**
-     * 创建一个枚举量.
+     * 锟斤拷锟斤拷一锟斤拷枚锟斤拷锟斤拷.
      *
-     * @param name 枚举量的名称
-     * @param value 枚举量的整数值
+     * @param name 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+     * @param value 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷值
      */
     protected static final LongEnum create(String name, long value) {
         return (LongEnum) createEnum(name, new Long(value));
     }
 
     /**
-     * 创建一个枚举量.
+     * 锟斤拷锟斤拷一锟斤拷枚锟斤拷锟斤拷.
      *
-     * @param name 枚举量的名称
-     * @param value 枚举量的整数值
+     * @param name 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+     * @param value 枚锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷值
      */
     protected static final LongEnum create(String name, Number value) {
         return (LongEnum) createEnum(name, new Long(value.longValue()));
     }
 
     /**
-     * 创建一个枚举类型的<code>EnumType</code>.
+     * 锟斤拷锟斤拷一锟斤拷枚锟斤拷锟斤拷锟酵碉拷<code>EnumType</code>.
      *
-     * @return 枚举类型的<code>EnumType</code>
+     * @return 枚锟斤拷锟斤拷锟酵碉拷<code>EnumType</code>
      */
     protected static Object createEnumType() {
         return new EnumType() {
@@ -61,7 +61,7 @@ public abstract class LongEnum extends Enum {
             protected Number getNextValue(Number value, boolean flagMode) {
                 if (value == null) {
                     return flagMode ? new Long(1)
-                            : new Long(0); // 默认起始值
+                            : new Long(0); // 默锟斤拷锟斤拷始值
                 }
 
                 long longValue = ((Long) value).longValue();
@@ -80,25 +80,25 @@ public abstract class LongEnum extends Enum {
     }
 
     /**
-     * 实现<code>Number</code>类, 取得整数值.
+     * 实锟斤拷<code>Number</code>锟斤拷, 取锟斤拷锟斤拷锟斤拷值.
      *
-     * @return 整数值
+     * @return 锟斤拷锟斤拷值
      */
     public int intValue() {
         return ((Long) getValue()).intValue();
     }
 
     /**
-     * 实现<code>Number</code>类, 取得长整数值.
+     * 实锟斤拷<code>Number</code>锟斤拷, 取锟矫筹拷锟斤拷锟斤拷值.
      *
-     * @return 长整数值
+     * @return 锟斤拷锟斤拷锟斤拷值
      */
     public long longValue() {
         return ((Long) getValue()).longValue();
     }
 
     /**
-     * 实现<code>Number</code>类, 取得<code>double</code>值.
+     * 实锟斤拷<code>Number</code>锟斤拷, 取锟斤拷<code>double</code>值.
      *
      * @return <code>double</code>值
      */
@@ -107,7 +107,7 @@ public abstract class LongEnum extends Enum {
     }
 
     /**
-     * 实现<code>Number</code>类, 取得<code>float</code>值.
+     * 实锟斤拷<code>Number</code>锟斤拷, 取锟斤拷<code>float</code>值.
      *
      * @return <code>float</code>值
      */
@@ -116,27 +116,27 @@ public abstract class LongEnum extends Enum {
     }
 
     /**
-     * 实现<code>IntegralNumber</code>类, 转换成十六进制整数字符串.
+     * 实锟斤拷<code>IntegralNumber</code>锟斤拷, 转锟斤拷锟斤拷十锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷.
      *
-     * @return 十六进制整数字符串
+     * @return 十锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷
      */
     public String toHexString() {
         return Long.toHexString(((Long) getValue()).intValue());
     }
 
     /**
-     * 实现<code>IntegralNumber</code>类, 转换成八进制整数字符串.
+     * 实锟斤拷<code>IntegralNumber</code>锟斤拷, 转锟斤拷锟缴八斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷.
      *
-     * @return 八进制整数字符串
+     * @return 锟剿斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷
      */
     public String toOctalString() {
         return Long.toOctalString(((Long) getValue()).intValue());
     }
 
     /**
-     * 实现<code>IntegralNumber</code>类, 转换成二进制整数字符串.
+     * 实锟斤拷<code>IntegralNumber</code>锟斤拷, 转锟斤拷锟缴讹拷锟斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷.
      *
-     * @return 二进制整数字符串
+     * @return 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟街凤拷锟斤拷
      */
     public String toBinaryString() {
         return Long.toBinaryString(((Long) getValue()).intValue());

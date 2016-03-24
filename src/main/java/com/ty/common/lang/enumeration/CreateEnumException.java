@@ -1,7 +1,7 @@
-package com.ty.alibaba.common.lang.enumeration;
+package com.ty.common.lang.enumeration;
 
-import com.ty.alibaba.common.lang.exception.ChainedThrowable;
-import com.ty.alibaba.common.lang.exception.ChainedThrowableDelegate;
+import com.ty.common.lang.exception.ChainedThrowable;
+import com.ty.common.lang.exception.ChainedThrowableDelegate;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -19,25 +19,25 @@ public class CreateEnumException extends IllegalArgumentException
     private Throwable              cause;
 
     /**
-     * ¹¹ÔìÒ»¸ö¿ÕµÄÒì³£.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Õµï¿½ï¿½ì³£.
      */
     public CreateEnumException() {
         super();
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷Òì³£µÄÏêÏ¸ĞÅÏ¢.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢.
      *
-     * @param message ÏêÏ¸ĞÅÏ¢
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
      */
     public CreateEnumException(String message) {
         super(message);
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒıÆğÕâ¸öÒì³£µÄÆğÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param cause Òì³£µÄÆğÒò
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public CreateEnumException(Throwable cause) {
         super((cause == null) ? null
@@ -46,10 +46,10 @@ public class CreateEnumException extends IllegalArgumentException
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒıÆğÕâ¸öÒì³£µÄÆğÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param message ÏêÏ¸ĞÅÏ¢
-     * @param cause Òì³£µÄÆğÒò
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public CreateEnumException(String message, Throwable cause) {
         super(message);
@@ -57,43 +57,43 @@ public class CreateEnumException extends IllegalArgumentException
     }
 
     /**
-     * È¡µÃÒıÆğÕâ¸öÒì³£µÄÆğÒò.
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @return Òì³£µÄÆğÒò.
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      */
     public Throwable getCause() {
         return cause;
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½±ê×¼´íÎó.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace() {
         delegate.printStackTrace();
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param stream Êä³ö×Ö½ÚÁ÷.
+     * @param stream ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintStream stream) {
         delegate.printStackTrace(stream);
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param writer Êä³ö×Ö·ûÁ÷.
+     * @param writer ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintWriter writer) {
         delegate.printStackTrace(writer);
     }
 
     /**
-     * ´òÓ¡Òì³£µÄµ÷ÓÃÕ», ²»°üÀ¨ÆğÒòÒì³£µÄĞÅÏ¢.
+     * ï¿½ï¿½Ó¡ï¿½ì³£ï¿½Äµï¿½ï¿½ï¿½Õ», ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¢.
      *
-     * @param writer ´òÓ¡µ½Êä³öÁ÷
+     * @param writer ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void printCurrentStackTrace(PrintWriter writer) {
         super.printStackTrace(writer);

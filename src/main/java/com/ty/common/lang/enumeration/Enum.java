@@ -1,9 +1,9 @@
-package com.ty.alibaba.common.lang.enumeration;
+package com.ty.common.lang.enumeration;
 
-import com.ty.alibaba.common.lang.ClassLoaderUtil;
-import com.ty.alibaba.common.lang.StringUtil;
-import com.ty.alibaba.common.lang.enumeration.internal.EnumConstant;
-import com.ty.alibaba.common.lang.enumeration.internal.NumberType;
+import com.ty.common.lang.ClassLoaderUtil;
+import com.ty.common.lang.StringUtil;
+import com.ty.common.lang.enumeration.internal.EnumConstant;
+import com.ty.common.lang.enumeration.internal.NumberType;
 
 import java.io.InvalidClassException;
 import java.io.ObjectStreamException;
@@ -15,7 +15,7 @@ import java.util.*;
 
 /**
  * @project myGather
- * @description ÀàÐÍ°²È«µÄÃ¶¾ÙÀàÐÍ.
+ * @description ï¿½ï¿½ï¿½Í°ï¿½È«ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -25,55 +25,55 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     private Number            value;
 
     /* ============================================================================ */
-    /*  ´´½¨enumºÍ³õÊ¼»¯º¯Êý¡£                                                      */
+    /*  ï¿½ï¿½ï¿½ï¿½enumï¿½Í³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                                                      */
     /* ============================================================================ */
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     protected Enum() {
     }
 
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿¡£<p>Ã¶¾ÙÁ¿µÄÃû³ÆºÍ³£Á¿Ãû³ÆÏàÍ¬£¬¶øÖµ½«±»×Ô¶¯²úÉú¡£</p>
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<p>Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆºÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</p>
      */
     protected static final Enum create() {
         return createEnum(null, null, false);
     }
 
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿¡£<p>Ã¶¾ÙÁ¿µÄÃû³ÆºÍ³£Á¿Ãû³ÆÏàÍ¬£¬¶øÖµ½«±»×Ô¶¯²úÉú¡£</p>
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<p>Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆºÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</p>
      *
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     protected static final Enum create(String name) {
         return createEnum(name, null, false);
     }
 
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿, ²¢¸³ÓèÖ¸¶¨µÄÖµ.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Öµ.
      *
-     * @param value Ã¶¾ÙÁ¿µÄÖµ, Õâ¸öÖµ²»ÄÜÎª<code>null</code>
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ, ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îª<code>null</code>
      */
     static final Enum createEnum(Number value) {
         return createEnum(null, value, true);
     }
 
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿, ²¢¸³ÓèÖ¸¶¨µÄÖµ.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Öµ.
      *
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ, Õâ¸öÖµ²»ÄÜÎª<code>null</code>
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ, ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îª<code>null</code>
      */
     static final Enum createEnum(String name, Number value) {
         return createEnum(name, value, true);
     }
 
     /**
-     * ´´½¨Ò»¸öÃ¶¾ÙÁ¿.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ
-     * @param withValue Èç¹ûÊÇ<code>true</code>, Ôò¸ÃÃ¶¾ÙÁ¿±»¸³ÓèÖ¸¶¨µÄÖµ, ·ñÔò¸ÃÃ¶¾ÙÁ¿½«±»¸³ÓèÒ»¸ö×Ô¶¯²úÉúµÄÖµ
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+     * @param withValue ï¿½ï¿½ï¿½ï¿½ï¿½<code>true</code>, ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Öµ, ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      */
     private static Enum createEnum(String name, Number value, boolean withValue) {
         String enumClassName                   = null;
@@ -106,15 +106,15 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
             enumObject.value = enumType.getNextValue(flagMode);
         }
 
-        // ½«enum¼ÓÈëenumList¡£
+        // ï¿½ï¿½enumï¿½ï¿½ï¿½ï¿½enumListï¿½ï¿½
         enumType.enumList.add(enumObject);
 
-        // ½«enum¼ÓÈëvalueMap, Èç¹ûÓÐ¶à¸öenumµÄÖµÏàÍ¬, ÔòÈ¡µÚÒ»¸ö
+        // ï¿½ï¿½enumï¿½ï¿½ï¿½ï¿½valueMap, ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½enumï¿½ï¿½Öµï¿½ï¿½Í¬, ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½
         if (!enumType.valueMap.containsKey(enumObject.value)) {
             enumType.valueMap.put(enumObject.value, enumObject);
         }
 
-        // ½«enum¼ÓÈënameMap, Èç¹ûÓÐ¶à¸öenumµÄÃû×ÖÏàÍ¬, ÔòÈ¡µÚÒ»¸ö
+        // ï¿½ï¿½enumï¿½ï¿½ï¿½ï¿½nameMap, ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½enumï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬, ï¿½ï¿½È¡ï¿½ï¿½Ò»ï¿½ï¿½
         if ((enumObject.name != null) && !enumType.nameMap.containsKey(enumObject.name)) {
             enumType.nameMap.put(enumObject.name, enumObject);
         }
@@ -123,9 +123,9 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * È¡µÃµ÷ÓÃÕßµÄÀàÃû¡£
+     * È¡ï¿½Ãµï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return µ÷ÓÃÕßÀàÃû
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private static String getCallerClassName() {
         StackTraceElement[] callers   = new Throwable().getStackTrace();
@@ -145,12 +145,12 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /* ============================================================================ */
-    /*  Enum³ÉÔ±º¯Êý¡£                                                              */
+    /*  Enumï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                                                              */
     /* ============================================================================ */
     /**
-     * È¡µÃÃ¶¾ÙÁ¿µÄÃû³Æ.
+     * È¡ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @return Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public String getName() {
         if (name == null) {
@@ -164,13 +164,13 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ÉèÖÃÃ¶¾ÙÁ¿µÄÃû³Æ¡£<p>Èç¹ûÃû³ÆÒÑ¾­±»ÉèÖÃ£¬¸Ã·½·¨½«Å×³öÒì³£¡£</p>
+     * ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½<p>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½</p>
      *
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return µ±Ç°enum
+     * @return ï¿½ï¿½Ç°enum
      *
-     * @throws IllegalStateException Èç¹ûÃû³ÆÒÑ¾­±»ÉèÖÃ
+     * @throws IllegalStateException ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private Enum setName(String name) {
         if (this.name != null) {
@@ -183,16 +183,16 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * È¡µÃÃ¶¾ÙÁ¿µÄÖµ.
+     * È¡ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ.
      *
-     * @return Ã¶¾ÙÁ¿µÄÖµ
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      */
     public Number getValue() {
         return value;
     }
 
     /**
-     * ÊµÏÖ<code>Number</code>Àà, È¡µÃ<code>byte</code>Öµ.
+     * Êµï¿½ï¿½<code>Number</code>ï¿½ï¿½, È¡ï¿½ï¿½<code>byte</code>Öµ.
      *
      * @return <code>byte</code>Öµ
      */
@@ -201,7 +201,7 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ÊµÏÖ<code>Number</code>Àà, È¡µÃ<code>short</code>Öµ.
+     * Êµï¿½ï¿½<code>Number</code>ï¿½ï¿½, È¡ï¿½ï¿½<code>short</code>Öµ.
      *
      * @return <code>short</code>Öµ
      */
@@ -210,12 +210,12 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ºÍÁíÒ»¸öÃ¶¾ÙÁ¿±È½Ï´óÐ¡, ¾ÍÊÇ°´Ã¶¾ÙÁ¿µÄÖµ±È½Ï.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½È½Ï´ï¿½Ð¡, ï¿½ï¿½ï¿½Ç°ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½È½ï¿½.
      *
-     * @param otherEnum Òª±È½ÏµÄÃ¶¾ÙÁ¿
+     * @param otherEnum Òªï¿½È½Ïµï¿½Ã¶ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûµÈÓÚ<code>0</code>, ±íÊ¾ÖµÏàµÈ, ´óÓÚ<code>0</code>±íÊ¾µ±Ç°µÄÃ¶¾ÙÁ¿µÄÖµ±È<code>otherEnum</code>´ó,
-     *         Ð¡ÓÚ<code>0</code>±íÊ¾µ±Ç°µÄÃ¶¾ÙÁ¿µÄÖµ±È<code>otherEnum</code>Ð¡
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>0</code>, ï¿½ï¿½Ê¾Öµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½<code>0</code>ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½<code>otherEnum</code>ï¿½ï¿½,
+     *         Ð¡ï¿½ï¿½<code>0</code>ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½<code>otherEnum</code>Ð¡
      */
     public int compareTo(Object otherEnum) {
         if (!getClass().equals(otherEnum.getClass())) {
@@ -230,11 +230,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ±È½ÏÁ½¸öÃ¶¾ÙÁ¿ÊÇ·ñÏàµÈ, ¼´: ÀàÐÍÏàÍ¬, ²¢ÇÒÖµÏàÍ¬(µ«Ãû×Ö¿ÉÒÔ²»Í¬).
+     * ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬, ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Í¬(ï¿½ï¿½ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½Ô²ï¿½Í¬).
      *
-     * @param obj Òª±È½ÏµÄ¶ÔÏó
+     * @param obj Òªï¿½È½ÏµÄ¶ï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûÏàµÈ, Ôò·µ»Ø<code>true</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>true</code>
      */
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -249,7 +249,7 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * È¡µÃÃ¶¾ÙÁ¿µÄhashÖµ.  Èç¹ûÁ½¸öÃ¶¾ÙÁ¿ÏàÍ¬, ÔòËüÃÇµÄhashÖµÒ»¶¨ÏàÍ¬.
+     * È¡ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½hashÖµ.  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬, ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½hashÖµÒ»ï¿½ï¿½ï¿½ï¿½Í¬.
      *
      * @return hashÖµ
      */
@@ -258,18 +258,18 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ½«Ã¶¾ÙÁ¿×ª»»³É×Ö·û´®, Ò²¾ÍÊÇÃ¶¾ÙÁ¿µÄÃû³Æ.
+     * ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½, Ò²ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @return Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public String toString() {
         return getName();
     }
 
     /**
-     * È¡µÃÒÑ±»×°ÔØµÄclass¡£
+     * È¡ï¿½ï¿½ï¿½Ñ±ï¿½×°ï¿½Øµï¿½classï¿½ï¿½
      *
-     * @return µ±Ç°¶ÔÏóµÄclass
+     * @return ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½class
      */
     public Class ensureClassLoaded() {
         Class enumClass = getClass();
@@ -280,11 +280,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ±»"ÐòÁÐ»¯"¹ý³Ìµ÷ÓÃ, ·µ»ØÃ¶¾ÙÁ¿µÄsingleton.
+     * ï¿½ï¿½"ï¿½ï¿½ï¿½Ð»ï¿½"ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½singleton.
      *
-     * @return Ã¶¾ÙÁ¿µÄsingleton
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½singleton
      *
-     * @throws java.io.ObjectStreamException Èç¹ûÐòÁÐ»¯³ö´í
+     * @throws java.io.ObjectStreamException ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     protected Object writeReplace() throws ObjectStreamException {
         getName();
@@ -292,11 +292,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ±»"·´ÐòÁÐ»¯"¹ý³Ìµ÷ÓÃ, È·±£·µ»ØÃ¶¾ÙÁ¿µÄsingleton.
+     * ï¿½ï¿½"ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½"ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½, È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½singleton.
      *
-     * @return Ã¶¾ÙÁ¿µÄsingleton
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½singleton
      *
-     * @throws ObjectStreamException Èç¹û·´ÐòÁÐ»¯³ö´í
+     * @throws ObjectStreamException ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     protected Object readResolve() throws ObjectStreamException {
         Class    enumClass  = ensureClassLoaded();
@@ -322,7 +322,7 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
     }
 
     /**
-     * ´ú±íÒ»¸öÃ¶¾ÙÀàÐÍµÄ¶îÍâÐÅÏ¢.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢.
      */
     protected abstract static class EnumType {
         private Number value;
@@ -331,12 +331,12 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         final List enumList = new ArrayList();
 
         /**
-         * ÉèÖÃÖ¸¶¨ÖµÎªµ±Ç°Öµ.
+         * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ÖµÎªï¿½ï¿½Ç°Öµ.
          *
-         * @param value µ±Ç°Öµ
-         * @param flagMode ÊÇ·ñÎªÎ»Ä£Ê½
+         * @param value ï¿½ï¿½Ç°Öµ
+         * @param flagMode ï¿½Ç·ï¿½ÎªÎ»Ä£Ê½
          *
-         * @return µ±Ç°Öµ
+         * @return ï¿½ï¿½Ç°Öµ
          */
         final Number setValue(Number value, boolean flagMode) {
             this.value = value;
@@ -345,11 +345,11 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * È¡µÃÏÂÒ»¸öÖµ.
+         * È¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµ.
          *
-         * @param flagMode ÊÇ·ñÎªÎ»Ä£Ê½
+         * @param flagMode ï¿½Ç·ï¿½ÎªÎ»Ä£Ê½
          *
-         * @return µ±Ç°Öµ
+         * @return ï¿½ï¿½Ç°Öµ
          */
         final Number getNextValue(boolean flagMode) {
             value = getNextValue(value, flagMode);
@@ -362,9 +362,9 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * Ê¹ÓÃ·´ÉäµÄ·½Ê½×°ÅäenumµÄÃû³Æ¡£
+         * Ê¹ï¿½Ã·ï¿½ï¿½ï¿½Ä·ï¿½Ê½×°ï¿½ï¿½enumï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½
          *
-         * @param enumClass enumÀà
+         * @param enumClass enumï¿½ï¿½
          */
         final void populateNames(Class enumClass) {
             synchronized (enumClass) {
@@ -397,28 +397,28 @@ public abstract class Enum extends Number implements NumberType, Comparable, Ser
         }
 
         /**
-         * È¡µÃ<code>Enum</code>ÖµµÄÀàÐÍ.
+         * È¡ï¿½ï¿½<code>Enum</code>Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
          *
-         * @return <code>Enum</code>ÖµµÄÀàÐÍ
+         * @return <code>Enum</code>Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          */
         protected abstract Class getUnderlyingClass();
 
         /**
-         * È¡µÃÖ¸¶¨ÖµµÄÏÂÒ»¸öÖµ.
+         * È¡ï¿½ï¿½Ö¸ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµ.
          *
-         * @param value Ö¸¶¨Öµ
-         * @param flagMode ÊÇ·ñÎªÎ»Ä£Ê½
+         * @param value Ö¸ï¿½ï¿½Öµ
+         * @param flagMode ï¿½Ç·ï¿½ÎªÎ»Ä£Ê½
          *
-         * @return Èç¹û<code>value</code>Îª<code>null</code>, Ôò·µ»ØÄ¬ÈÏµÄ³õÊ¼Öµ, ·ñÔò·µ»ØÏÂÒ»¸öÖµ
+         * @return ï¿½ï¿½ï¿½<code>value</code>Îª<code>null</code>, ï¿½ò·µ»ï¿½Ä¬ï¿½ÏµÄ³ï¿½Ê¼Öµ, ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Öµ
          */
         protected abstract Number getNextValue(Number value, boolean flagMode);
 
         /**
-         * ÅÐ¶ÏÊÇ·ñÎª<code>0</code>.
+         * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îª<code>0</code>.
          *
-         * @param value ÒªÅÐ¶ÏµÄÖµ
+         * @param value Òªï¿½Ð¶Ïµï¿½Öµ
          *
-         * @return Èç¹ûÊÇ, Ôò·µ»Ø<code>true</code>
+         * @return ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>true</code>
          */
         protected abstract boolean isZero(Number value);
     }

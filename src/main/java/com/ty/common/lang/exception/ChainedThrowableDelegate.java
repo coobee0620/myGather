@@ -1,4 +1,4 @@
-package com.ty.alibaba.common.lang.exception;
+package com.ty.common.lang.exception;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * @project myGather
- * @description ¿ÉÇ¶Ì×µÄÒì³£´úÀí, ¼ò»¯¿ÉÇ¶Ì×µÄÒì³£µÄÊµÏÖ.
+ * @description ï¿½ï¿½Ç¶ï¿½×µï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½, ï¿½ò»¯¿ï¿½Ç¶ï¿½×µï¿½ï¿½ì³£ï¿½ï¿½Êµï¿½ï¿½.
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -18,10 +18,10 @@ public class ChainedThrowableDelegate
         implements ChainedThrowable {
     private static final long serialVersionUID = 3257288032683241523L;
 
-    /** ±íÊ¾Òì³£²»´æÔÚµÄ³£Á¿. */
+    /** ï¿½ï¿½Ê¾ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÄ³ï¿½ï¿½ï¿½. */
     protected static final Throwable NO_CAUSE = new Throwable();
 
-    /** ³£¼ûµÄÓÃÀ´È¡µÃÒì³£ÆðÒòµÄ·½·¨Ãû. */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½. */
     private static final String[] CAUSE_METHOD_NAMES = {
             "getNested", "getNestedException",
             "getNextException", "getTargetException",
@@ -30,25 +30,25 @@ public class ChainedThrowableDelegate
             "getCause"
     };
 
-    /** ³£¼ûµÄÓÃÀ´È¡µÃÒì³£ÆðÒòµÄ×Ö¶ÎÃû. */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½. */
     private static final String[] CAUSE_FIELD_NAMES = { "detail" };
 
-    /** ±»´úÀíµÄ<code>Throwable</code>¶ÔÏó. */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>Throwable</code>ï¿½ï¿½ï¿½ï¿½. */
     protected Throwable delegatedThrowable;
 
     /**
-     * ´´½¨Ò»¸ö<code>Throwable</code>´úÀí.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½<code>Throwable</code>ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param throwable ±»´úÀíµÄÒì³£
+     * @param throwable ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£
      */
     public ChainedThrowableDelegate(Throwable throwable) {
         this.delegatedThrowable = throwable;
     }
 
     /**
-     * È¡µÃ±»´úÀíµÄÒì³£µÄÆðÒò.
+     * È¡ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @return Òì³£µÄÆðÒò.
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      */
     public Throwable getCause() {
         Throwable cause = getCauseByWellKnownTypes(delegatedThrowable);
@@ -56,13 +56,13 @@ public class ChainedThrowableDelegate
         for (Class throwableClass = delegatedThrowable.getClass();
              (cause == null) && Throwable.class.isAssignableFrom(throwableClass);
              throwableClass = throwableClass.getSuperclass()) {
-            // ³¢ÊÔ³£¼ûµÄ·½·¨
+            // ï¿½ï¿½ï¿½Ô³ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
             for (int i = 0; (cause == null) && (i < CAUSE_METHOD_NAMES.length); i++) {
                 cause = getCauseByMethodName(delegatedThrowable, throwableClass,
                         CAUSE_METHOD_NAMES[i]);
             }
 
-            // ³¢ÊÔ³£¼ûµÄ×Ö¶Î
+            // ï¿½ï¿½ï¿½Ô³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½
             for (int i = 0; (cause == null) && (i < CAUSE_FIELD_NAMES.length); i++) {
                 cause = getCauseByFieldName(delegatedThrowable, throwableClass, CAUSE_FIELD_NAMES[i]);
             }
@@ -80,11 +80,11 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * È¡µÃ³£¼û<code>Throwable</code>ÀàµÄÒì³£ÆðÒò.
+     * È¡ï¿½Ã³ï¿½ï¿½ï¿½<code>Throwable</code>ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param throwable Òì³£
+     * @param throwable ï¿½ì³£
      *
-     * @return Òì³£ÆðÒò
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
      */
     protected Throwable getCauseByWellKnownTypes(Throwable throwable) {
         Throwable cause           = null;
@@ -112,13 +112,13 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * Í¨¹ý³£¼ûµÄ·½·¨¶¯Ì¬µØÈ¡µÃÒì³£ÆðÒò.
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param throwable Òì³£
-     * @param throwableClass Òì³£Àà
-     * @param methodName ·½·¨Ãû
+     * @param throwable ï¿½ì³£
+     * @param throwableClass ï¿½ì³£ï¿½ï¿½
+     * @param methodName ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Òì³£ÆðÒò»ò<code>NO_CAUSE</code>
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½<code>NO_CAUSE</code>
      */
     protected Throwable getCauseByMethodName(Throwable throwable, Class throwableClass,
                                              String methodName) {
@@ -150,13 +150,13 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * Í¨¹ý³£¼ûµÄ·½·¨¶¯Ì¬µØÈ¡µÃÒì³£ÆðÒò.
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param throwable Òì³£
-     * @param throwableClass Òì³£Àà
-     * @param fieldName ×Ö¶ÎÃû
+     * @param throwable ï¿½ì³£
+     * @param throwableClass ï¿½ì³£ï¿½ï¿½
+     * @param fieldName ï¿½Ö¶ï¿½ï¿½ï¿½
      *
-     * @return Òì³£ÆðÒò»ò<code>NO_CAUSE</code>
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½<code>NO_CAUSE</code>
      */
     protected Throwable getCauseByFieldName(Throwable throwable, Class throwableClass,
                                             String fieldName) {
@@ -187,34 +187,34 @@ public class ChainedThrowableDelegate
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½±ê×¼´íÎó.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace() {
         ExceptionHelper.printStackTrace(this);
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param stream Êä³ö×Ö½ÚÁ÷.
+     * @param stream ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintStream stream) {
         ExceptionHelper.printStackTrace(this, stream);
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param writer Êä³ö×Ö·ûÁ÷.
+     * @param writer ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintWriter writer) {
         ExceptionHelper.printStackTrace(this, writer);
     }
 
     /**
-     * ´òÓ¡Òì³£µÄµ÷ÓÃÕ», ²»°üÀ¨ÆðÒòÒì³£µÄÐÅÏ¢.
+     * ï¿½ï¿½Ó¡ï¿½ì³£ï¿½Äµï¿½ï¿½ï¿½Õ», ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¢.
      *
-     * @param writer ´òÓ¡µ½Êä³öÁ÷
+     * @param writer ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void printCurrentStackTrace(PrintWriter writer) {
         if (delegatedThrowable instanceof ChainedThrowable) {

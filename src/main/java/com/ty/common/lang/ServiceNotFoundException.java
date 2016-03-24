@@ -1,14 +1,14 @@
-package com.ty.alibaba.common.lang;
+package com.ty.common.lang;
 
-import com.ty.alibaba.common.lang.exception.ChainedThrowable;
-import com.ty.alibaba.common.lang.exception.ChainedThrowableDelegate;
+import com.ty.common.lang.exception.ChainedThrowable;
+import com.ty.common.lang.exception.ChainedThrowableDelegate;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
  * @project myGather
- * @description ´ú±í<code>META-INF/services/</code>ÖÐµÄÎÄ¼þÎ´ÕÒµ½»ò¶ÁÎÄ¼þÊ§°ÜµÄÒì³£¡£
+ * @description ï¿½ï¿½ï¿½ï¿½<code>META-INF/services/</code>ï¿½Ðµï¿½ï¿½Ä¼ï¿½Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ê§ï¿½Üµï¿½ï¿½ì³£ï¿½ï¿½
  * @auth changtong.ty
  * @date 2015/6/23
  */
@@ -19,25 +19,25 @@ public class ServiceNotFoundException extends ClassNotFoundException
     private Throwable              cause;
 
     /**
-     * ¹¹ÔìÒ»¸ö¿ÕµÄÒì³£.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Õµï¿½ï¿½ì³£.
      */
     public ServiceNotFoundException() {
         super();
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷Òì³£µÄÏêÏ¸ÐÅÏ¢.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢.
      *
-     * @param message ÏêÏ¸ÐÅÏ¢
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
      */
     public ServiceNotFoundException(String message) {
         super(message);
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒýÆðÕâ¸öÒì³£µÄÆðÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param cause Òì³£µÄÆðÒò
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public ServiceNotFoundException(Throwable cause) {
         super((cause == null) ? null
@@ -46,10 +46,10 @@ public class ServiceNotFoundException extends ClassNotFoundException
     }
 
     /**
-     * ¹¹ÔìÒ»¸öÒì³£, Ö¸Ã÷ÒýÆðÕâ¸öÒì³£µÄÆðÒò.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ì³£, Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param message ÏêÏ¸ÐÅÏ¢
-     * @param cause Òì³£µÄÆðÒò
+     * @param message ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
+     * @param cause ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public ServiceNotFoundException(String message, Throwable cause) {
         super(message);
@@ -57,43 +57,43 @@ public class ServiceNotFoundException extends ClassNotFoundException
     }
 
     /**
-     * È¡µÃÒýÆðÕâ¸öÒì³£µÄÆðÒò.
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @return Òì³£µÄÆðÒò.
+     * @return ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      */
     public Throwable getCause() {
         return cause;
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½±ê×¼´íÎó.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace() {
         delegate.printStackTrace();
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param stream Êä³ö×Ö½ÚÁ÷.
+     * @param stream ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintStream stream) {
         delegate.printStackTrace(stream);
     }
 
     /**
-     * ´òÓ¡µ÷ÓÃÕ»µ½Ö¸¶¨Êä³öÁ÷.
+     * ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½Õ»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param writer Êä³ö×Ö·ûÁ÷.
+     * @param writer ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½.
      */
     public void printStackTrace(PrintWriter writer) {
         delegate.printStackTrace(writer);
     }
 
     /**
-     * ´òÓ¡Òì³£µÄµ÷ÓÃÕ», ²»°üÀ¨ÆðÒòÒì³£µÄÐÅÏ¢.
+     * ï¿½ï¿½Ó¡ï¿½ì³£ï¿½Äµï¿½ï¿½ï¿½Õ», ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½Ï¢.
      *
-     * @param writer ´òÓ¡µ½Êä³öÁ÷
+     * @param writer ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void printCurrentStackTrace(PrintWriter writer) {
         super.printStackTrace(writer);

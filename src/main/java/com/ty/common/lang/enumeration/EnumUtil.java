@@ -1,6 +1,6 @@
-package com.ty.alibaba.common.lang.enumeration;
+package com.ty.common.lang.enumeration;
 
-import com.ty.alibaba.common.lang.enumeration.internal.EnumConstant;
+import com.ty.common.lang.enumeration.internal.EnumConstant;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,47 +18,47 @@ public class EnumUtil {
     private static final Map entries = new WeakHashMap();
 
     /**
-     * È¡µÃ<code>Enum</code>ÖµµÄÀàÐÍ.
+     * È¡ï¿½ï¿½<code>Enum</code>Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return <code>Enum</code>ÖµµÄÀàÐÍ
+     * @return <code>Enum</code>Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public static Class getUnderlyingClass(Class enumClass) {
         return getEnumType(enumClass).getUnderlyingClass();
     }
 
     /**
-     * ÅÐ¶ÏÖ¸¶¨Ãû³ÆµÄÃ¶¾ÙÁ¿ÊÇ·ñ±»¶¨Òå.
+     * ï¿½Ð¶ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¶ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹û´æÔÚ, Ôò·µ»Ø<code>true</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>true</code>
      */
     public static boolean isNameDefined(Class enumClass, String name) {
         return getEnumType(enumClass).nameMap.containsKey(name);
     }
 
     /**
-     * ÅÐ¶ÏÖ¸¶¨ÖµµÄÃ¶¾ÙÁ¿ÊÇ·ñ±»¶¨Òå.
+     * ï¿½Ð¶ï¿½Ö¸ï¿½ï¿½Öµï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ±»¶ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      *
-     * @return Èç¹û´æÔÚ, Ôò·µ»Ø<code>true</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>true</code>
      */
     public static boolean isValueDefined(Class enumClass, Number value) {
         return getEnumType(enumClass).valueMap.containsKey(value);
     }
 
     /**
-     * È¡µÃÖ¸¶¨Ãû³ÆµÄÃ¶¾ÙÁ¿.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ã¶ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param name Ã¶¾ÙÁ¿µÄÃû³Æ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param name Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ã¶¾ÙÁ¿, Èç¹û²»´æÔÚ, Ôò·µ»Ø<code>null</code>
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static Enum getEnumByName(Class enumClass, String name) {
         Enum.EnumType enumType = getEnumType(enumClass);
@@ -71,69 +71,69 @@ public class EnumUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÖµµÄÃ¶¾ÙÁ¿.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½Öµï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      *
-     * @return Ã¶¾ÙÁ¿, Èç¹û²»´æÔÚ, Ôò·µ»Ø<code>null</code>
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, Number value) {
         return (Enum) getEnumType(enumClass).valueMap.get(value);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÖµµÄÃ¶¾ÙÁ¿.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½Öµï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      *
-     * @return Ã¶¾ÙÁ¿, Èç¹û²»´æÔÚ, Ôò·µ»Ø<code>null</code>
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, int value) {
         return (Enum) getEnumType(enumClass).valueMap.get(new Integer(value));
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÖµµÄÃ¶¾ÙÁ¿.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½Öµï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param value Ã¶¾ÙÁ¿µÄÖµ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param value Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
      *
-     * @return Ã¶¾ÙÁ¿, Èç¹û²»´æÔÚ, Ôò·µ»Ø<code>null</code>
+     * @return Ã¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static Enum getEnumByValue(Class enumClass, long value) {
         return (Enum) getEnumType(enumClass).valueMap.get(new Long(value));
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàÐÍµÄËùÓÐÃ¶¾ÙÁ¿µÄ<code>Map</code>, ´Ë<code>Map</code>ÊÇÓÐÐòµÄ.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>Map</code>, ï¿½ï¿½<code>Map</code>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ö¸¶¨ÀàÐÍµÄËùÓÐÃ¶¾ÙÁ¿µÄ<code>Map</code>
+     * @return Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>Map</code>
      */
     public static Map getEnumMap(Class enumClass) {
         return Collections.unmodifiableMap(getEnumType(enumClass).nameMap);
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàÐÍµÄËùÓÐÃ¶¾ÙÁ¿µÄ<code>Iterator</code>.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>Iterator</code>.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ö¸¶¨ÀàÐÍµÄËùÓÐÃ¶¾ÙÁ¿µÄ<code>Iterator</code>
+     * @return Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<code>Iterator</code>
      */
     public static Iterator getEnumIterator(Class enumClass) {
         return getEnumType(enumClass).enumList.iterator();
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄ<code>ClassLoader</code>¶ÔÓ¦µÄentry±í.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½<code>ClassLoader</code>ï¿½ï¿½Ó¦ï¿½ï¿½entryï¿½ï¿½.
      *
-     * @param enumClass <code>Enum</code>Àà
+     * @param enumClass <code>Enum</code>ï¿½ï¿½
      *
-     * @return entry±í
+     * @return entryï¿½ï¿½
      */
     static Map getEnumEntryMap(Class enumClass) {
         ClassLoader classLoader = enumClass.getClassLoader();
@@ -152,11 +152,11 @@ public class EnumUtil {
     }
 
     /**
-     * È¡µÃ<code>Enum</code>ÀàµÄ<code>EnumType</code>
+     * È¡ï¿½ï¿½<code>Enum</code>ï¿½ï¿½ï¿½<code>EnumType</code>
      *
-     * @param enumClass <code>Enum</code>Àà
+     * @param enumClass <code>Enum</code>ï¿½ï¿½
      *
-     * @return <code>Enum</code>Àà¶ÔÓ¦µÄ<code>EnumType</code>¶ÔÏó
+     * @return <code>Enum</code>ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½<code>EnumType</code>ï¿½ï¿½ï¿½ï¿½
      */
     static Enum.EnumType getEnumType(Class enumClass) {
         if (enumClass == null) {
@@ -192,8 +192,8 @@ public class EnumUtil {
                 if (enumType != null) {
                     entryMap.put(enumClass.getName(), enumType);
 
-                    // ÔÚJDK5ÏÂÃæ£¬class loaderÍê³É²¢²»ÒâÎ¶×ÅËùÓÐµÄ³£Á¿±»×°Åä
-                    // ÏÂÃæµÄ´úÂëÇ¿ÖÆ×°Åä³£Á¿¡£
+                    // ï¿½ï¿½JDK5ï¿½ï¿½ï¿½æ£¬class loaderï¿½ï¿½É²ï¿½ï¿½ï¿½ï¿½ï¿½Î¶ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ³ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
+                    // ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½×°ï¿½ä³£ï¿½ï¿½ï¿½ï¿½
                     enumType.populateNames(enumClass);
                 }
             }
@@ -210,13 +210,13 @@ public class EnumUtil {
     }
 
     /**
-     * ²éÕÒ·½·¨.
+     * ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½.
      *
-     * @param enumClass Ã¶¾ÙÀàÐÍ
-     * @param methodName ·½·¨Ãû
-     * @param paramTypes ²ÎÊýÀàÐÍ±í
+     * @param enumClass Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param methodName ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param paramTypes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í±ï¿½
      *
-     * @return ·½·¨¶ÔÏó, »ò<code>null</code>±íÊ¾Î´ÕÒµ½
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½<code>null</code>ï¿½ï¿½Ê¾Î´ï¿½Òµï¿½
      */
     private static Method findStaticMethod(Class enumClass, String methodName, Class[] paramTypes) {
         Method method = null;

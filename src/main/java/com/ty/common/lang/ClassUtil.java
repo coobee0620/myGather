@@ -1,49 +1,49 @@
-package com.ty.alibaba.common.lang;
+package com.ty.common.lang;
 
 import java.lang.reflect.Array;
 import java.util.*;
 
 /**
  * @project myGather
- * @description ÓÐ¹Ø <code>Class</code> ´¦ÀíµÄ¹¤¾ßÀà¡£
+ * @description ï¿½Ð¹ï¿½ <code>Class</code> ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½à¡£
  * <p>
- * Õâ¸öÀàÖÐµÄÃ¿¸ö·½·¨¶¼¿ÉÒÔ¡°°²È«¡±µØ´¦Àí <code>null</code> £¬¶ø²»»áÅ×³ö <code>NullPointerException</code>¡£
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½ <code>NullPointerException</code>ï¿½ï¿½
  * </p>
  * @auth changtong.ty
  * @date 2015/6/23
  */
 public class ClassUtil {
     /* ============================================================================ */
-    /* ³£Á¿ºÍsingleton¡£                                                            */
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½singletonï¿½ï¿½                                                            */
     /* ============================================================================ */
 
-    /** ×ÊÔ´ÎÄ¼þµÄ·Ö¸ô·û£º <code>'/'</code>¡£ */
+    /** ï¿½ï¿½Ô´ï¿½Ä¼ï¿½ï¿½Ä·Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>'/'</code>ï¿½ï¿½ */
     public static final char RESOURCE_SEPARATOR_CHAR = '/';
 
-    /** JavaÀàÃûµÄ·Ö¸ô·û£º <code>'.'</code>¡£ */
+    /** Javaï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>'.'</code>ï¿½ï¿½ */
     public static final char PACKAGE_SEPARATOR_CHAR = '.';
 
-    /** JavaÀàÃûµÄ·Ö¸ô·û£º <code>"."</code>¡£ */
+    /** Javaï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>"."</code>ï¿½ï¿½ */
     public static final String PACKAGE_SEPARATOR = String.valueOf(PACKAGE_SEPARATOR_CHAR);
 
-    /** ÄÚÁªÀàµÄ·Ö¸ô·û£º <code>'$'</code>¡£ */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>'$'</code>ï¿½ï¿½ */
     public static final char INNER_CLASS_SEPARATOR_CHAR = '$';
 
-    /** ÄÚÁªÀàµÄ·Ö¸ô·û£º <code>"$"</code>¡£ */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>"$"</code>ï¿½ï¿½ */
     public static final String INNER_CLASS_SEPARATOR = String.valueOf(INNER_CLASS_SEPARATOR_CHAR);
 
-    /** ËùÓÐÀàµÄÐÅÏ¢±í£¬°üÀ¨¸¸Àà, ½Ó¿Ú, Êý×éµÄÎ¬ÊýµÈÐÅÏ¢¡£ */
+    /** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ó¿ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ */
     private static Map TYPE_MAP = Collections.synchronizedMap(new WeakHashMap());
 
     /* ============================================================================ */
-    /* È¡µÃÀàÃûºÍpackageÃûµÄ·½·¨¡£                                                  */
+    /* È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½                                                  */
     /* ============================================================================ */
 
     /**
-     * È¡µÃ¶ÔÏóËùÊôµÄÀàµÄÖ±¹ÛÀàÃû¡£
+     * È¡ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * Ïàµ±ÓÚ <code>object.getClass().getName()</code> £¬µ«²»Í¬µÄÊÇ£¬¸Ã·½·¨ÓÃ¸üÖ±¹ÛµÄ·½Ê½ÏÔÊ¾Êý×éÀàÐÍ¡£ ÀýÈç£º
+     * ï¿½àµ±ï¿½ï¿½ <code>object.getClass().getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½Ö±ï¿½ÛµÄ·ï¿½Ê½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  int[].class.getName() = "[I" ClassUtil.getClassName(int[].class) = "int[]"
      *
@@ -52,16 +52,16 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ¶ÔÓÚ·ÇÊý×éµÄÀàÐÍ£¬¸Ã·½·¨µÈÐ§ÓÚ <code>Class.getName()</code> ·½·¨¡£
+     * ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ <code>Class.getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
      * <p>
-     * ×¢Òâ£¬¸Ã·½·¨Ëù·µ»ØµÄÊý×éÀàÃûÖ»ÄÜÓÃÓÚÏÔÊ¾¸øÈË¿´£¬²»ÄÜÓÃÓÚ <code>Class.forName</code> ²Ù×÷¡£
+     * ×¢ï¿½â£¬ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>Class.forName</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param object ÒªÏÔÊ¾ÀàÃûµÄ¶ÔÏó
+     * @param object Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
      *
-     * @return ÓÃÓÚÏÔÊ¾µÄÖ±¹ÛÀàÃû£¬Èç¹ûÔ­ÀàÃûÎª¿Õ»ò·Ç·¨£¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ»ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getClassNameForObject(Object object) {
         if (object == null) {
@@ -72,10 +72,10 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ±¹ÛµÄÀàÃû¡£
+     * È¡ï¿½ï¿½Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * Ïàµ±ÓÚ <code>clazz.getName()</code> £¬µ«²»Í¬µÄÊÇ£¬¸Ã·½·¨ÓÃ¸üÖ±¹ÛµÄ·½Ê½ÏÔÊ¾Êý×éÀàÐÍ¡£ ÀýÈç£º
+     * ï¿½àµ±ï¿½ï¿½ <code>clazz.getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½Ö±ï¿½ÛµÄ·ï¿½Ê½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  int[].class.getName() = "[I" ClassUtil.getClassName(int[].class) = "int[]"
      *
@@ -84,16 +84,16 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ¶ÔÓÚ·ÇÊý×éµÄÀàÐÍ£¬¸Ã·½·¨µÈÐ§ÓÚ <code>Class.getName()</code> ·½·¨¡£
+     * ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ <code>Class.getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
      * <p>
-     * ×¢Òâ£¬¸Ã·½·¨Ëù·µ»ØµÄÊý×éÀàÃûÖ»ÄÜÓÃÓÚÏÔÊ¾¸øÈË¿´£¬²»ÄÜÓÃÓÚ <code>Class.forName</code> ²Ù×÷¡£
+     * ×¢ï¿½â£¬ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>Class.forName</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param clazz ÒªÏÔÊ¾ÀàÃûµÄÀà
+     * @param clazz Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÓÃÓÚÏÔÊ¾µÄÖ±¹ÛÀàÃû£¬Èç¹ûÔ­Ê¼ÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getClassName(Class clazz) {
         if (clazz == null) {
@@ -104,10 +104,10 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ±¹ÛµÄÀàÃû¡£
+     * È¡ï¿½ï¿½Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * <code>className</code> ±ØÐëÊÇ´Ó <code>clazz.getName()</code> Ëù·µ»ØµÄºÏ·¨ÀàÃû¡£¸Ã·½·¨ÓÃ¸üÖ±¹ÛµÄ·½Ê½ÏÔÊ¾Êý×éÀàÐÍ¡£ ÀýÈç£º
+     * <code>className</code> ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ <code>clazz.getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄºÏ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½Ö±ï¿½ÛµÄ·ï¿½Ê½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  int[].class.getName() = "[I" ClassUtil.getClassName(int[].class) = "int[]"
      *
@@ -116,28 +116,28 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ¶ÔÓÚ·ÇÊý×éµÄÀàÐÍ£¬¸Ã·½·¨µÈÐ§ÓÚ <code>Class.getName()</code> ·½·¨¡£
+     * ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ <code>Class.getName()</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
      * <p>
-     * ×¢Òâ£¬¸Ã·½·¨Ëù·µ»ØµÄÊý×éÀàÃûÖ»ÄÜÓÃÓÚÏÔÊ¾¸øÈË¿´£¬²»ÄÜÓÃÓÚ <code>Class.forName</code> ²Ù×÷¡£
+     * ×¢ï¿½â£¬ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>Class.forName</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param className ÒªÏÔÊ¾µÄÀàÃû
+     * @param className Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÓÃÓÚÏÔÊ¾µÄÖ±¹ÛÀàÃû£¬Èç¹ûÔ­ÀàÃûÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code> £¬Èç¹ûÔ­ÀàÃûÊÇ·Ç·¨µÄ£¬Ôò·µ»ØÔ­ÀàÃû
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Ç·Ç·ï¿½ï¿½Ä£ï¿½ï¿½ò·µ»ï¿½Ô­ï¿½ï¿½ï¿½ï¿½
      */
     public static String getClassName(String className) {
         return getClassName(className, true);
     }
 
     /**
-     * È¡µÃÖ±¹ÛµÄÀàÃû¡£
+     * È¡ï¿½ï¿½Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param className ÀàÃû
-     * @param processInnerClass ÊÇ·ñ½«ÄÚÁªÀà·Ö¸ô·û <code>'$'</code> ×ª»»³É <code>'.'</code>
+     * @param className ï¿½ï¿½ï¿½ï¿½
+     * @param processInnerClass ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ <code>'$'</code> ×ªï¿½ï¿½ï¿½ï¿½ <code>'.'</code>
      *
-     * @return Ö±¹ÛµÄÀàÃû£¬»ò <code>null</code>
+     * @return Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>null</code>
      */
     private static String getClassName(String className, boolean processInnerClass) {
         if (StringUtil.isEmpty(className)) {
@@ -151,24 +151,24 @@ public class ClassUtil {
         int length    = className.length();
         int dimension = 0;
 
-        // È¡µÃÊý×éµÄÎ¬Êý£¬Èç¹û²»ÊÇÊý×é£¬Î¬ÊýÎª0
+        // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬Î¬ï¿½ï¿½Îª0
         for (int i = 0; i < length; i++, dimension++) {
             if (className.charAt(i) != '[') {
                 break;
             }
         }
 
-        // Èç¹û²»ÊÇÊý×é£¬ÔòÖ±½Ó·µ»Ø
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
         if (dimension == 0) {
             return className;
         }
 
-        // È·±£ÀàÃûºÏ·¨
+        // È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½
         if (length <= dimension) {
-            return className; // ·Ç·¨ÀàÃû
+            return className; // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
-        // ´¦ÀíÊý×é
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         StringBuffer componentTypeName = new StringBuffer();
 
         switch (className.charAt(dimension)) {
@@ -207,14 +207,14 @@ public class ClassUtil {
             case 'L':
 
                 if ((className.charAt(length - 1) != ';') || (length <= (dimension + 2))) {
-                    return className; // ·Ç·¨ÀàÃû
+                    return className; // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
 
                 componentTypeName.append(className.substring(dimension + 1, length - 1));
                 break;
 
             default:
-                return className; // ·Ç·¨ÀàÃû
+                return className; // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
         }
 
         for (int i = 0; i < dimension; i++) {
@@ -225,22 +225,22 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨¶ÔÏóËùÊôµÄÀàµÄ¶ÌÀàÃû£¬²»°üÀ¨packageÃû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ´Ë·½·¨¿ÉÒÔÕýÈ·ÏÔÊ¾Êý×éºÍÄÚÁªÀàµÄÃû³Æ¡£
+     * ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½
      * </p>
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  ClassUtil.getShortClassNameForObject(Boolean.TRUE) = "Boolean" ClassUtil.getShortClassNameForObject(new Boolean[10]) = "Boolean[]" ClassUtil.getShortClassNameForObject(new int[1][2]) = "int[][]"
      *  </pre>
      * </p>
      *
-     * @param object Òª²é¿´µÄ¶ÔÏó
+     * @param object Òªï¿½é¿´ï¿½Ä¶ï¿½ï¿½ï¿½
      *
-     * @return ¶ÌÀàÃû£¬Èç¹û¶ÔÏóÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getShortClassNameForObject(Object object) {
         if (object == null) {
@@ -251,22 +251,22 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃ¶ÌÀàÃû£¬²»°üÀ¨packageÃû¡£
+     * È¡ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ´Ë·½·¨¿ÉÒÔÕýÈ·ÏÔÊ¾Êý×éºÍÄÚÁªÀàµÄÃû³Æ¡£
+     * ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½
      * </p>
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  ClassUtil.getShortClassName(Boolean.class) = "Boolean" ClassUtil.getShortClassName(Boolean[].class) = "Boolean[]" ClassUtil.getShortClassName(int[][].class) = "int[][]" ClassUtil.getShortClassName(Map.Entry.class) = "Map.Entry"
      *  </pre>
      * </p>
      *
-     * @param clazz Òª²é¿´µÄÀà
+     * @param clazz Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ¶ÌÀàÃû£¬Èç¹ûÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getShortClassName(Class clazz) {
         if (clazz == null) {
@@ -277,29 +277,29 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÀàÃû£¬²»°üÀ¨packageÃû¡£
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ´Ë·½·¨¿ÉÒÔÕýÈ·ÏÔÊ¾Êý×éºÍÄÚÁªÀàµÄÃû³Æ¡£
+     * ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½
      * </p>
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      *  ClassUtil.getShortClassName(Boolean.class.getName()) = "Boolean" ClassUtil.getShortClassName(Boolean[].class.getName()) = "Boolean[]" ClassUtil.getShortClassName(int[][].class.getName()) = "int[][]" ClassUtil.getShortClassName(Map.Entry.class.getName()) = "Map.Entry"
      *  </pre>
      * </p>
      *
-     * @param className Òª²é¿´µÄÀàÃû
+     * @param className Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ¶ÌÀàÃû£¬Èç¹ûÀàÃûÎª¿Õ£¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getShortClassName(String className) {
         if (StringUtil.isEmpty(className)) {
             return className;
         }
 
-        // ×ª»»³ÉÖ±¹ÛµÄÀàÃû
+        // ×ªï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½
         className = getClassName(className, false);
 
         char[] chars   = className.toCharArray();
@@ -317,15 +317,15 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨¶ÔÏóËùÊôµÄÀàµÄpackageÃû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param object Òª²é¿´µÄ¶ÔÏó
+     * @param object Òªï¿½é¿´ï¿½Ä¶ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹û¶ÔÏóÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageNameForObject(Object object) {
         if (object == null) {
@@ -336,15 +336,15 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄpackageÃû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param clazz Òª²é¿´µÄÀà
+     * @param clazz Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹ûÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageName(Class clazz) {
         if (clazz == null) {
@@ -355,22 +355,22 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàÃûµÄpackageÃû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param className Òª²é¿´µÄÀàÃû
+     * @param className Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹ûÀàÃûÎª¿Õ£¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageName(String className) {
         if (StringUtil.isEmpty(className)) {
             return null;
         }
 
-        // ×ª»»³ÉÖ±¹ÛµÄÀàÃû
+        // ×ªï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ûµï¿½ï¿½ï¿½ï¿½ï¿½
         className = getClassName(className, false);
 
         int i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
@@ -383,27 +383,27 @@ public class ClassUtil {
     }
 
     /* ============================================================================ */
-    /* È¡µÃÀàÃûºÍpackageÃûµÄresourceÃûµÄ·½·¨¡£                                      */
+    /* È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½resourceï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½                                      */
     /*                                                                              */
-    /* ºÍÀàÃû¡¢packageÃû²»Í¬µÄÊÇ£¬resourceÃû·ûºÏÎÄ¼þÃûÃüÃû¹æ·¶£¬ÀýÈç£º              */
+    /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ç£ï¿½resourceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ·¶ï¿½ï¿½ï¿½ï¿½ï¿½ç£º              */
     /*  java/lang/String.class                                                      */
     /*  com/alibaba/commons/lang                                                    */
     /*  etc.                                                                        */
     /* ============================================================================ */
 
     /**
-     * È¡µÃ¶ÔÏóËùÊôµÄÀàµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      * ClassUtil.getClassNameForObjectAsResource("This is a string")    = "java/lang/String.class"
      * </pre>
      * </p>
      *
-     * @param object ÒªÏÔÊ¾ÀàÃûµÄ¶ÔÏó
+     * @param object Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
      *
-     * @return Ö¸¶¨¶ÔÏóËùÊôÀàµÄ×ÊÔ´Ãû£¬Èç¹û¶ÔÏóÎª¿Õ£¬Ôò·µ»Ø<code>null</code>
+     * @return Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static String getClassNameForObjectAsResource(Object object) {
         if (object == null) {
@@ -415,18 +415,18 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      * ClassUtil.getClassNameAsResource(String.class)   = "java/lang/String.class"
      * </pre>
      * </p>
      *
-     * @param clazz ÒªÏÔÊ¾ÀàÃûµÄÀà
+     * @param clazz Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ö¸¶¨ÀàµÄ×ÊÔ´Ãû£¬Èç¹ûÖ¸¶¨ÀàÎª¿Õ£¬Ôò·µ»Ø<code>null</code>
+     * @return Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static String getClassNameAsResource(Class clazz) {
         if (clazz == null) {
@@ -437,18 +437,18 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ÀýÈç£º
+     * ï¿½ï¿½ï¿½ç£º
      * <pre>
      * ClassUtil.getClassNameAsResource("java.lang.String") = "java/lang/String.class"
      * </pre>
      * </p>
      *
-     * @param className ÒªÏÔÊ¾µÄÀàÃû
+     * @param className Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ö¸¶¨ÀàÃû¶ÔÓ¦µÄ×ÊÔ´Ãû£¬Èç¹ûÖ¸¶¨ÀàÃûÎª¿Õ£¬Ôò·µ»Ø<code>null</code>
+     * @return Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½<code>null</code>
      */
     public static String getClassNameAsResource(String className) {
         if (className == null) {
@@ -459,15 +459,15 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨¶ÔÏóËùÊôµÄÀàµÄpackageÃûµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param object Òª²é¿´µÄ¶ÔÏó
+     * @param object Òªï¿½é¿´ï¿½Ä¶ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹û¶ÔÏóÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageNameForObjectAsResource(Object object) {
         if (object == null) {
@@ -479,15 +479,15 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄpackageÃûµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param clazz Òª²é¿´µÄÀà
+     * @param clazz Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹ûÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageNameAsResource(Class clazz) {
         if (clazz == null) {
@@ -498,15 +498,15 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàÃûµÄpackageÃûµÄ×ÊÔ´Ãû¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
      *
      * <p>
-     * ¶ÔÓÚÊý×é£¬´Ë·½·¨·µ»ØµÄÊÇÊý×éÔªËØÀàÐÍµÄpackageÃû¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½packageï¿½ï¿½ï¿½ï¿½
      * </p>
      *
-     * @param className Òª²é¿´µÄÀàÃû
+     * @param className Òªï¿½é¿´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return packageÃû£¬Èç¹ûÀàÃûÎª¿Õ£¬Ôò·µ»Ø <code>null</code>
+     * @return packageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static String getPackageNameAsResource(String className) {
         if (className == null) {
@@ -517,16 +517,16 @@ public class ClassUtil {
     }
 
     /* ============================================================================ */
-    /* È¡µÃÀàµÄÐÅÏ¢£¬Èç¸¸Àà, ½Ó¿Ú, Êý×éµÄÎ¬ÊýµÈ¡£                                   */
+    /* È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ç¸¸ï¿½ï¿½, ï¿½Ó¿ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½È¡ï¿½                                   */
     /* ============================================================================ */
 
     /**
-     * È¡µÃÖ¸¶¨Î¬ÊýµÄ <code>Array</code>Àà.
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½ <code>Array</code>ï¿½ï¿½.
      *
-     * @param componentType Êý×éµÄ»ùÀà
-     * @param dimension Î¬Êý£¬Èç¹ûÐ¡ÓÚ <code>0</code> Ôò¿´×÷ <code>0</code>
+     * @param componentType ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
+     * @param dimension Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ <code>0</code> ï¿½ï¿½ï¿½ï¿½ <code>0</code>
      *
-     * @return Èç¹ûÎ¬ÊýÎª0, Ôò·µ»Ø»ùÀà±¾Éí, ·ñÔò·µ»ØÊý×éÀà£¬Èç¹ûÊý×éµÄ»ùÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½Î¬ï¿½ï¿½Îª0, ï¿½ò·µ»Ø»ï¿½ï¿½à±¾ï¿½ï¿½, ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static Class getArrayClass(Class componentType, int dimension) {
         if (dimension <= 0) {
@@ -541,11 +541,11 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÊý×éÔªËØµÄÀàÐÍ¡£
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½Í¡ï¿½
      *
-     * @param type Òª²éÕÒµÄÀà
+     * @param type Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûÊÇÊý×é, Ôò·µ»ØÊý×éÔªËØµÄÀàÐÍ, ·ñÔò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static Class getArrayComponentType(Class type) {
         if (type == null) {
@@ -556,11 +556,11 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÊý×éµÄÎ¬Êý¡£
+     * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
      *
-     * @param clazz Òª²éÕÒµÄÀà
+     * @param clazz Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
      *
-     * @return Êý×éµÄÎ¬Êý. Èç¹û²»ÊÇÊý×é, Ôò·µ»Ø <code>0</code> £¬Èç¹ûÊý×éÎª <code>null</code> £¬ÊÇ·µ»Ø <code>-1</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½ <code>0</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ <code>-1</code>
      */
     public static int getArrayDimension(Class clazz) {
         if (clazz == null) {
@@ -571,14 +571,14 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄËùÓÐ¸¸Àà¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½à¡£
      *
      * <p>
-     * ¶ÔÓÚÒ»¸ö <code>Class</code> ÊµÀý£¬Èç¹ûËü²»ÊÇ½Ó¿Ú£¬Ò²²»ÊÇÊý×é£¬´Ë·½·¨ÒÀ´ÎÁÐ³ö´Ó¸ÃÀàµÄ¸¸Àà¿ªÊ¼Ö±µ½ <code>Object</code> µÄËùÓÐÀà¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ <code>Class</code> Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½Ó¿Ú£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½à¿ªÊ¼Ö±ï¿½ï¿½ <code>Object</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à¡£
      * </p>
      *
      * <p>
-     * ÀýÈç <code>ClassUtil.getSuperclasses(java.util.ArrayList.class)</code> ·µ»ØÒÔÏÂÁÐ±í£º
+     * ï¿½ï¿½ï¿½ï¿½ <code>ClassUtil.getSuperclasses(java.util.ArrayList.class)</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -594,16 +594,16 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ¶ÔÓÚÒ»¸ö½Ó¿Ú£¬´Ë·½·¨·µ»ØÒ»¸ö¿ÕÁÐ±í¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ó¿Ú£ï¿½ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      * </p>
      *
      * <p>
-     * ÀýÈç<code>ClassUtil.getSuperclasses(java.util.List.class)</code>½«·µ»ØÒ»¸ö¿ÕÁÐ±í¡£
+     * ï¿½ï¿½ï¿½ï¿½<code>ClassUtil.getSuperclasses(java.util.List.class)</code>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      * </p>
      *
      * <p>
-     * ¶ÔÓÚÒ»¸öÊý×é£¬´Ë·½·¨·µ»ØÒ»¸öÁÐ±í£¬ÁÐ³öËùÓÐcomponentÀàÐÍµÄ¸¸ÀàµÄÏàÍ¬Î¬ÊýµÄÊý×éÀàÐÍ¡£ ÀýÈç£º
-     * <code>ClassUtil.getSuperclasses(java.util.ArrayList[][].class)</code> ·µ»ØÒÔÏÂÁÐ±í£º
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½componentï¿½ï¿½ï¿½ÍµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ ï¿½ï¿½ï¿½ç£º
+     * <code>ClassUtil.getSuperclasses(java.util.ArrayList[][].class)</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -623,8 +623,8 @@ public class ClassUtil {
      * </li>
      * </ol>
      *
-     * ×¢Òâ£¬Ô­×ÓÀàÐÍ¼°ÆäÊý×é£¬½«±»×ª»»³ÉÏàÓ¦µÄ°ü×°ÀàÀ´´¦Àí¡£ ÀýÈç£º <code>ClassUtil.getSuperclasses(int[][].class)</code>
-     * ·µ»ØÒÔÏÂÁÐ±í£º
+     * ×¢ï¿½â£¬Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç£º <code>ClassUtil.getSuperclasses(int[][].class)</code>
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -642,9 +642,9 @@ public class ClassUtil {
      * </ol>
      * </p>
      *
-     * @param clazz Òª²éÕÒµÄÀà
+     * @param clazz Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
      *
-     * @return ËùÓÐ¸¸ÀàµÄÁÐ±í£¬Èç¹ûÖ¸¶¨ÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static List getSuperclasses(Class clazz) {
         if (clazz == null) {
@@ -655,14 +655,14 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄËùÓÐ½Ó¿Ú¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½Ó¿Ú¡ï¿½
      *
      * <p>
-     * ¶ÔÓÚÒ»¸ö <code>Class</code> ÊµÀý£¬Èç¹ûËü²»ÊÇ½Ó¿Ú£¬Ò²²»ÊÇÊý×é£¬´Ë·½·¨ÒÀ´ÎÁÐ³ö´Ó¸ÃÀàµÄ¸¸Àà¿ªÊ¼Ö±µ½ <code>Object</code> µÄËùÓÐÀà¡£
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ <code>Class</code> Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç½Ó¿Ú£ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½à¿ªÊ¼Ö±ï¿½ï¿½ <code>Object</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à¡£
      * </p>
      *
      * <p>
-     * ÀýÈç <code>ClassUtil.getInterfaces(java.util.ArrayList.class)</code> ·µ»ØÒÔÏÂÁÐ±í£º
+     * ï¿½ï¿½ï¿½ï¿½ <code>ClassUtil.getInterfaces(java.util.ArrayList.class)</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -684,8 +684,8 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ¶ÔÓÚÒ»¸öÊý×é£¬´Ë·½·¨·µ»ØÒ»¸öÁÐ±í£¬ÁÐ³öËùÓÐcomponentÀàÐÍµÄ½Ó¿ÚµÄÏàÍ¬Î¬ÊýµÄÊý×éÀàÐÍ¡£ ÀýÈç£º
-     * <code>ClassUtil.getInterfaces(java.util.ArrayList[][].class)</code> ·µ»ØÒÔÏÂÁÐ±í£º
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½componentï¿½ï¿½ï¿½ÍµÄ½Ó¿Úµï¿½ï¿½ï¿½Í¬Î¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ ï¿½ï¿½ï¿½ç£º
+     * <code>ClassUtil.getInterfaces(java.util.ArrayList[][].class)</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -707,7 +707,7 @@ public class ClassUtil {
      * </p>
      *
      * <p>
-     * ×¢Òâ£¬Ô­×ÓÀàÐÍ¼°ÆäÊý×é£¬½«±»×ª»»³ÉÏàÓ¦µÄ°ü×°ÀàÀ´´¦Àí¡£ ÀýÈç£º <code>ClassUtil.getInterfaces(int[][].class)</code> ·µ»ØÒÔÏÂÁÐ±í£º
+     * ×¢ï¿½â£¬Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç£º <code>ClassUtil.getInterfaces(int[][].class)</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      *
      * <ol>
      * <li>
@@ -719,9 +719,9 @@ public class ClassUtil {
      * </ol>
      * </p>
      *
-     * @param clazz Òª²éÕÒµÄÀà
+     * @param clazz Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
      *
-     * @return ËùÓÐ½Ó¿ÚµÄÁÐ±í£¬Èç¹ûÖ¸¶¨ÀàÎª <code>null</code> £¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½Ð½Ó¿Úµï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static List getInterfaces(Class clazz) {
         if (clazz == null) {
@@ -732,11 +732,11 @@ public class ClassUtil {
     }
 
     /**
-     * ÅÐ¶ÏÖ¸¶¨ÀàÊÇ·ñÎªÄÚÁªÀà¡£
+     * ï¿½Ð¶ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½à¡£
      *
-     * @param clazz Òª²éÕÒµÄÀà
+     * @param clazz Òªï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûÊÇ£¬Ôò·µ»Ø <code>true</code>
+     * @return ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ò·µ»ï¿½ <code>true</code>
      */
     public static boolean isInnerClass(Class clazz) {
         if (clazz == null) {
@@ -747,49 +747,49 @@ public class ClassUtil {
     }
 
     /**
-     * ¼ì²éÒ»×éÖ¸¶¨ÀàÐÍ <code>fromClasses</code> µÄ¶ÔÏóÊÇ·ñ¿ÉÒÔ¸³Öµ¸øÁíÒ»×éÀàÐÍ <code>classes</code>¡£
+     * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClasses</code> ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ô¸ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>classes</code>ï¿½ï¿½
      *
      * <p>
-     * ´Ë·½·¨¿ÉÒÔÓÃÀ´È·¶¨Ö¸¶¨ÀàÐÍµÄ²ÎÊý <code>object1, object2, ...</code> ÊÇ·ñ¿ÉÒÔÓÃÀ´µ÷ÓÃÈ·¶¨²ÎÊýÀàÐÍÎª <code>class1, class2,
-     * ...</code> µÄ·½·¨¡£
+     * ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½ <code>object1, object2, ...</code> ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª <code>class1, class2,
+     * ...</code> ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
      * <p>
-     * ¶ÔÓÚ <code>fromClasses</code> µÄÃ¿¸öÔªËØ <code>fromClass</code> ºÍ <code>classes</code> µÄÃ¿¸öÔªËØ
-     * <code>clazz</code>£¬ °´ÕÕÈçÏÂ¹æÔò£º
+     * ï¿½ï¿½ï¿½ï¿½ <code>fromClasses</code> ï¿½ï¿½Ã¿ï¿½ï¿½Ôªï¿½ï¿½ <code>fromClass</code> ï¿½ï¿½ <code>classes</code> ï¿½ï¿½Ã¿ï¿½ï¿½Ôªï¿½ï¿½
+     * <code>clazz</code>ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½
      *
      * <ol>
      * <li>
-     * Èç¹ûÄ¿±êÀà <code>clazz</code> Îª <code>null</code> £¬×ÜÊÇ·µ»Ø <code>false</code>¡£
+     * ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> Îª <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ <code>false</code>ï¿½ï¿½
      * </li>
      * <li>
-     * Èç¹û²ÎÊýÀàÐÍ <code>fromClass</code> Îª <code>null</code> £¬²¢ÇÒÄ¿±êÀàÐÍ <code>clazz</code> Îª·ÇÔ­×ÓÀàÐÍ£¬Ôò·µ»Ø
-     * <code>true</code>¡£ ÒòÎª <code>null</code> ¿ÉÒÔ±»¸³¸øÈÎºÎÒýÓÃÀàÐÍ¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClass</code> Îª <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> Îªï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ò·µ»ï¿½
+     * <code>true</code>ï¿½ï¿½ ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½
      * </li>
      * <li>
-     * µ÷ÓÃ <code>Class.isAssignableFrom</code> ·½·¨À´È·¶¨Ä¿±êÀà <code>clazz</code> ÊÇ·ñºÍ²ÎÊýÀà
-     * <code>fromClass</code> ÏàÍ¬»òÊÇÆä¸¸Àà¡¢½Ó¿Ú£¬Èç¹ûÊÇ£¬Ôò·µ»Ø <code>true</code>¡£
+     * ï¿½ï¿½ï¿½ï¿½ <code>Class.isAssignableFrom</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> ï¿½Ç·ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½
+     * <code>fromClass</code> ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ä¸¸ï¿½à¡¢ï¿½Ó¿Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ò·µ»ï¿½ <code>true</code>ï¿½ï¿½
      * </li>
      * <li>
-     * Èç¹ûÄ¿±êÀàÐÍ <code>clazz</code> ÎªÔ­×ÓÀàÐÍ£¬ÄÇÃ´¸ù¾Ý <a href="http://java.sun.com/docs/books/jls/">The Java
-     * Language Specification</a> £¬sections 5.1.1, 5.1.2, 5.1.4¶¨ÒåµÄWidening Primitive
-     * Conversion¹æÔò£¬²ÎÊýÀàÐÍ <code>fromClass</code> ¿ÉÒÔÊÇÈÎºÎÄÜÀ©Õ¹³É¸ÃÄ¿±êÀàÐÍµÄÔ­×ÓÀàÐÍ¼°Æä°ü×°Àà¡£ ÀýÈç£¬ <code>clazz</code> Îª
-     * <code>long</code> £¬ÄÇÃ´²ÎÊýÀàÐÍ¿ÉÒÔÊÇ <code>byte</code>¡¢
-     * <code>short</code>¡¢<code>int</code>¡¢<code>long</code>¡¢<code>char</code> ¼°Æä°ü×°Àà
-     * <code>java.lang.Byte</code>¡¢<code>java.lang.Short</code>¡¢<code>java.lang.Integer</code>¡¢
-     * <code>java.lang.Long</code> ºÍ <code>java.lang.Character</code> ¡£Èç¹ûÂú×ãÕâ¸öÌõ¼þ£¬Ôò·µ»Ø
-     * <code>true</code>¡£
+     * ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> ÎªÔ­ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ <a href="http://java.sun.com/docs/books/jls/">The Java
+     * Language Specification</a> ï¿½ï¿½sections 5.1.1, 5.1.2, 5.1.4ï¿½ï¿½ï¿½ï¿½ï¿½Widening Primitive
+     * Conversionï¿½ï¿½ï¿½ò£¬²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClass</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½É¸ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½×°ï¿½à¡£ ï¿½ï¿½ï¿½ç£¬ <code>clazz</code> Îª
+     * <code>long</code> ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ <code>byte</code>ï¿½ï¿½
+     * <code>short</code>ï¿½ï¿½<code>int</code>ï¿½ï¿½<code>long</code>ï¿½ï¿½<code>char</code> ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
+     * <code>java.lang.Byte</code>ï¿½ï¿½<code>java.lang.Short</code>ï¿½ï¿½<code>java.lang.Integer</code>ï¿½ï¿½
+     * <code>java.lang.Long</code> ï¿½ï¿½ <code>java.lang.Character</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½
+     * <code>true</code>ï¿½ï¿½
      * </li>
      * <li>
-     * ²»Âú×ãÉÏÊöËùÓÐÌõ¼þ£¬Ôò·µ»Ø <code>false</code>¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>false</code>ï¿½ï¿½
      * </li>
      * </ol>
      * </p>
      *
-     * @param classes Ä¿±êÀàÐÍÁÐ±í£¬Èç¹ûÊÇ <code>null</code> ×ÜÊÇ·µ»Ø <code>false</code>
-     * @param fromClasses ²ÎÊýÀàÐÍÁÐ±í£¬ <code>null</code> ±íÊ¾¿É¸³Öµ¸øÈÎÒâ·ÇÔ­×ÓÀàÐÍ
+     * @param classes Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>null</code> ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ <code>false</code>
+     * @param fromClasses ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ <code>null</code> ï¿½ï¿½Ê¾ï¿½É¸ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹û¿ÉÒÔ±»¸³Öµ£¬Ôò·µ»Ø <code>true</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ò·µ»ï¿½ <code>true</code>
      */
     public static boolean isAssignable(Class[] classes, Class[] fromClasses) {
         if (!ArrayUtil.isSameLength(fromClasses, classes)) {
@@ -814,89 +814,89 @@ public class ClassUtil {
     }
 
     /**
-     * ¼ì²éÖ¸¶¨ÀàÐÍ <code>fromClass</code> µÄ¶ÔÏóÊÇ·ñ¿ÉÒÔ¸³Öµ¸øÁíÒ»ÖÖÀàÐÍ <code>clazz</code>¡£
+     * ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClass</code> ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ô¸ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>clazz</code>ï¿½ï¿½
      *
      * <p>
-     * ´Ë·½·¨¿ÉÒÔÓÃÀ´È·¶¨Ö¸¶¨ÀàÐÍµÄ²ÎÊý <code>object1, object2, ...</code> ÊÇ·ñ¿ÉÒÔÓÃÀ´µ÷ÓÃÈ·¶¨²ÎÊýÀàÐÍ <code>class1, class2,
-     * ...</code> µÄ·½·¨¡£
+     * ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½ <code>object1, object2, ...</code> ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>class1, class2,
+     * ...</code> ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
      * </p>
      *
      * <p>
-     * °´ÕÕÈçÏÂ¹æÔò£º
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½
      *
      * <ol>
      * <li>
-     * Èç¹ûÄ¿±êÀà <code>clazz</code> Îª <code>null</code> £¬×ÜÊÇ·µ»Ø <code>false</code>¡£
+     * ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> Îª <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ <code>false</code>ï¿½ï¿½
      * </li>
      * <li>
-     * Èç¹û²ÎÊýÀàÐÍ <code>fromClass</code> Îª <code>null</code> £¬²¢ÇÒÄ¿±êÀàÐÍ <code>clazz</code> Îª·ÇÔ­×ÓÀàÐÍ£¬Ôò·µ»Ø
-     * <code>true</code>¡£ ÒòÎª <code>null</code> ¿ÉÒÔ±»¸³¸øÈÎºÎÒýÓÃÀàÐÍ¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClass</code> Îª <code>null</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> Îªï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ò·µ»ï¿½
+     * <code>true</code>ï¿½ï¿½ ï¿½ï¿½Îª <code>null</code> ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½
      * </li>
      * <li>
-     * µ÷ÓÃ <code>Class.isAssignableFrom</code> ·½·¨À´È·¶¨Ä¿±êÀà <code>clazz</code> ÊÇ·ñºÍ²ÎÊýÀà
-     * <code>fromClass</code> ÏàÍ¬»òÊÇÆä¸¸Àà¡¢½Ó¿Ú£¬Èç¹ûÊÇ£¬Ôò·µ»Ø <code>true</code>¡£
+     * ï¿½ï¿½ï¿½ï¿½ <code>Class.isAssignableFrom</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> ï¿½Ç·ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½
+     * <code>fromClass</code> ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ä¸¸ï¿½à¡¢ï¿½Ó¿Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ò·µ»ï¿½ <code>true</code>ï¿½ï¿½
      * </li>
      * <li>
-     * Èç¹ûÄ¿±êÀàÐÍ <code>clazz</code> ÎªÔ­×ÓÀàÐÍ£¬ÄÇÃ´¸ù¾Ý <a href="http://java.sun.com/docs/books/jls/">The Java
-     * Language Specification</a> £¬sections 5.1.1, 5.1.2, 5.1.4¶¨ÒåµÄWidening Primitive
-     * Conversion¹æÔò£¬²ÎÊýÀàÐÍ <code>fromClass</code> ¿ÉÒÔÊÇÈÎºÎÄÜÀ©Õ¹³É¸ÃÄ¿±êÀàÐÍµÄÔ­×ÓÀàÐÍ¼°Æä°ü×°Àà¡£ ÀýÈç£¬ <code>clazz</code> Îª
-     * <code>long</code> £¬ÄÇÃ´²ÎÊýÀàÐÍ¿ÉÒÔÊÇ <code>byte</code>¡¢
-     * <code>short</code>¡¢<code>int</code>¡¢<code>long</code>¡¢<code>char</code> ¼°Æä°ü×°Àà
-     * <code>java.lang.Byte</code>¡¢<code>java.lang.Short</code>¡¢<code>java.lang.Integer</code>¡¢
-     * <code>java.lang.Long</code> ºÍ <code>java.lang.Character</code> ¡£Èç¹ûÂú×ãÕâ¸öÌõ¼þ£¬Ôò·µ»Ø
-     * <code>true</code>¡£
+     * ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>clazz</code> ÎªÔ­ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ <a href="http://java.sun.com/docs/books/jls/">The Java
+     * Language Specification</a> ï¿½ï¿½sections 5.1.1, 5.1.2, 5.1.4ï¿½ï¿½ï¿½ï¿½ï¿½Widening Primitive
+     * Conversionï¿½ï¿½ï¿½ò£¬²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>fromClass</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½É¸ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½×°ï¿½à¡£ ï¿½ï¿½ï¿½ç£¬ <code>clazz</code> Îª
+     * <code>long</code> ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½ <code>byte</code>ï¿½ï¿½
+     * <code>short</code>ï¿½ï¿½<code>int</code>ï¿½ï¿½<code>long</code>ï¿½ï¿½<code>char</code> ï¿½ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
+     * <code>java.lang.Byte</code>ï¿½ï¿½<code>java.lang.Short</code>ï¿½ï¿½<code>java.lang.Integer</code>ï¿½ï¿½
+     * <code>java.lang.Long</code> ï¿½ï¿½ <code>java.lang.Character</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½
+     * <code>true</code>ï¿½ï¿½
      * </li>
      * <li>
-     * ²»Âú×ãÉÏÊöËùÓÐÌõ¼þ£¬Ôò·µ»Ø <code>false</code>¡£
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>false</code>ï¿½ï¿½
      * </li>
      * </ol>
      * </p>
      *
-     * @param clazz Ä¿±êÀàÐÍ£¬Èç¹ûÊÇ <code>null</code> ×ÜÊÇ·µ»Ø <code>false</code>
-     * @param fromClass ²ÎÊýÀàÐÍ£¬ <code>null</code> ±íÊ¾¿É¸³Öµ¸øÈÎÒâ·ÇÔ­×ÓÀàÐÍ
+     * @param clazz Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ <code>null</code> ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ <code>false</code>
+     * @param fromClass ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ <code>null</code> ï¿½ï¿½Ê¾ï¿½É¸ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹û¿ÉÒÔ±»¸³Öµ£¬Ôò·µ»Ø <code>null</code>
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
      */
     public static boolean isAssignable(Class clazz, Class fromClass) {
         if (clazz == null) {
             return false;
         }
 
-        // Èç¹ûfromClassÊÇnull£¬Ö»Òªclazz²»ÊÇÔ­×ÓÀàÐÍÈçint£¬¾ÍÒ»¶¨¿ÉÒÔ¸³Öµ
+        // ï¿½ï¿½ï¿½fromClassï¿½ï¿½nullï¿½ï¿½Ö»Òªclazzï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½intï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½Öµ
         if (fromClass == null) {
             return !clazz.isPrimitive();
         }
 
-        // Èç¹ûÀàÏàÍ¬»òÓÐ¸¸×Ó¹ØÏµ£¬µ±È»¿ÉÒÔ¸³Öµ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½Ó¹ï¿½Ïµï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½Ô¸ï¿½Öµ
         if (clazz.isAssignableFrom(fromClass)) {
             return true;
         }
 
-        // ¶ÔÓÚÔ­×ÓÀàÐÍ£¬¸ù¾ÝJLSµÄ¹æÔò½øÐÐÀ©Õ¹
-        // Ä¿±êclassÎªÔ­×ÓÀàÐÍÊ±£¬fromClass¿ÉÒÔÎªÔ­×ÓÀàÐÍºÍÔ­×ÓÀàÐÍµÄ°ü×°ÀàÐÍ¡£
+        // ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½JLSï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹
+        // Ä¿ï¿½ï¿½classÎªÔ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½fromClassï¿½ï¿½ï¿½ï¿½ÎªÔ­ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ÍµÄ°ï¿½×°ï¿½ï¿½ï¿½Í¡ï¿½
         if (clazz.isPrimitive()) {
-            // boolean¿ÉÒÔ½ÓÊÜ£ºboolean
+            // booleanï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½boolean
             if (Boolean.TYPE.equals(clazz)) {
                 return Boolean.class.equals(fromClass);
             }
 
-            // byte¿ÉÒÔ½ÓÊÜ£ºbyte
+            // byteï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½byte
             if (Byte.TYPE.equals(clazz)) {
                 return Byte.class.equals(fromClass);
             }
 
-            // char¿ÉÒÔ½ÓÊÜ£ºchar
+            // charï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½char
             if (Character.TYPE.equals(clazz)) {
                 return Character.class.equals(fromClass);
             }
 
-            // short¿ÉÒÔ½ÓÊÜ£ºshort, byte
+            // shortï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½short, byte
             if (Short.TYPE.equals(clazz)) {
                 return Short.class.equals(fromClass) || Byte.TYPE.equals(fromClass)
                         || Byte.class.equals(fromClass);
             }
 
-            // int¿ÉÒÔ½ÓÊÜ£ºint¡¢byte¡¢short¡¢char
+            // intï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½intï¿½ï¿½byteï¿½ï¿½shortï¿½ï¿½char
             if (Integer.TYPE.equals(clazz)) {
                 return Integer.class.equals(fromClass) || Byte.TYPE.equals(fromClass)
                         || Byte.class.equals(fromClass) || Short.TYPE.equals(fromClass)
@@ -904,7 +904,7 @@ public class ClassUtil {
                         || Character.class.equals((fromClass));
             }
 
-            // long¿ÉÒÔ½ÓÊÜ£ºlong¡¢int¡¢byte¡¢short¡¢char
+            // longï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½longï¿½ï¿½intï¿½ï¿½byteï¿½ï¿½shortï¿½ï¿½char
             if (Long.TYPE.equals(clazz)) {
                 return Long.class.equals(fromClass) || Integer.TYPE.equals(fromClass)
                         || Integer.class.equals(fromClass) || Byte.TYPE.equals(fromClass)
@@ -913,7 +913,7 @@ public class ClassUtil {
                         || Character.class.equals((fromClass));
             }
 
-            // float¿ÉÒÔ½ÓÊÜ£ºfloat, long, int, byte, short, char
+            // floatï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½float, long, int, byte, short, char
             if (Float.TYPE.equals(clazz)) {
                 return Float.class.equals(fromClass) || Long.TYPE.equals(fromClass)
                         || Long.class.equals(fromClass) || Integer.TYPE.equals(fromClass)
@@ -923,7 +923,7 @@ public class ClassUtil {
                         || Character.class.equals((fromClass));
             }
 
-            // double¿ÉÒÔ½ÓÊÜ£ºdouble, float, long, int, byte, short, char
+            // doubleï¿½ï¿½ï¿½Ô½ï¿½ï¿½Ü£ï¿½double, float, long, int, byte, short, char
             if (Double.TYPE.equals(clazz)) {
                 return Double.class.equals(fromClass) || Float.TYPE.equals(fromClass)
                         || Float.class.equals(fromClass) || Long.TYPE.equals(fromClass)
@@ -939,11 +939,11 @@ public class ClassUtil {
     }
 
     /**
-     * È¡µÃÖ¸¶¨ÀàµÄ <code>TypeInfo</code>¡£
+     * È¡ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>TypeInfo</code>ï¿½ï¿½
      *
-     * @param type Ö¸¶¨Àà»ò½Ó¿Ú
+     * @param type Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
      *
-     * @return <code>TypeInfo</code> ¶ÔÏó.
+     * @return <code>TypeInfo</code> ï¿½ï¿½ï¿½ï¿½.
      */
     protected static TypeInfo getTypeInfo(Class type) {
         if (type == null) {
@@ -965,7 +965,7 @@ public class ClassUtil {
     }
 
     /**
-     * ´ú±íÒ»¸öÀàµÄÐÅÏ¢, °üÀ¨¸¸Àà, ½Ó¿Ú, Êý×éµÄÎ¬ÊýµÈ.
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Ó¿ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½.
      */
     protected static class TypeInfo {
         private Class type;
@@ -975,14 +975,14 @@ public class ClassUtil {
         private List  interfaces   = new ArrayList(2);
 
         /**
-         * ´´½¨ <code>TypeInfo</code>¡£
+         * ï¿½ï¿½ï¿½ï¿½ <code>TypeInfo</code>ï¿½ï¿½
          *
-         * @param type ´´½¨Ö¸¶¨ÀàµÄ <code>TypeInfo</code>
+         * @param type ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ <code>TypeInfo</code>
          */
         private TypeInfo(Class type) {
             this.type = type;
 
-            // Èç¹ûÊÇarray, ÉèÖÃcomponentTypeºÍdimension
+            // ï¿½ï¿½ï¿½ï¿½ï¿½array, ï¿½ï¿½ï¿½ï¿½componentTypeï¿½ï¿½dimension
             Class componentType = null;
 
             if (type.isArray()) {
@@ -996,14 +996,14 @@ public class ClassUtil {
 
             this.componentType = componentType;
 
-            // È¡µÃËùÓÐsuperclass
+            // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½superclass
             if (dimension > 0) {
-                // ½«primitiveÀàÐÍ×ª»»³É¶ÔÓ¦µÄ°ü×°Àà
+                // ï¿½ï¿½primitiveï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½ï¿½
                 componentType = getNonPrimitiveType(componentType);
 
                 Class superComponentType = componentType.getSuperclass();
 
-                // Èç¹ûÊÇprimitive, interface, ÔòÉèÖÃÆä»ùÀàÎªObject.
+                // ï¿½ï¿½ï¿½ï¿½ï¿½primitive, interface, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªObject.
                 if ((superComponentType == null) && !Object.class.equals(componentType)) {
                     superComponentType = Object.class;
                 }
@@ -1019,7 +1019,7 @@ public class ClassUtil {
                     }
                 }
             } else {
-                // ½«primitiveÀàÐÍ×ª»»³É¶ÔÓ¦µÄ°ü×°Àà
+                // ï¿½ï¿½primitiveï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½ï¿½
                 type = getNonPrimitiveType(type);
 
                 Class superclass = type.getSuperclass();
@@ -1030,7 +1030,7 @@ public class ClassUtil {
                 }
             }
 
-            // È¡µÃËùÓÐinterface
+            // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½interface
             if (dimension == 0) {
                 Class[] typeInterfaces = type.getInterfaces();
                 List    set = new ArrayList();
@@ -1065,11 +1065,11 @@ public class ClassUtil {
         }
 
         /**
-         * ½«ËùÓÐµÄÔ­×ÓÀàÐÍ×ª»»³É¶ÔÓ¦µÄ°ü×°Àà£¬ÆäËüÀàÐÍ²»±ä¡£
+         * ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ä¡£
          *
-         * @param type Òª×ª»»µÄÀàÐÍ
+         * @param type Òª×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          *
-         * @return ·ÇÔ­×ÓÀàÐÍ
+         * @return ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
          */
         private Class getNonPrimitiveType(Class type) {
             if (type.isPrimitive()) {
@@ -1096,45 +1096,45 @@ public class ClassUtil {
         }
 
         /**
-         * È¡µÃ <code>TypeInfo</code> Ëù´ú±íµÄjavaÀà¡£
+         * È¡ï¿½ï¿½ <code>TypeInfo</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½javaï¿½à¡£
          *
-         * @return <code>TypeInfo</code> Ëù´ú±íµÄjavaÀà
+         * @return <code>TypeInfo</code> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½javaï¿½ï¿½
          */
         public Class getType() {
             return type;
         }
 
         /**
-         * È¡µÃÊý×éÔªËØµÄÀàÐÍ¡£
+         * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½Í¡ï¿½
          *
-         * @return Èç¹ûÊÇÊý×é, Ôò·µ»ØÊý×éÔªËØµÄÀàÐÍ, ·ñÔò·µ»Ø <code>null</code>
+         * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ò·µ»ï¿½ <code>null</code>
          */
         public Class getArrayComponentType() {
             return componentType;
         }
 
         /**
-         * È¡µÃÊý×éµÄÎ¬Êý¡£
+         * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
          *
-         * @return Êý×éµÄÎ¬Êý. Èç¹û²»ÊÇÊý×é, Ôò·µ»Ø <code>0</code>
+         * @return ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ò·µ»ï¿½ <code>0</code>
          */
         public int getArrayDimension() {
             return dimension;
         }
 
         /**
-         * È¡µÃËùÓÐµÄ¸¸Àà¡£
+         * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¸ï¿½ï¿½à¡£
          *
-         * @return ËùÓÐµÄ¸¸Àà
+         * @return ï¿½ï¿½ï¿½ÐµÄ¸ï¿½ï¿½ï¿½
          */
         public List getSuperclasses() {
             return Collections.unmodifiableList(superclasses);
         }
 
         /**
-         * È¡µÃËùÓÐµÄ½Ó¿Ú¡£
+         * È¡ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ½Ó¿Ú¡ï¿½
          *
-         * @return ËùÓÐµÄ½Ó¿Ú
+         * @return ï¿½ï¿½ï¿½ÐµÄ½Ó¿ï¿½
          */
         public List getInterfaces() {
             return Collections.unmodifiableList(interfaces);
@@ -1142,15 +1142,15 @@ public class ClassUtil {
     }
 
     /* ============================================================================ */
-    /* ÓÐ¹ØprimitiveÀàÐÍµÄ·½·¨¡£                                                    */
+    /* ï¿½Ð¹ï¿½primitiveï¿½ï¿½ï¿½ÍµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½                                                    */
     /* ============================================================================ */
 
     /**
-     * ·µ»ØÖ¸¶¨ÀàÐÍËù¶ÔÓ¦µÄprimitiveÀàÐÍ¡£
+     * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½primitiveï¿½ï¿½ï¿½Í¡ï¿½
      *
-     * @param clazz Òª¼ì²éµÄÀàÐÍ
+     * @param clazz Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûÖ¸¶¨ÀàÐÍÎª<code>null</code>»ò²»ÊÇprimitiveÀàÐÍµÄ°ü×°Àà£¬Ôò·µ»Ø<code>null</code>£¬·ñÔò·µ»ØÏàÓ¦µÄprimitiveÀàÐÍ¡£
+     * @return ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª<code>null</code>ï¿½ï¿½ï¿½ï¿½primitiveï¿½ï¿½ï¿½ÍµÄ°ï¿½×°ï¿½à£¬ï¿½ò·µ»ï¿½<code>null</code>ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½primitiveï¿½ï¿½ï¿½Í¡ï¿½
      */
     public static Class getPrimitiveType(Class clazz) {
         if (clazz == null) {
@@ -1197,11 +1197,11 @@ public class ClassUtil {
     }
 
     /**
-     * ·µ»ØÖ¸¶¨ÀàÐÍËù¶ÔÓ¦µÄ·ÇprimitiveÀàÐÍ¡£
+     * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä·ï¿½primitiveï¿½ï¿½ï¿½Í¡ï¿½
      *
-     * @param clazz Òª¼ì²éµÄÀàÐÍ
+     * @param clazz Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Èç¹ûÖ¸¶¨ÀàÐÍÎª<code>null</code>£¬Ôò·µ»Ø<code>null</code>£¬Èç¹ûÊÇprimitiveÀàÐÍ£¬Ôò·µ»ØÏàÓ¦µÄ°ü×°Àà£¬·ñÔò·µ»ØÔ­Ê¼µÄÀàÐÍ¡£
+     * @return ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª<code>null</code>ï¿½ï¿½ï¿½ò·µ»ï¿½<code>null</code>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½primitiveï¿½ï¿½ï¿½Í£ï¿½ï¿½ò·µ»ï¿½ï¿½ï¿½Ó¦ï¿½Ä°ï¿½×°ï¿½à£¬ï¿½ï¿½ï¿½ò·µ»ï¿½Ô­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½
      */
     public static Class getNonPrimitiveType(Class clazz) {
         if (clazz == null) {
