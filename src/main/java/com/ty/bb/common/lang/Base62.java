@@ -38,21 +38,10 @@ public class Base62 {
     }
 
     public static void main(String[] args) throws Exception {
-        Set<String> set = new HashSet<String>();
-        char[] chars = "1q2w3e4r5t1q2w3e4r5t1q2w3e4r5t1q2w3e4r5t1q2w3e4r5t1q2w3e4r5t1q2w3e4r5t1".toCharArray();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (char c:chars) {
-            stringBuilder.append(Encoding(c));
-        }
-        System.out.println(stringBuilder.toString());
-//        for (long i = 1;i <71 ;i++) {
-//            String aNew = Encoding(i);
-//            System.out.println(aNew);
-//            if (set.contains(aNew)) {
-//                System.out.println("SB");
-//            } else {
-//                set.add(Encoding(i));
-//            }
-//        }
+        long num = (int)(1+Math.random()*(10000000000L));
+        System.out.println(num);
+        String b62 = Encoding(num);
+        System.out.println(b62);
+        System.out.println(Decoding(b62));
     }
 }
