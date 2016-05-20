@@ -1,6 +1,6 @@
 //: net/mindview/util/PPrint.java
 // Pretty-printer for collections
-package com.tianpl.laboratory.io;
+package com.tianpl.laboratory.io.bio;
 import java.util.*;
 
 public class PPrint {

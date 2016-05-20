@@ -1,4 +1,4 @@
-package com.tianpl.laboratory.io;
+package com.tianpl.laboratory.io.bio;
 
 import java.io.*;
 
@@ -8,6 +8,7 @@ import java.io.*;
 public class BufferedInputFile {
     public static String read(String fileName) throws IOException {
         String pre = System.getProperty("user.dir");
+        System.out.println(pre);
         StringBuilder sb = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(pre + File.separator + fileName),"UTF-8"))) {
             String s;
