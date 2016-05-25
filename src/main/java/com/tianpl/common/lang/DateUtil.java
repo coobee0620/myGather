@@ -18,6 +18,7 @@ public class DateUtil {
     private static final Logger log = LoggerFactory.getLogger(DateUtil.class);
     public static final String LOG_MONITOR_FORMAT = "yyyy-MM-dd hh:mm:ss";
     public static final String QUERY_MONITOR_FORMATE = "yyyy-MM-dd";
+    public static final String DEFAULT_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     /**
      * PMS 日志解析专用时间格式
      * */
