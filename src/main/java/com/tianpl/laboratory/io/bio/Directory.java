@@ -2,7 +2,7 @@
 // Produce a sequence of File objects that match a
 // regular expression in either a local directory,
 // or by walking a directory tree.
-package com.tianpl.laboratory.io;
+package com.tianpl.laboratory.io.bio;
 import org.springframework.util.Assert;
 
 import java.util.regex.*;

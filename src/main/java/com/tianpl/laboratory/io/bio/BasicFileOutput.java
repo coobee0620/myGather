@@ -1,4 +1,4 @@
-package com.tianpl.laboratory.io;
+package com.tianpl.laboratory.io.bio;
 
 import java.io.*;
 
