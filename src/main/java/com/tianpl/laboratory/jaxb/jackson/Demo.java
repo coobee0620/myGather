@@ -33,12 +33,17 @@ public class Demo {
 
         System.out.println(beanToXml(root,xml));
         String xmlText = "<xml xmlns=\"\"><name><![CDATA[222]]></name><surname>333</surname><id>中文</id><level1><l1>L11</l1><l2>L12</l2></level1></xml>";
-        Root root1 = xmlToBean(xmlText,xml,new TypeReference<Root>(){});
+        Root root1 = beanFromXml(xmlText,xml,new TypeReference<Root>(){});
         System.out.println(root1);
 
         String json = xml2Json(xmlText,xml);
         System.out.println(json);
 
+        Map<String,Object> map = mapFromXml(xmlText,xml);
+
+        for (Map.Entry<String,Object> entry : map.entrySet()) {
+            System.out.println("key:" + entry.getKey() +";value:" + entry.getValue());
+        }
 
     }
 
@@ -46,15 +51,19 @@ public class Demo {
         return xmlMapper.writeValueAsString(bean);
     }
     @SuppressWarnings("unchecked")
-    public static <T> T xmlToBean(String xml ,XmlMapper xmlMapper,TypeReference valueTypeRef) throws IOException, XMLStreamException {
+    public static <T> T beanFromXml(String xml ,XmlMapper xmlMapper,TypeReference valueTypeRef) throws IOException, XMLStreamException {
         XMLStreamReader reader =
                 XMLInputFactory.newInstance().createXMLStreamReader(new BufferedReader(new StringReader(xml)));
         return (T) xmlMapper.readValue(reader,valueTypeRef);
     }
 
     public static String xml2Json(String xml,XmlMapper xmlMapper) throws IOException, XMLStreamException {
-        Map<String,Object> map = xmlToBean(xml, xmlMapper, new TypeReference<HashMap<String,Object>>() {});
+        Map<String,Object> map = beanFromXml(xml, xmlMapper, new TypeReference<HashMap<String,Object>>() {});
 
         return new ObjectMapper().writeValueAsString(map);
+    }
+
+    public static <K,V> Map<K,V> mapFromXml(String xml,XmlMapper xmlMapper) throws IOException, XMLStreamException {
+        return beanFromXml(xml,xmlMapper,new TypeReference<HashMap<K,V>>() {});
     }
 }
