@@ -1,4 +1,4 @@
-package com.tianpl.laboratory.zk.tester;
+package com.tianpl.laboratory.algorithm;
 
 import java.util.PriorityQueue;
 
