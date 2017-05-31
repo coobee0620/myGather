@@ -26,7 +26,9 @@ public class TimeClient {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new TimeDecoder()).addLast(new TimeClientHandler());
+                    ch.pipeline()
+                            .addLast(new TimeDecoder())
+                            .addLast(new TimeClientHandler());
                 }
             });
             ChannelFuture f = b.connect(host,port).sync();
